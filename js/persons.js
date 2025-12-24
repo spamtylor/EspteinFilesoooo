@@ -1,117 +1,92 @@
-// Persons page functionality
+// Persons Page JavaScript
+// Handles filtering, searching, and rendering person cards
+
 let allPersons = [];
-let contactBookNames = [];
-let categories = {};
+let contactBook = [];
 
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         const response = await fetch('data/persons.json');
         const data = await response.json();
-        allPersons = data.persons;
-        contactBookNames = data.contact_book_names || [];
-        categories = data.categories || {};
 
-        updateFilterCounts();
+        allPersons = data.key_persons || [];
+        contactBook = data.contact_book_names || [];
+
         renderPersons(allPersons);
-        renderContactBook(contactBookNames);
+        renderContactBook(contactBook);
         setupFilters();
         setupSearch();
+        updateCount(allPersons.length);
+
     } catch (error) {
-        console.error('Error loading data:', error);
+        console.error('Error loading persons:', error);
     }
 });
 
-function updateFilterCounts() {
-    // Update button counts
-    const counts = {
-        all: allPersons.length,
-        coconspirator: 0,
-        victim: 0,
-        associate: 0,
-        legal_prosecution: 0,
-        legal_defense: 0,
-        legal_victim: 0,
-        judge: 0,
-        law_enforcement: 0,
-        government: 0,
-        family: 0,
-        witness: 0,
-        media: 0
-    };
-
-    allPersons.forEach(p => {
-        if (counts[p.category] !== undefined) {
-            counts[p.category]++;
-        }
-    });
-
-    // Update button text with counts
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        const filter = btn.dataset.filter;
-        if (filter === 'all') {
-            btn.textContent = `All (${counts.all})`;
-        }
-    });
-}
-
 function renderPersons(persons) {
-    const container = document.getElementById('personsList');
-    if (!container) return;
+    const grid = document.getElementById('personsList');
+    if (!grid) return;
 
-    if (persons.length === 0) {
-        container.innerHTML = '<p class="text-muted">No persons match your search.</p>';
-        return;
-    }
-
-    container.innerHTML = persons.map(person => `
-        <div class="person-card" data-category="${person.category}" data-name="${person.name.toLowerCase()}">
+    grid.innerHTML = persons.map(p => `
+        <div class="person-card" data-category="${p.category || 'other'}">
             <div class="info">
-                <h4>${person.name}</h4>
-                <span class="role">${person.role}</span>
-                ${person.notes ? `<span class="notes">${person.notes}</span>` : ''}
+                <h4>${p.name}</h4>
+                <span class="role">${p.role || ''}</span>
+                ${p.notes ? `<span class="notes">${p.notes}</span>` : ''}
             </div>
-            <span class="mentions">${person.mentions}×</span>
+            <span class="mentions">${p.mentions || 0}</span>
         </div>
     `).join('');
 }
 
 function renderContactBook(names) {
-    const container = document.getElementById('contactBookList');
-    if (!container || !names.length) return;
+    const tbody = document.getElementById('contactBookList');
+    if (!tbody) return;
 
-    container.innerHTML = names.map(name => `
+    tbody.innerHTML = names.map(name => `
         <tr>
             <td>${name}</td>
-            <td><a href="docs/C. Contact Book_Redacted_0.pdf" target="_blank" download>Contact Book (PDF)</a></td>
+            <td><a href="docs/C. Contact Book_Redacted_0.pdf" target="_blank">Contact Book</a></td>
         </tr>
     `).join('');
 }
 
 function setupFilters() {
-    const buttons = document.querySelectorAll('.filter-btn');
+    const links = document.querySelectorAll('#categoryLinks a');
 
-    buttons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            buttons.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+    links.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
 
-            const filter = btn.dataset.filter;
-            let filtered;
+            // Update active state
+            links.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
 
-            if (filter === 'all') {
-                filtered = allPersons;
-            } else if (filter === 'legal') {
-                // Legal includes prosecution, defense, and victim attorneys
-                filtered = allPersons.filter(p =>
-                    p.category.startsWith('legal_') || p.category === 'judge'
-                );
-            } else {
-                filtered = allPersons.filter(p => p.category === filter);
-            }
-
-            renderPersons(filtered);
+            const filter = link.dataset.filter;
+            filterPersons(filter);
         });
     });
+}
+
+function filterPersons(filter) {
+    let filtered;
+
+    if (filter === 'all') {
+        filtered = allPersons;
+    } else if (filter === 'legal') {
+        // Combined legal filter
+        filtered = allPersons.filter(p =>
+            p.category && (
+                p.category.startsWith('legal_') ||
+                p.category === 'judge'
+            )
+        );
+    } else {
+        filtered = allPersons.filter(p => p.category === filter);
+    }
+
+    renderPersons(filtered);
+    updateCount(filtered.length);
 }
 
 function setupSearch() {
@@ -119,31 +94,34 @@ function setupSearch() {
     if (!input) return;
 
     input.addEventListener('input', (e) => {
-        const query = e.target.value.toLowerCase();
+        const query = e.target.value.toLowerCase().trim();
+
+        if (!query) {
+            renderPersons(allPersons);
+            updateCount(allPersons.length);
+            return;
+        }
+
         const filtered = allPersons.filter(p =>
             p.name.toLowerCase().includes(query) ||
-            p.role.toLowerCase().includes(query) ||
+            (p.role && p.role.toLowerCase().includes(query)) ||
             (p.notes && p.notes.toLowerCase().includes(query))
         );
+
         renderPersons(filtered);
+        updateCount(filtered.length);
 
         // Also filter contact book
-        filterContactBook(query);
+        const filteredContacts = contactBook.filter(name =>
+            name.toLowerCase().includes(query)
+        );
+        renderContactBook(filteredContacts);
     });
 }
 
-function filterContactBook(query) {
-    const container = document.getElementById('contactBookList');
-    if (!container) return;
-
-    const filtered = query
-        ? contactBookNames.filter(n => n.toLowerCase().includes(query))
-        : contactBookNames;
-
-    container.innerHTML = filtered.map(name => `
-        <tr>
-            <td>${name}</td>
-            <td><a href="docs/C. Contact Book_Redacted_0.pdf" target="_blank" download>Contact Book (PDF)</a></td>
-        </tr>
-    `).join('');
+function updateCount(count) {
+    const el = document.getElementById('resultsCount');
+    if (el) {
+        el.textContent = `Showing ${count} of ${allPersons.length} persons`;
+    }
 }
