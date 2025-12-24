@@ -1,0 +1,82 @@
+[
+    {
+        "id": "T001",
+        "date": "March 2005",
+        "title": "Initial Complaint",
+        "description": "Palm Beach Police Department receives the first formal complaint against Jeffrey Epstein from parent of a minor victim.",
+        "category": "investigation",
+        "source": "PBPD Records"
+    },
+    {
+        "id": "T002",
+        "date": "October 20, 2006",
+        "title": "Florida Grand Jury Indictment",
+        "description": "Epstein is indicted by a Florida grand jury on one count of soliciting prostitution.",
+        "category": "legal",
+        "source": "Florida State Court"
+    },
+    {
+        "id": "T003",
+        "date": "June 30, 2008",
+        "title": "Non-Prosecution Agreement",
+        "description": "The controversial NPA is signed by U.S. Attorney Alexander Acosta, allowing Epstein to plead guilty to state charges in exchange for federal immunity.",
+        "category": "legal",
+        "source": "DOJ Disclosures"
+    },
+    {
+        "id": "T004",
+        "date": "July 6, 2019",
+        "title": "Federal Arrest",
+        "description": "Epstein is arrested at Teterboro Airport by the FBI and NYPD on charges of sex trafficking and conspiracy.",
+        "category": "investigation",
+        "source": "SDNY Indictment"
+    },
+    {
+        "id": "T005",
+        "date": "July 8, 2019",
+        "title": "SDNY Search Warrant",
+        "description": "Federal agents execute search warrants at Epstein's Manhattan residence, recovering thousands of photos and digital media.",
+        "category": "evidence",
+        "source": "Evidence List A"
+    },
+    {
+        "id": "T006",
+        "date": "August 10, 2019",
+        "title": "Death in Custody",
+        "description": "Jeffrey Epstein is found dead in his cell at the Metropolitan Correctional Center (MCC) in Manhattan.",
+        "category": "legal",
+        "source": "BOP Report"
+    },
+    {
+        "id": "T007",
+        "date": "July 2, 2020",
+        "title": "Ghislaine Maxwell Arrest",
+        "description": "FBI agents arrest Ghislaine Maxwell in Bradford, New Hampshire, on charges of enticement and sex trafficking.",
+        "category": "investigation",
+        "source": "DOJ Press Release"
+    },
+    {
+        "id": "T008",
+        "date": "December 29, 2021",
+        "title": "Maxwell Conviction",
+        "description": "A federal jury finds Ghislaine Maxwell guilty on five of six counts including sex trafficking of a minor.",
+        "category": "legal",
+        "source": "SDNY Verdict"
+    },
+    {
+        "id": "T009",
+        "date": "January 2024",
+        "title": "Giuffre v. Maxwell Unsealing",
+        "description": "Judge Loretta Preska unseals hundreds of documents and names associated with the settled civil case.",
+        "category": "disclosure",
+        "source": "Court Records"
+    },
+    {
+        "id": "T010",
+        "date": "December 3, 2025",
+        "title": "Major Transparency Act Release",
+        "description": "DOJ releases 18,550 files including USVI productions and previously redacted evidence logs.",
+        "category": "disclosure",
+        "source": "DOJ Portal"
+    }
+]

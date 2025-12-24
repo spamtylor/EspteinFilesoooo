@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Archive - Epstein Files</title>
+    <meta name="description"
+        content="Searchable archive of 18,550 investigation files including USVI and DOJ productions.">
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">EPSTEIN FILES</a>
+
+            <div class="header-search">
+                <input type="text" placeholder="Search archive (documents, names, events)..." id="headerSearch">
+            </div>
+
+            <button class="nav-toggle" aria-label="Menu" id="navToggle">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Briefing</a></li>
+                <li><a href="persons.html">People</a></li>
+                <li><a href="networks.html">Networks</a></li>
+                <li><a href="archive.html" class="active">Archive</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="timeline.html">Timeline</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="page-content">
+        <div class="container">
+            <div class="layout-with-sidebar">
+                <!-- Sidebar -->
+                <aside class="sidebar">
+                    <div class="sidebar-section">
+                        <h4>Filter by Type</h4>
+                        <ul class="sidebar-links" id="typeFilters">
+                            <li><a href="#" class="active" data-filter="all">All Records</a></li>
+                            <li><a href="#" data-filter="document">Documents</a></li>
+                            <li><a href="#" data-filter="record">Evidence Records</a></li>
+                            <li><a href="#" data-filter="media">Media (Photos/Video)</a></li>
+                        </ul>
+                    </div>
+                    <div class="sidebar-section">
+                        <h4>Filter by Collection</h4>
+                        <ul class="sidebar-links" id="collectionFilters">
+                            <li><a href="#" class="active" data-collection="all">All Productions</a></li>
+                            <li><a href="#" data-collection="dataset_8">DataSet 8 (Media)</a></li>
+                            <li><a href="#" data-collection="dataset_1">DataSet 1 (Primary)</a></li>
+                            <li><a href="#" data-collection="12.03.25_usvi_production">USVI Production</a></li>
+                            <li><a href="#" data-collection="images005">Images 005</a></li>
+                        </ul>
+                    </div>
+                    <div class="sidebar-section">
+                        <h4>Sort By</h4>
+                        <ul class="sidebar-links" id="sortOptions">
+                            <li><a href="#" class="active" data-sort="date-desc">Newest First</a></li>
+                            <li><a href="#" data-sort="relevance">Highest Relevance</a></li>
+                            <li><a href="#" data-sort="name-asc">A to Z</a></li>
+                        </ul>
+                    </div>
+                </aside>
+
+                <!-- Search Results -->
+                <div class="main-content">
+                    <div class="section-header">
+                        <div>
+                            <h1>Master Archive</h1>
+                            <p class="text-muted" id="recordCount">Loading 18,550 indexed files...</p>
+                        </div>
+                    </div>
+
+                    <div class="archive-controls">
+                        <input type="text" id="archiveSearch"
+                            placeholder="Filter records by name, tag, or collection..." class="search-input">
+                        <div class="filter-tabs">
+                            <button class="filter-tab active" data-source="all">All Sources</button>
+                            <button class="filter-tab" data-source="doj">DOJ Production</button>
+                            <button class="filter-tab" data-source="court">Court Records</button>
+                            <button class="filter-tab" data-source="maxwell">Maxwell Trial</button>
+                        </div>
+                    </div>
+
+                    <div class="archive-list" id="archiveContainer">
+                        <!-- Rendered by archive.js -->
+                    </div>
+
+                    <button class="load-more" id="loadMore">Load More Records</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h4>About This Project</h4>
+                    <p>Analysis of publicly released documents from the Epstein investigation. All data sourced from
+                        official government releases. Not affiliated with DOJ.</p>
+                </div>
+                <div>
+                    <h4>Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="persons.html">People Database</a></li>
+                        <li><a href="archive.html">Master Archive</a></li>
+                        <li><a href="gallery.html">Media Gallery</a></li>
+                        <li><a href="about.html">Methodology</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Data extracted December 2025 • <a href="about.html">View Methodology</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/nav.js"></script>
+    <script src="js/archive.js"></script>
+    <script src="js/search.js"></script>
+</body>
+
+</html>
