@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Epstein Investigation Analysis Dashboard</title>
+    <meta name="description" content="Comprehensive analysis of 18,550 files from the Epstein investigation">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>Epstein Investigation</h1>
+                <p class="subtitle">Data Analysis Dashboard</p>
+            </div>
+            <div class="header-stats">
+                <div class="stat-badge">
+                    <span class="stat-value" id="totalFiles">18,550</span>
+                    <span class="stat-label">Files</span>
+                </div>
+                <div class="stat-badge">
+                    <span class="stat-value" id="totalSize">19.43 GB</span>
+                    <span class="stat-label">Data</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Grid -->
+        <main class="main-grid">
+            <!-- Left Column -->
+            <div class="column-left">
+                <!-- Key Persons Card -->
+                <section class="card card-dark">
+                    <div class="card-header">
+                        <h2>🔍 Key Persons</h2>
+                        <span class="badge">23 Individuals</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="person-categories">
+                            <button class="filter-btn active" data-filter="all">All</button>
+                            <button class="filter-btn" data-filter="subject">Subjects</button>
+                            <button class="filter-btn" data-filter="legal">Legal</button>
+                            <button class="filter-btn" data-filter="associate">Associates</button>
+                        </div>
+                        <div class="persons-list" id="personsList">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Contact Book Card -->
+                <section class="card">
+                    <div class="card-header">
+                        <h2>📒 Contact Book Names</h2>
+                        <span class="badge">20+ Notable</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="tag-cloud" id="contactNames">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Center Column -->
+            <div class="column-center">
+                <!-- Stats Overview -->
+                <section class="card stats-card">
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-icon">📄</div>
+                            <div class="stat-info">
+                                <span class="stat-number">14,700</span>
+                                <span class="stat-desc">PDF Documents</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">🎬</div>
+                            <div class="stat-info">
+                                <span class="stat-number">887</span>
+                                <span class="stat-desc">Videos</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">📷</div>
+                            <div class="stat-info">
+                                <span class="stat-number">6,775</span>
+                                <span class="stat-desc">Images</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">📊</div>
+                            <div class="stat-info">
+                                <span class="stat-number">29,408</span>
+                                <span class="stat-desc">DAT Records</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Key Findings -->
+                <section class="card">
+                    <div class="card-header">
+                        <h2>⚠️ Critical Findings</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="findings-list" id="findingsList">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Evidence Categories -->
+                <section class="card">
+                    <div class="card-header">
+                        <h2>📦 Evidence Categories</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="evidence-grid" id="evidenceGrid">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Column -->
+            <div class="column-right">
+                <!-- Hidden Emails Discovered -->
+                <section class="card card-warning">
+                    <div class="card-header">
+                        <h2>📧 Hidden Emails Found</h2>
+                        <span class="badge badge-warning">Discovered in Scan</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="emails-list" id="emailsList">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Locations -->
+                <section class="card">
+                    <div class="card-header">
+                        <h2>📍 Key Locations</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="locations-list" id="locationsList">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Analysis Info -->
+                <section class="card card-info">
+                    <div class="card-header">
+                        <h2>ℹ️ Analysis Details</h2>
+                    </div>
+                    <div class="card-content">
+                        <ul class="info-list">
+                            <li><strong>Extraction Date:</strong> December 24, 2025</li>
+                            <li><strong>Source Archives:</strong> 12 ZIP files</li>
+                            <li><strong>Data Sources:</strong> DOJ, USVI, Estate Productions</li>
+                            <li><strong>Redaction Status:</strong> Masseuse List ✅ Secure</li>
+                            <li><strong>Tools Used:</strong> PyMuPDF, Tesseract OCR</li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Data extracted from publicly released documents • Analysis performed December 2025</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
