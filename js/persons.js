@@ -1,8 +1,9 @@
 // Persons Page JavaScript
-// Handles filtering, searching, and rendering person cards
+// Handles filtering, searching, and rendering person cards with source links
 
 let allPersons = [];
 let contactBook = [];
+let sourceDocuments = {};
 
 document.addEventListener('DOMContentLoaded', async () => {
     try {
@@ -11,6 +12,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         allPersons = data.key_persons || [];
         contactBook = data.contact_book_names || [];
+        sourceDocuments = data.source_documents || {};
 
         renderPersons(allPersons);
         renderContactBook(contactBook);
@@ -23,6 +25,26 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
+function getSourceLink(sourceKey) {
+    const source = sourceDocuments[sourceKey];
+    if (!source) return null;
+    return source;
+}
+
+function renderSourceLinks(sources) {
+    if (!sources || sources.length === 0) return '';
+
+    const links = sources.map(sourceKey => {
+        const source = getSourceLink(sourceKey);
+        if (!source) return '';
+
+        const isExternal = source.file.startsWith('http');
+        return `<a href="${source.file}" target="_blank" class="source-link">${source.name}</a>`;
+    }).filter(Boolean).join('');
+
+    return links ? `<div class="person-sources">${links}</div>` : '';
+}
+
 function renderPersons(persons) {
     const grid = document.getElementById('personsList');
     if (!grid) return;
@@ -33,6 +55,7 @@ function renderPersons(persons) {
                 <h4>${p.name}</h4>
                 <span class="role">${p.role || ''}</span>
                 ${p.notes ? `<span class="notes">${p.notes}</span>` : ''}
+                ${renderSourceLinks(p.sources)}
             </div>
             <span class="mentions">${p.mentions || 0}</span>
         </div>
@@ -43,12 +66,36 @@ function renderContactBook(names) {
     const tbody = document.getElementById('contactBookList');
     if (!tbody) return;
 
-    tbody.innerHTML = names.map(name => `
-        <tr>
-            <td>${name}</td>
-            <td><a href="docs/C. Contact Book_Redacted_0.pdf" target="_blank">Contact Book</a></td>
-        </tr>
-    `).join('');
+    // Look up if person exists in key_persons for their sources
+    tbody.innerHTML = names.map(name => {
+        // Try to find this person in key_persons
+        const person = allPersons.find(p =>
+            p.name.toLowerCase() === name.toLowerCase() ||
+            name.toLowerCase().includes(p.name.split(',')[0].toLowerCase())
+        );
+
+        let sourceLinks = '';
+        if (person && person.sources) {
+            sourceLinks = person.sources.map(sourceKey => {
+                const source = getSourceLink(sourceKey);
+                if (!source) return '';
+                return `<a href="${source.file}" target="_blank">${source.name}</a>`;
+            }).filter(Boolean).join(', ');
+        } else {
+            // Default to contact book
+            const contactSource = sourceDocuments['contact_book'];
+            sourceLinks = contactSource ?
+                `<a href="${contactSource.file}" target="_blank">${contactSource.name}</a>` :
+                'Contact Book';
+        }
+
+        return `
+            <tr>
+                <td>${name}</td>
+                <td>${sourceLinks}</td>
+            </tr>
+        `;
+    }).join('');
 }
 
 function setupFilters() {
@@ -98,6 +145,7 @@ function setupSearch() {
 
         if (!query) {
             renderPersons(allPersons);
+            renderContactBook(contactBook);
             updateCount(allPersons.length);
             return;
         }

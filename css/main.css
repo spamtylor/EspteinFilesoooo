@@ -755,6 +755,31 @@ tr:hover {
     border-radius: var(--radius-sm);
 }
 
+.person-sources {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-top: var(--space-sm);
+}
+
+.source-link {
+    display: inline-block;
+    padding: 2px 8px;
+    background: var(--bg-glass);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    font-size: 0.625rem;
+    font-weight: 500;
+    color: var(--accent-blue);
+    transition: all 0.2s;
+}
+
+.source-link:hover {
+    background: var(--accent-blue);
+    color: #fff;
+    text-decoration: none;
+}
+
 /* Category colors */
 .person-card[data-category="coconspirator"] {
     border-left: 3px solid #e53935;
