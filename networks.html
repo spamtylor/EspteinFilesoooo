@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Networks - Epstein Files</title>
+    <meta name="description" content="Relationship network of key figures in the Epstein investigation.">
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">EPSTEIN FILES</a>
+            <button class="nav-toggle" aria-label="Menu" id="navToggle">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="persons.html">Persons</a></li>
+                <li><a href="networks.html" class="active">Networks</a></li>
+                <li><a href="documents.html">Documents</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="evidence.html">Evidence</a></li>
+                <li><a href="timeline.html">Timeline</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="page-content">
+        <div class="container">
+            <div class="layout-with-sidebar">
+
+                <!-- Sidebar -->
+                <aside class="sidebar">
+                    <div class="sidebar-section">
+                        <h4>Circles</h4>
+                        <ul class="sidebar-links" id="circleLinks">
+                            <li><a href="#" data-filter="all" class="active">All Figures</a></li>
+                            <li><a href="#" data-filter="inner">Inner Circle</a></li>
+                            <li><a href="#" data-filter="enablers">Enablers & Staff</a></li>
+                            <li><a href="#" data-filter="victims">Victims & Accusers</a></li>
+                            <li><a href="#" data-filter="network">Social Network</a></li>
+                            <li><a href="#" data-filter="legal">Legal Players</a></li>
+                        </ul>
+                    </div>
+                    <div class="sidebar-section">
+                        <h4>Locations</h4>
+                        <ul class="sidebar-links">
+                            <li><a href="#locations">Key Properties</a></li>
+                        </ul>
+                    </div>
+                    <div class="sidebar-section">
+                        <h4>Official Sources</h4>
+                        <ul class="sidebar-links">
+                            <li><a href="https://www.justice.gov/epstein" target="_blank">DOJ Portal</a></li>
+                            <li><a href="https://www.courtlistener.com/docket/17318376/united-states-v-maxwell/"
+                                    target="_blank">Maxwell Docket</a></li>
+                        </ul>
+                    </div>
+                </aside>
+
+                <!-- Main Content -->
+                <div class="main-content">
+                    <h1>Relationship Networks</h1>
+                    <p class="text-muted mb-lg">Key figures organized by their documented relationship to Jeffrey
+                        Epstein. Relevance scored by depth of involvement, not just mention frequency.</p>
+
+                    <!-- Legend -->
+                    <div class="legend" id="legend">
+                        <div class="legend-item">
+                            <span class="legend-color" style="background: #e53935"></span>
+                            Inner Circle
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color" style="background: #ff9800"></span>
+                            Enablers & Staff
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color" style="background: #7c4dff"></span>
+                            Victims
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color" style="background: #42a5f5"></span>
+                            Social Network
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color" style="background: #00c853"></span>
+                            Legal
+                        </div>
+                    </div>
+
+                    <!-- Industry Filters -->
+                    <div class="filter-tabs" id="industryTabs">
+                        <button class="filter-tab active" data-industry="all">All</button>
+                        <button class="filter-tab" data-industry="celebrity">Celebrities</button>
+                        <button class="filter-tab" data-industry="tech">Tech</button>
+                        <button class="filter-tab" data-industry="politics">Politics</button>
+                        <button class="filter-tab" data-industry="finance">Finance</button>
+                        <button class="filter-tab" data-industry="media">Media</button>
+                    </div>
+
+                    <!-- Location Filter -->
+                    <div class="filter-tabs" id="locationTabs">
+                        <button class="filter-tab active" data-location="all">All Locations</button>
+                        <button class="filter-tab" data-location="usa">USA</button>
+                        <button class="filter-tab" data-location="uk">UK/Europe</button>
+                        <button class="filter-tab" data-location="israel">Middle East</button>
+                    </div>
+
+                    <!-- Key Figures Grid -->
+                    <section class="section" id="figures">
+                        <div class="section-header">
+                            <h2>Key Figures</h2>
+                            <span id="figureCount" class="text-muted"></span>
+                        </div>
+                        <div class="network-grid" id="figuresGrid"></div>
+                    </section>
+
+                    <!-- Locations -->
+                    <section class="section" id="locations">
+                        <div class="section-header">
+                            <h2>Key Locations</h2>
+                        </div>
+                        <div class="locations-grid" id="locationsGrid"></div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>Network analysis from official records • <a href="https://www.justice.gov/epstein"
+                        target="_blank">Official DOJ Source</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/nav.js"></script>
+    <script src="js/networks.js"></script>
+</body>
+
+</html>

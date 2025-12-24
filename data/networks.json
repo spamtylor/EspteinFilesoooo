@@ -1,0 +1,577 @@
+{
+    "lastUpdated": "2025-12-24",
+    "description": "Network and relationship data for key figures in the Epstein investigation",
+    "circles": {
+        "inner": {
+            "name": "Inner Circle",
+            "description": "Direct associates with documented close relationships",
+            "color": "#e53935"
+        },
+        "enablers": {
+            "name": "Enablers & Staff",
+            "description": "Assistants, recruiters, and household staff",
+            "color": "#ff9800"
+        },
+        "victims": {
+            "name": "Victims & Accusers",
+            "description": "Alleged victims who have come forward",
+            "color": "#7c4dff"
+        },
+        "network": {
+            "name": "Social Network",
+            "description": "High-profile contacts from various industries",
+            "color": "#42a5f5"
+        },
+        "legal": {
+            "name": "Legal Players",
+            "description": "Attorneys, judges, and law enforcement",
+            "color": "#00c853"
+        }
+    },
+    "key_figures": [
+        {
+            "id": "maxwell",
+            "name": "Ghislaine Maxwell",
+            "circle": "inner",
+            "industry": "media",
+            "location": "usa",
+            "relevance": 10,
+            "relationship": "Primary co-conspirator",
+            "connection_type": "romantic_business",
+            "time_period": "1991-2019",
+            "key_facts": [
+                "Met Epstein early 1990s after father's death",
+                "Introduced Epstein to elite social circles",
+                "Convicted Dec 2021 on 5 counts",
+                "Sentenced to 20 years federal prison"
+            ],
+            "connections": [
+                "brunel",
+                "kellen",
+                "groff",
+                "prince_andrew",
+                "giuffre"
+            ]
+        },
+        {
+            "id": "prince_andrew",
+            "name": "Prince Andrew",
+            "circle": "network",
+            "industry": "celebrity",
+            "location": "uk",
+            "relevance": 9,
+            "relationship": "Close friend of Maxwell and Epstein",
+            "connection_type": "social",
+            "time_period": "1999-2010",
+            "key_facts": [
+                "Photographed with Maxwell and Virginia Giuffre",
+                "Visited multiple Epstein properties",
+                "Civil suit settled 2022",
+                "Stripped of royal patronages"
+            ],
+            "connections": [
+                "maxwell",
+                "giuffre"
+            ]
+        },
+        {
+            "id": "brunel",
+            "name": "Jean-Luc Brunel",
+            "circle": "inner",
+            "industry": "media",
+            "location": "uk",
+            "relevance": 9,
+            "relationship": "Business partner - MC2 modeling agency",
+            "connection_type": "business",
+            "time_period": "1990s-2019",
+            "key_facts": [
+                "Ran MC2 Model Management funded by Epstein",
+                "Accused of supplying young models",
+                "Found dead in Paris prison Feb 2022"
+            ],
+            "connections": [
+                "maxwell"
+            ]
+        },
+        {
+            "id": "wexner",
+            "name": "Les Wexner",
+            "circle": "network",
+            "industry": "finance",
+            "location": "usa",
+            "relevance": 9,
+            "relationship": "Financial patron",
+            "connection_type": "business",
+            "time_period": "1987-2007",
+            "key_facts": [
+                "L Brands/Victoria's Secret founder",
+                "Epstein managed his finances",
+                "Gave Epstein power of attorney",
+                "Gifted NY mansion to Epstein"
+            ],
+            "connections": []
+        },
+        {
+            "id": "kellen",
+            "name": "Sarah Kellen",
+            "circle": "enablers",
+            "industry": null,
+            "location": "usa",
+            "relevance": 8,
+            "relationship": "Personal assistant and scheduler",
+            "connection_type": "employee",
+            "time_period": "2002-2008",
+            "key_facts": [
+                "Named in 2008 Non-Prosecution Agreement",
+                "Primary scheduler for 'massages'",
+                "Granted immunity in 2008 NPA"
+            ],
+            "connections": [
+                "maxwell",
+                "groff",
+                "marcinkova"
+            ]
+        },
+        {
+            "id": "groff",
+            "name": "Lesley Groff",
+            "circle": "enablers",
+            "industry": null,
+            "location": "usa",
+            "relevance": 7,
+            "relationship": "Executive assistant",
+            "connection_type": "employee",
+            "time_period": "1990s-2019",
+            "key_facts": [
+                "Long-term personal assistant",
+                "Named in 2008 NPA",
+                "Handled travel and scheduling"
+            ],
+            "connections": [
+                "kellen"
+            ]
+        },
+        {
+            "id": "marcinkova",
+            "name": "Nadia Marcinkova",
+            "circle": "enablers",
+            "industry": null,
+            "location": "usa",
+            "relevance": 7,
+            "relationship": "Pilot and associate",
+            "connection_type": "employee",
+            "time_period": "2000s",
+            "key_facts": [
+                "Became licensed pilot",
+                "Named in various depositions"
+            ],
+            "connections": [
+                "kellen"
+            ]
+        },
+        {
+            "id": "giuffre",
+            "name": "Virginia Giuffre",
+            "circle": "victims",
+            "industry": null,
+            "location": "usa",
+            "relevance": 10,
+            "relationship": "Primary accuser",
+            "connection_type": "victim",
+            "time_period": "1999-2002",
+            "key_facts": [
+                "Recruited at Mar-a-Lago age 16",
+                "Filed civil suit against Maxwell",
+                "Accused Prince Andrew (settled 2022)",
+                "Key witness in multiple proceedings"
+            ],
+            "connections": [
+                "maxwell",
+                "prince_andrew"
+            ]
+        },
+        {
+            "id": "farmer",
+            "name": "Annie Farmer",
+            "circle": "victims",
+            "industry": null,
+            "location": "usa",
+            "relevance": 8,
+            "relationship": "Accuser and trial witness",
+            "connection_type": "victim",
+            "time_period": "1996",
+            "key_facts": [
+                "Met Epstein at age 16",
+                "Testified publicly at Maxwell trial",
+                "Sister Maria also targeted"
+            ],
+            "connections": [
+                "maxwell"
+            ]
+        },
+        {
+            "id": "wild",
+            "name": "Courtney Wild",
+            "circle": "victims",
+            "industry": null,
+            "location": "usa",
+            "relevance": 8,
+            "relationship": "CVRA plaintiff",
+            "connection_type": "victim",
+            "time_period": "2002-2005",
+            "key_facts": [
+                "Filed Crime Victims Rights Act lawsuit",
+                "Challenged 2008 Non-Prosecution Agreement",
+                "Recruited at 14 years old"
+            ],
+            "connections": []
+        },
+        {
+            "id": "clinton",
+            "name": "Bill Clinton",
+            "circle": "network",
+            "industry": "politics",
+            "location": "usa",
+            "relevance": 7,
+            "relationship": "Flight log passenger",
+            "connection_type": "social",
+            "time_period": "2002-2003",
+            "key_facts": [
+                "Multiple flights on private jet",
+                "Documented in flight logs",
+                "Denied knowledge of crimes"
+            ],
+            "connections": []
+        },
+        {
+            "id": "trump",
+            "name": "Donald Trump",
+            "circle": "network",
+            "industry": "politics",
+            "location": "usa",
+            "relevance": 6,
+            "relationship": "Social acquaintance",
+            "connection_type": "social",
+            "time_period": "1980s-2000s",
+            "key_facts": [
+                "Mar-a-Lago members",
+                "2002 quote about Epstein liking 'younger' women",
+                "Later banned Epstein from Mar-a-Lago"
+            ],
+            "connections": []
+        },
+        {
+            "id": "dershowitz",
+            "name": "Alan Dershowitz",
+            "circle": "network",
+            "industry": "politics",
+            "location": "usa",
+            "relevance": 7,
+            "relationship": "Legal advisor and social contact",
+            "connection_type": "business_social",
+            "time_period": "1990s-2008",
+            "key_facts": [
+                "Harvard Law professor",
+                "Part of 2008 defense team",
+                "Accused by Virginia Giuffre (denied)"
+            ],
+            "connections": [
+                "giuffre"
+            ]
+        },
+        {
+            "id": "barak",
+            "name": "Ehud Barak",
+            "circle": "network",
+            "industry": "politics",
+            "location": "israel",
+            "relevance": 6,
+            "relationship": "Business associate",
+            "connection_type": "business",
+            "time_period": "2000s-2010s",
+            "key_facts": [
+                "Former Israeli Prime Minister",
+                "Business relationship documented",
+                "Photographed at NY residence"
+            ],
+            "connections": []
+        },
+        {
+            "id": "black",
+            "name": "Leon Black",
+            "circle": "network",
+            "industry": "finance",
+            "location": "usa",
+            "relevance": 7,
+            "relationship": "Financial client",
+            "connection_type": "business",
+            "time_period": "2012-2017",
+            "key_facts": [
+                "Apollo Global Management founder",
+                "Paid Epstein $158M for advice",
+                "Stepped down as CEO 2021"
+            ],
+            "connections": []
+        },
+        {
+            "id": "dubin",
+            "name": "Glenn Dubin",
+            "circle": "network",
+            "industry": "finance",
+            "location": "usa",
+            "relevance": 6,
+            "relationship": "Social friend",
+            "connection_type": "social",
+            "time_period": "1990s-2010s",
+            "key_facts": [
+                "Hedge fund billionaire",
+                "Wife Eva former girlfriend of Epstein",
+                "Named in Virginia Giuffre allegations"
+            ],
+            "connections": []
+        },
+        {
+            "id": "hawking",
+            "name": "Stephen Hawking",
+            "circle": "network",
+            "industry": "tech",
+            "location": "uk",
+            "relevance": 4,
+            "relationship": "Conference attendee",
+            "connection_type": "social",
+            "time_period": "2006",
+            "key_facts": [
+                "Attended conference on Epstein's island",
+                "Physicist/cosmologist",
+                "No criminal allegations"
+            ],
+            "connections": []
+        },
+        {
+            "id": "musk",
+            "name": "Elon Musk",
+            "circle": "network",
+            "industry": "tech",
+            "location": "usa",
+            "relevance": 3,
+            "relationship": "Photographed at event",
+            "connection_type": "social",
+            "time_period": "2014",
+            "key_facts": [
+                "Photographed at Epstein-attended event",
+                "Tesla/SpaceX CEO",
+                "Denied any relationship"
+            ],
+            "connections": []
+        },
+        {
+            "id": "gates",
+            "name": "Bill Gates",
+            "circle": "network",
+            "industry": "tech",
+            "location": "usa",
+            "relevance": 5,
+            "relationship": "Met multiple times",
+            "connection_type": "business",
+            "time_period": "2011-2014",
+            "key_facts": [
+                "Multiple meetings documented",
+                "Microsoft co-founder",
+                "Acknowledged meetings, denied close relationship"
+            ],
+            "connections": []
+        },
+        {
+            "id": "spacey",
+            "name": "Kevin Spacey",
+            "circle": "network",
+            "industry": "celebrity",
+            "location": "usa",
+            "relevance": 4,
+            "relationship": "Flight log passenger",
+            "connection_type": "social",
+            "time_period": "2002",
+            "key_facts": [
+                "Documented on Africa trip flight",
+                "Actor",
+                "No allegations related to Epstein"
+            ],
+            "connections": [
+                "clinton"
+            ]
+        },
+        {
+            "id": "tucker",
+            "name": "Chris Tucker",
+            "circle": "network",
+            "industry": "celebrity",
+            "location": "usa",
+            "relevance": 3,
+            "relationship": "Flight log passenger",
+            "connection_type": "social",
+            "time_period": "2002",
+            "key_facts": [
+                "Documented on Africa trip flight",
+                "Actor/comedian",
+                "No allegations"
+            ],
+            "connections": []
+        },
+        {
+            "id": "campbell",
+            "name": "Naomi Campbell",
+            "circle": "network",
+            "industry": "celebrity",
+            "location": "uk",
+            "relevance": 3,
+            "relationship": "Contact book entry",
+            "connection_type": "social",
+            "time_period": "1990s-2000s",
+            "key_facts": [
+                "Named in contact book",
+                "Supermodel",
+                "No allegations"
+            ],
+            "connections": []
+        },
+        {
+            "id": "visoski",
+            "name": "Larry Visoski",
+            "circle": "enablers",
+            "industry": null,
+            "location": "usa",
+            "relevance": 6,
+            "relationship": "Chief pilot",
+            "connection_type": "employee",
+            "time_period": "1991-2019",
+            "key_facts": [
+                "Flew private jets for 28 years",
+                "Testified at Maxwell trial",
+                "Maintained flight logs"
+            ],
+            "connections": [
+                "rodgers"
+            ]
+        },
+        {
+            "id": "rodgers",
+            "name": "David Rodgers",
+            "circle": "enablers",
+            "industry": null,
+            "location": "usa",
+            "relevance": 6,
+            "relationship": "Pilot",
+            "connection_type": "employee",
+            "time_period": "1990s-2016",
+            "key_facts": [
+                "Second captain",
+                "Maintained detailed flight logs",
+                "Testified about passenger records"
+            ],
+            "connections": [
+                "visoski"
+            ]
+        },
+        {
+            "id": "nathan",
+            "name": "Judge Alison Nathan",
+            "circle": "legal",
+            "industry": null,
+            "location": "usa",
+            "relevance": 7,
+            "relationship": "Maxwell trial judge",
+            "connection_type": "official",
+            "time_period": "2020-2022",
+            "key_facts": [
+                "Presided over Maxwell trial",
+                "Federal district judge",
+                "Oversaw sentencing"
+            ],
+            "connections": []
+        },
+        {
+            "id": "berman",
+            "name": "Geoffrey Berman",
+            "circle": "legal",
+            "industry": null,
+            "location": "usa",
+            "relevance": 6,
+            "relationship": "US Attorney who announced arrest",
+            "connection_type": "official",
+            "time_period": "2019",
+            "key_facts": [
+                "Announced Epstein arrest July 2019",
+                "Former US Attorney SDNY",
+                "Supervised investigation"
+            ],
+            "connections": []
+        },
+        {
+            "id": "acosta",
+            "name": "Alexander Acosta",
+            "circle": "legal",
+            "industry": "politics",
+            "location": "usa",
+            "relevance": 8,
+            "relationship": "2008 NPA prosecutor",
+            "connection_type": "official",
+            "time_period": "2007-2008",
+            "key_facts": [
+                "US Attorney who signed 2008 NPA",
+                "Later became Labor Secretary",
+                "Resigned 2019 over NPA controversy"
+            ],
+            "connections": []
+        }
+    ],
+    "locations": [
+        {
+            "name": "71st Street Mansion",
+            "address": "9 E 71st Street, Manhattan",
+            "significance": "Primary New York residence",
+            "connected_figures": [
+                "maxwell",
+                "wexner",
+                "kellen",
+                "groff"
+            ]
+        },
+        {
+            "name": "Palm Beach Estate",
+            "address": "358 El Brillo Way, FL",
+            "significance": "Site of documented abuse, 2005 investigation origin",
+            "connected_figures": [
+                "kellen",
+                "groff",
+                "wild"
+            ]
+        },
+        {
+            "name": "Little St. James Island",
+            "address": "U.S. Virgin Islands",
+            "significance": "Private island, extensive surveillance",
+            "connected_figures": [
+                "maxwell",
+                "prince_andrew",
+                "clinton",
+                "hawking"
+            ]
+        },
+        {
+            "name": "Zorro Ranch",
+            "address": "Stanley, New Mexico",
+            "significance": "8,000-acre property",
+            "connected_figures": [
+                "farmer"
+            ]
+        },
+        {
+            "name": "Paris Apartment",
+            "address": "Avenue Foch, Paris",
+            "significance": "European residence",
+            "connected_figures": [
+                "brunel"
+            ]
+        }
+    ]
+}
