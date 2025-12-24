@@ -24,8 +24,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             allMedia = records.filter(item =>
                 item.file_type === 'image' ||
                 item.file_type === 'video' ||
+                item.file_type === 'document' ||
                 item.filename.endsWith('.jpg') ||
-                item.filename.endsWith('.mp4')
+                item.filename.endsWith('.mp4') ||
+                item.filename.endsWith('.pdf')
             );
 
             renderFolders();
