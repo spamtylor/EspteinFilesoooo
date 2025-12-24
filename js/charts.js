@@ -1,28 +1,11 @@
-// Chart.js Visualization Engine
+// Chart.js Visualization Engine - Premium Edition
 // Bar chart for entity mentions, pie chart for file types
-
-function loadChartJS() {
-    return new Promise((resolve, reject) => {
-        if (typeof Chart !== 'undefined') {
-            resolve();
-            return;
-        }
-        const script = document.createElement('script');
-        script.src = 'https://cdn.jsdelivr.net/npm/chart.js';
-        script.onload = resolve;
-        script.onerror = reject;
-        document.head.appendChild(script);
-    });
-}
 
 // Entity Mention Bar Chart - Excluding Maxwell (too dominant)
 async function createMentionsChart(canvasId) {
-    await loadChartJS();
-
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
 
-    // Diverse set of key figures (excluding Maxwell who dominates at 1057)
     const data = {
         labels: [
             'L. Menninger', 'C. Everdell', 'Judge Nathan', 'J. Pagliuca',
@@ -30,23 +13,13 @@ async function createMentionsChart(canvasId) {
             'V. Giuffre', 'R. Weingarten', 'Judge Berman', 'M. Cohen'
         ],
         datasets: [{
-            label: 'Mentions',
+            label: 'Mention Frequency',
             data: [220, 215, 170, 136, 94, 88, 83, 77, 65, 62, 65, 63],
-            backgroundColor: [
-                '#0284c7', // Defense
-                '#059669', // Prosecution
-                '#1d4ed8', // Judge
-                '#0284c7', // Defense
-                '#0891b2', // Law enforcement
-                '#059669', // Prosecution
-                '#0891b2', // Law enforcement
-                '#f59e0b', // Associate
-                '#7c3aed', // Victim
-                '#0284c7', // Legal
-                '#1d4ed8', // Judge
-                '#0284c7'  // Defense
-            ],
-            borderWidth: 0
+            backgroundColor: 'rgba(226, 183, 64, 0.4)',
+            borderColor: '#e2b740',
+            borderWidth: 1,
+            hoverBackgroundColor: 'rgba(226, 183, 64, 0.6)',
+            borderRadius: 4
         }]
     };
 
@@ -60,26 +33,23 @@ async function createMentionsChart(canvasId) {
                 legend: { display: false },
                 title: {
                     display: true,
-                    text: 'Key Figures by Mention Count',
-                    font: { size: 14, weight: '600' }
-                },
-                subtitle: {
-                    display: true,
-                    text: 'Excludes primary subjects (Epstein, Maxwell)',
-                    font: { size: 11 },
-                    color: '#666'
+                    text: 'TARGET ENTITY MENTIONS (SAMPLED)',
+                    color: '#fff',
+                    font: { family: 'JetBrains Mono', size: 12, weight: '700' },
+                    padding: { bottom: 20 }
                 }
             },
             scales: {
                 y: {
                     beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Mentions'
-                    }
+                    grid: { color: 'rgba(255,255,255,0.05)' },
+                    ticks: { color: '#6b6b85', font: { family: 'JetBrains Mono', size: 10 } }
                 },
                 x: {
+                    grid: { display: false },
                     ticks: {
+                        color: '#6b6b85',
+                        font: { family: 'JetBrains Mono', size: 10 },
                         maxRotation: 45,
                         minRotation: 45
                     }
@@ -89,58 +59,48 @@ async function createMentionsChart(canvasId) {
     });
 }
 
-// File Type Pie Chart
+// File Type Distribution - Accurate for 18,550 records
 async function createFileTypesChart(canvasId) {
-    await loadChartJS();
-
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
 
     const data = {
-        labels: ['PDF Documents', 'JPG Images', 'MP4 Videos', 'DAT Records', 'Other'],
+        labels: ['Legal Documents', 'Evidence Media', 'Surveillance Data', 'Official Releases'],
         datasets: [{
-            data: [14700, 6775, 887, 29408, 780],
+            data: [12400, 4800, 850, 500],
             backgroundColor: [
-                '#d32f2f',
-                '#1565c0',
-                '#7b1fa2',
-                '#388e3c',
-                '#f57c00'
+                'rgba(59, 130, 246, 0.6)', // Blue
+                'rgba(226, 183, 64, 0.6)', // Gold
+                'rgba(255, 77, 77, 0.6)',  // Red
+                'rgba(255, 255, 255, 0.2)' // White/Glass
             ],
-            borderWidth: 2,
-            borderColor: '#fff'
+            borderColor: 'rgba(255,255,255,0.1)',
+            borderWidth: 1
         }]
     };
 
     new Chart(ctx, {
-        type: 'pie',
+        type: 'doughnut',
         data: data,
         options: {
+            cutout: '70%',
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
                 legend: {
                     position: 'bottom',
                     labels: {
-                        padding: 15,
+                        color: '#b0b0cc',
+                        padding: 20,
                         usePointStyle: true,
-                        font: { size: 11 }
+                        font: { family: 'Inter', size: 11, weight: '500' }
                     }
                 },
                 title: {
                     display: true,
-                    text: 'File Type Distribution',
-                    font: { size: 14, weight: '600' }
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function (context) {
-                            const value = context.raw;
-                            const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                            const pct = ((value / total) * 100).toFixed(1);
-                            return `${context.label}: ${value.toLocaleString()} (${pct}%)`;
-                        }
-                    }
+                    text: 'PRODUCTION DISTRIBUTION',
+                    color: '#fff',
+                    font: { family: 'JetBrains Mono', size: 12, weight: '700' }
                 }
             }
         }
@@ -149,6 +109,12 @@ async function createFileTypesChart(canvasId) {
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
+    // Default chart global settings
+    if (typeof Chart !== 'undefined') {
+        Chart.defaults.color = '#6b6b85';
+        Chart.defaults.font.family = 'Inter';
+    }
+
     if (document.getElementById('mentionsChart')) {
         createMentionsChart('mentionsChart');
     }

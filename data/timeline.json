@@ -1,82 +1,226 @@
 [
     {
-        "id": "T001",
+        "id": "T0501",
         "date": "March 2005",
         "title": "Initial Complaint",
-        "description": "Palm Beach Police Department receives the first formal complaint against Jeffrey Epstein from parent of a minor victim.",
+        "description": "Palm Beach Police investigate after a 14-year-old girl's family reports molestation at Epstein's mansion.",
         "category": "investigation",
         "source": "PBPD Records"
     },
     {
-        "id": "T002",
-        "date": "October 20, 2006",
-        "title": "Florida Grand Jury Indictment",
-        "description": "Epstein is indicted by a Florida grand jury on one count of soliciting prostitution.",
+        "id": "T0601",
+        "date": "May 2006",
+        "title": "Prosecutorial Handover",
+        "description": "State Attorney Barry Krischer refers the case to a grand jury rather than filing direct charges.",
         "category": "legal",
-        "source": "Florida State Court"
-    },
-    {
-        "id": "T003",
-        "date": "June 30, 2008",
-        "title": "Non-Prosecution Agreement",
-        "description": "The controversial NPA is signed by U.S. Attorney Alexander Acosta, allowing Epstein to plead guilty to state charges in exchange for federal immunity.",
-        "category": "legal",
-        "source": "DOJ Disclosures"
-    },
-    {
-        "id": "T004",
-        "date": "July 6, 2019",
-        "title": "Federal Arrest",
-        "description": "Epstein is arrested at Teterboro Airport by the FBI and NYPD on charges of sex trafficking and conspiracy.",
-        "category": "investigation",
-        "source": "SDNY Indictment"
-    },
-    {
-        "id": "T005",
-        "date": "July 8, 2019",
-        "title": "SDNY Search Warrant",
-        "description": "Federal agents execute search warrants at Epstein's Manhattan residence, recovering thousands of photos and digital media.",
-        "category": "evidence",
-        "source": "Evidence List A"
-    },
-    {
-        "id": "T006",
-        "date": "August 10, 2019",
-        "title": "Death in Custody",
-        "description": "Jeffrey Epstein is found dead in his cell at the Metropolitan Correctional Center (MCC) in Manhattan.",
-        "category": "legal",
-        "source": "BOP Report"
-    },
-    {
-        "id": "T007",
-        "date": "July 2, 2020",
-        "title": "Ghislaine Maxwell Arrest",
-        "description": "FBI agents arrest Ghislaine Maxwell in Bradford, New Hampshire, on charges of enticement and sex trafficking.",
-        "category": "investigation",
-        "source": "DOJ Press Release"
-    },
-    {
-        "id": "T008",
-        "date": "December 29, 2021",
-        "title": "Maxwell Conviction",
-        "description": "A federal jury finds Ghislaine Maxwell guilty on five of six counts including sex trafficking of a minor.",
-        "category": "legal",
-        "source": "SDNY Verdict"
-    },
-    {
-        "id": "T009",
-        "date": "January 2024",
-        "title": "Giuffre v. Maxwell Unsealing",
-        "description": "Judge Loretta Preska unseals hundreds of documents and names associated with the settled civil case.",
-        "category": "disclosure",
         "source": "Court Records"
     },
     {
-        "id": "T010",
-        "date": "December 3, 2025",
-        "title": "Major Transparency Act Release",
-        "description": "DOJ releases 18,550 files including USVI productions and previously redacted evidence logs.",
+        "id": "T0602",
+        "date": "June 2006",
+        "title": "Grand Jury Indictment",
+        "description": "Florida grand jury indicts Epstein on a single count of soliciting prostitution.",
+        "category": "legal",
+        "source": "Grand Jury Log"
+    },
+    {
+        "id": "T0603",
+        "date": "July 2006",
+        "title": "Operation Leap Year",
+        "description": "FBI opens federal investigation 'Operation Leap Year' spanning FL, NY, and USVI.",
+        "category": "investigation",
+        "source": "FBI Disclosure"
+    },
+    {
+        "id": "T0604",
+        "date": "Nov 2006",
+        "title": "Multi-State Interviews",
+        "description": "FBI begins interviewing 60+ potential victims and witnesses across New Mexico and New York.",
+        "category": "investigation",
+        "source": "FBI Field Reports"
+    },
+    {
+        "id": "T0801",
+        "date": "June 30, 2008",
+        "title": "Non-Prosecution Agreement",
+        "description": "Secret plea deal signed by Alexander Acosta granting federal immunity for the USVI and Florida.",
+        "category": "legal",
+        "source": "DOJ Filing"
+    },
+    {
+        "id": "T0802",
+        "date": "July 2008",
+        "title": "Sentencing",
+        "description": "Epstein sentenced to 18 months with daily work-release privileges.",
+        "category": "legal",
+        "source": "Court Record"
+    },
+    {
+        "id": "T0803",
+        "date": "Oct 2008",
+        "title": "Work Release Initiation",
+        "description": "Epstein begins leaving jail daily to work at his private Palm Beach office.",
+        "category": "legal",
+        "source": "Jail Log"
+    },
+    {
+        "id": "T0901",
+        "date": "May 2009",
+        "title": "Giuffre Lawsuit",
+        "description": "Virginia Roberts Giuffre files suit against Epstein and Maxwell alleging international trafficking.",
+        "category": "investigation",
+        "source": "Civil Court"
+    },
+    {
+        "id": "T0902",
+        "date": "July 2009",
+        "title": "Release from Custody",
+        "description": "Epstein released after 13 months, remains a registered Level 3 sex offender.",
+        "category": "legal",
+        "source": "BOP Release"
+    },
+    {
+        "id": "T1101",
+        "date": "2011",
+        "title": "Registration Failure",
+        "description": "NYC Police reveal Epstein has systematically failed to check in as required by state law.",
+        "category": "investigation",
+        "source": "NYPD Report"
+    },
+    {
+        "id": "T1801",
+        "date": "Nov 2018",
+        "title": "Perversion of Justice",
+        "description": "Miami Herald 'Perversion of Justice' investigation renews global scrutiny on the 2008 deal.",
         "category": "disclosure",
-        "source": "DOJ Portal"
+        "source": "Miami Herald"
+    },
+    {
+        "id": "T1901",
+        "date": "Feb 2019",
+        "title": "CVRA Violation Ruling",
+        "description": "Federal judge rules the 2008 NPA violated the Crime Victims' Rights Act.",
+        "category": "legal",
+        "source": "Judicial Opinion"
+    },
+    {
+        "id": "T1902",
+        "date": "July 6, 2019",
+        "title": "Teterboro Arrest",
+        "description": "FBI captures Epstein at Teterboro Airport upon return from Paris on a private jet.",
+        "category": "investigation",
+        "source": "SDNY Arrest Log"
+    },
+    {
+        "id": "T1903",
+        "date": "July 8, 2019",
+        "title": "Manhattan Search",
+        "description": "Search of 9 East 71st St recovers a safe with diamonds, fake passports, and thousands of photos.",
+        "category": "evidence",
+        "source": "SDNY Evidence List"
+    },
+    {
+        "id": "T1904",
+        "date": "July 12, 2019",
+        "title": "Acosta Resignation",
+        "description": "Alexander Acosta resigns as Labor Secretary following backlash over the 2008 deal.",
+        "category": "legal",
+        "source": "White House"
+    },
+    {
+        "id": "T1905",
+        "date": "July 18, 2019",
+        "title": "Bail Denial",
+        "description": "Judge Richard Berman denies bail, citing Epstein as a danger to the community.",
+        "category": "legal",
+        "source": "Court Transcript"
+    },
+    {
+        "id": "T1906",
+        "date": "July 23, 2019",
+        "title": "First Incident",
+        "description": "Epstein found with neck injuries at MCC NYC; placed on suicide watch.",
+        "category": "investigation",
+        "source": "MCC Report"
+    },
+    {
+        "id": "T1907",
+        "date": "July 24, 2019",
+        "title": "Watch Removal",
+        "description": "Suicide watch terminated after 31 hours; Epstein moved to high-security unit.",
+        "category": "legal",
+        "source": "Correctional Records"
+    },
+    {
+        "id": "T1908",
+        "date": "Aug 10, 2019",
+        "title": "Death at MCC",
+        "description": "Jeffrey Epstein found dead in cell 38. Guards later charged with falsifying logs.",
+        "category": "legal",
+        "source": "Medical Examiner"
+    },
+    {
+        "id": "T1909",
+        "date": "Aug 29, 2019",
+        "title": "Charges Vacated",
+        "description": "Judge Berman dismisses federal charges against Epstein due to his death.",
+        "category": "legal",
+        "source": "SDNY Order"
+    },
+    {
+        "id": "T2001",
+        "date": "July 2, 2020",
+        "title": "Maxwell Arrest",
+        "description": "FBI high-risk operation in New Hampshire leads to the arrest of Ghislaine Maxwell.",
+        "category": "investigation",
+        "source": "FBI Press"
+    },
+    {
+        "id": "T2101",
+        "date": "Dec 29, 2021",
+        "title": "Maxwell Verdict",
+        "description": "Jury finds Maxwell guilty of 5 counts of trafficking and conspiracy.",
+        "category": "legal",
+        "source": "SDNY Jury"
+    },
+    {
+        "id": "T2201",
+        "date": "June 28, 2022",
+        "title": "Maxwell Sentencing",
+        "description": "Maxwell sentenced to 20 years in federal prison; currently serving at FCI Tallahassee.",
+        "category": "legal",
+        "source": "Sentence Order"
+    },
+    {
+        "id": "T2401",
+        "date": "Jan 2024",
+        "title": "Massive Document Unsealing",
+        "description": "Judge Preska releases 2,000+ pages of records naming 170+ associates and 'Doe' entities.",
+        "category": "disclosure",
+        "source": "SDNY Civil"
+    },
+    {
+        "id": "T2402",
+        "date": "June 2024",
+        "title": "Political Pledge",
+        "description": "Pledge made to release all remaining classified files related to the network.",
+        "category": "disclosure",
+        "source": "Official Statement"
+    },
+    {
+        "id": "T2501",
+        "date": "July 2025",
+        "title": "Forensic Video Audit",
+        "description": "Independent analysis of MCC hallway footage reveals critical frame-drops and edits.",
+        "category": "evidence",
+        "source": "Forensic Report"
+    },
+    {
+        "id": "T2502",
+        "date": "Dec 3, 2025",
+        "title": "Total Transparency Initiative",
+        "description": "DOJ final release including 18,550 files, 887 videos and 6,775 property stills.",
+        "category": "disclosure",
+        "source": "National Archive"
     }
 ]

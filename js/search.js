@@ -5,20 +5,21 @@ document.addEventListener('DOMContentLoaded', () => {
         headerSearch.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 const query = headerSearch.value.trim();
-                window.location.href = `archive.html?q=${encodeURIComponent(query)}`;
+                if (query) {
+                    window.location.href = `archive.html?q=${encodeURIComponent(query)}`;
+                }
             }
         });
     }
 
-    // Auto-focus archive search if parameters exist
+    // Auto-sync search input on Archive page
     const urlParams = new URLSearchParams(window.location.search);
     const query = urlParams.get('q');
-    if (query && document.getElementById('archiveSearch')) {
-        const archiveSearch = document.getElementById('archiveSearch');
+    const archiveSearch = document.getElementById('archiveSearch');
+
+    if (query && archiveSearch) {
         archiveSearch.value = query;
-        // Trigger the search logic in archive.js by dispatching an input event
-        setTimeout(() => {
-            archiveSearch.dispatchEvent(new Event('input'));
-        }, 100);
+        headerSearch.value = query;
+        // The actual filtering is handled by archive.js which listens for DOMContentLoaded
     }
 });

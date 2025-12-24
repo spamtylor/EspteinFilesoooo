@@ -1,7 +1,8 @@
+// Master Archive - High-Density Browser
 let archiveData = { records: [] };
 let filteredRecords = [];
 let currentPage = 1;
-const recordsPerPage = 50;
+const recordsPerPage = 100;
 
 document.addEventListener('DOMContentLoaded', () => {
     const archiveContainer = document.getElementById('archiveContainer');
@@ -12,6 +13,15 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(res => res.json())
         .then(data => {
             archiveData = data;
+
+            // Dynamic Collection Filter Generation
+            const collections = [...new Set(data.records.map(r => r.collection))].sort();
+            const filterList = document.getElementById('collectionFilters');
+            if (filterList) {
+                filterList.innerHTML = `<li><a href="#" data-collection="all" class="active">All Collections</a></li>` +
+                    collections.map(col => `<li><a href="#" data-collection="${col}">${col}</a></li>`).join('');
+            }
+
             const urlParams = new URLSearchParams(window.location.search);
             const query = urlParams.get('q');
             if (query) {

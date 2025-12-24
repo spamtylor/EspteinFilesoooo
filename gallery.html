@@ -4,10 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gallery - Epstein Files</title>
-    <meta name="description" content="Video and media gallery from the Epstein investigation files.">
+    <title>Media Gallery - Epstein Files</title>
+    <meta name="description"
+        content="Secure media gallery for 20.8GB of investigation discovery including surveillance and property stills.">
     <link rel="stylesheet" href="css/main.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -34,225 +37,98 @@
 
     <main class="page-content">
         <div class="container">
-            <div class="layout-with-sidebar">
+            <div class="section-header mb-lg">
+                <div>
+                    <span class="badge" style="background: var(--accent-blue); color: #fff;">MEDIA DISCOVERY</span>
+                    <h1 class="mt-sm">Evidence Gallery</h1>
+                    <p class="text-muted">Interactive browser for 887 videos and 6,775 image assets.</p>
+                </div>
+            </div>
 
-                <!-- Sidebar -->
+            <div class="layout-with-sidebar">
+                <!-- Media Sidebar -->
                 <aside class="sidebar">
                     <div class="sidebar-section">
-                        <h4>Media Types</h4>
-                        <ul class="sidebar-links">
-                            <li><a href="#videos">Videos (887)</a></li>
-                            <li><a href="#documents">Key PDFs</a></li>
-                            <li><a href="#images">Images</a></li>
+                        <h4>Production Sets</h4>
+                        <ul class="sidebar-links" id="productionFilters">
+                            <li><a href="#" data-folder="root" class="active">All Collections</a></li>
+                            <li><a href="#" data-folder="batch_1">DataSet 1 (Vested)</a></li>
+                            <li><a href="#" data-folder="batch_2">DataSet 2 (Discovery)</a></li>
+                            <li><a href="#" data-folder="surveillance">NVR Surveillance</a></li>
                         </ul>
                     </div>
                     <div class="sidebar-section">
-                        <h4>Official Sources</h4>
+                        <h4>File Types</h4>
                         <ul class="sidebar-links">
-                            <li><a href="https://www.justice.gov/epstein" target="_blank">DOJ Portal</a></li>
-                            <li><a href="https://www.justice.gov/epstein/doj-disclosures" target="_blank">DOJ
-                                    Disclosures</a></li>
+                            <li><a href="#" data-type="mp4">Video (887)</a></li>
+                            <li><a href="#" data-type="jpg">Image Stills (6k+)</a></li>
+                            <li><a href="#" data-type="pdf">Key PDFs</a></li>
                         </ul>
                     </div>
                 </aside>
 
-                <!-- Main Content -->
+                <!-- Media Browser -->
                 <div class="main-content">
-                    <h1>Media Gallery</h1>
-                    <p class="text-muted mb-lg">Videos, documents, and images from official releases. Total archive:
-                        18,550 files.</p>
-
-                    <!-- Stats -->
-                    <div class="stats-grid mb-lg">
-                        <div class="stat-item">
-                            <span class="number">887</span>
-                            <span class="label">Videos (MP4)</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="number">14,700</span>
-                            <span class="label">Documents (PDF)</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="number">6,775</span>
-                            <span class="label">Images (JPG)</span>
-                        </div>
+                    <!-- Breadcrumbs -->
+                    <div class="gallery-nav mb-lg"
+                        style="display: flex; align-items: center; gap: 12px; font-family: 'JetBrains Mono'; font-size: 0.8rem; color: var(--text-muted); padding: 8px 16px; background: var(--bg-glass); border-radius: 4px;">
+                        <span id="breadcrumb">Root / All Collections</span>
                     </div>
 
-                    <!-- Videos Section -->
-                    <section class="section" id="videos">
-                        <div class="section-header">
-                            <h2>Video Files</h2>
-                        </div>
+                    <!-- Folder Grid (Hidden when in specific folder) -->
+                    <div id="folderGrid" class="grid mb-2xl"
+                        style="grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: var(--space-md);">
+                        <!-- Categorized folders populated by gallery.js -->
+                    </div>
 
-                        <div class="finding-card critical mb-lg">
-                            <h3>Surveillance Videos</h3>
-                            <p>887 video files primarily from surveillance systems seized from Epstein properties. Many
-                                are from UniFi NVR systems. Videos are organized by DataSet production.</p>
-                        </div>
-
-                        <div class="table-container">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Source</th>
-                                        <th>Count</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>DataSet 1</td>
-                                        <td>~150</td>
-                                        <td>Initial production surveillance clips</td>
-                                    </tr>
-                                    <tr>
-                                        <td>DataSet 2-4</td>
-                                        <td>~400</td>
-                                        <td>Extended surveillance recordings</td>
-                                    </tr>
-                                    <tr>
-                                        <td>DataSet 5-8</td>
-                                        <td>~337</td>
-                                        <td>Additional property footage</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <p class="text-muted mt-lg"><strong>Note:</strong> Video files are part of the full archive.
-                            Access requires downloading the complete DataSet archives from the official DOJ sources.</p>
-                    </section>
-
-                    <!-- Key Documents -->
-                    <section class="section" id="documents">
-                        <div class="section-header">
-                            <h2>Key Documents</h2>
-                            <a href="documents.html" class="view-all">View All →</a>
-                        </div>
-
-                        <div class="doc-grid">
-                            <div class="doc-card">
-                                <h4>Evidence List</h4>
-                                <p class="meta">Complete inventory of seized evidence</p>
-                                <a href="docs/A. Evidence List_0_0_0_0.pdf" target="_blank" class="download-btn">View
-                                    PDF</a>
-                            </div>
-
-                            <div class="doc-card">
-                                <h4>Flight Log</h4>
-                                <p class="meta">117 pages of flight records</p>
-                                <a href="docs/B. Flight Log_Released in U.S. v. Maxwell_0_0_0_0.pdf" target="_blank"
-                                    class="download-btn">View PDF</a>
-                            </div>
-
-                            <div class="doc-card">
-                                <h4>Contact Book</h4>
-                                <p class="meta">Redacted contact directory</p>
-                                <a href="docs/C. Contact Book_Redacted_0.pdf" target="_blank" class="download-btn">View
-                                    PDF</a>
-                            </div>
-
-                            <div class="doc-card">
-                                <h4>Masseuse List</h4>
-                                <p class="meta">254 individuals documented</p>
-                                <a href="docs/D. Masseuse List_Redacted_0.pdf" target="_blank" class="download-btn">View
-                                    PDF</a>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- Images Section -->
-                    <section class="section" id="images">
-                        <div class="section-header">
-                            <h2>Image Files</h2>
-                        </div>
-
-                        <div class="finding-card">
-                            <h3>6,775 Image Files</h3>
-                            <p>Images include property photographs, evidence documentation, and surveillance stills.
-                                Most are in JPG format within the DataSet archives.</p>
-                        </div>
-
-                        <div class="table-container mt-lg">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Category</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Property Photos</td>
-                                        <td>Documentation of seized properties</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Evidence Documentation</td>
-                                        <td>Photographs of seized items</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Surveillance Stills</td>
-                                        <td>Frames extracted from video systems</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </section>
-
-                    <!-- Download Archives -->
-                    <section class="section" id="archives">
-                        <div class="section-header">
-                            <h2>Full Archive Access</h2>
-                        </div>
-
-                        <div class="source-cards">
-                            <a href="https://www.justice.gov/epstein/doj-disclosures" target="_blank"
-                                class="source-card official">
-                                <span class="source-badge">Official</span>
-                                <h4>DOJ Disclosures</h4>
-                                <p>Complete file releases under Epstein Files Transparency Act</p>
-                                <span class="source-url">justice.gov/epstein/doj-disclosures</span>
-                            </a>
-
-                            <a href="https://www.justice.gov/epstein/court-records" target="_blank" class="source-card">
-                                <h4>Court Records</h4>
-                                <p>Federal court documents and exhibits</p>
-                                <span class="source-url">justice.gov/epstein/court-records</span>
-                            </a>
-                        </div>
-                    </section>
+                    <!-- Media Grid (Lazy Loaded) -->
+                    <div id="mediaGrid" class="grid"
+                        style="grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--space-lg);">
+                        <!-- Media items populated by gallery.js -->
+                        <div class="loading-placeholder">Initializing Media Engine...</div>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
 
+    <!-- Modal for Large Media -->
+    <div id="mediaModal" class="modal"
+        style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 2000; align-items: center; justify-content: center; padding: 40px;">
+        <span class="modal-close"
+            style="position: absolute; top: 20px; right: 20px; font-size: 2rem; cursor: pointer; color: #fff;">&times;</span>
+        <div id="modalContent"
+            style="max-width: 100%; max-height: 100%; display: flex; flex-direction: column; align-items: center;">
+            <!-- Dynamic content -->
+        </div>
+    </div>
+
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div>
-                    <h4>About This Project</h4>
-                    <p>Analysis of publicly released documents from the Epstein investigation. All data sourced from
-                        official government releases. Not affiliated with DOJ.</p>
+                    <h4>Media Methodology</h4>
+                    <p>All assets are linked to the 18,550-file master index. Digital evidence is cross-referenced with
+                        production Batch IDs.</p>
                 </div>
                 <div>
-                    <h4>Navigation</h4>
+                    <h4>Investigation Path</h4>
                     <ul class="footer-links">
-                        <li><a href="persons.html">People Database</a></li>
-                        <li><a href="archive.html">Master Archive</a></li>
-                        <li><a href="gallery.html">Media Gallery</a></li>
-                        <li><a href="about.html">Methodology</a></li>
+                        <li><a href="archive.html">Evidence Tracker</a></li>
+                        <li><a href="networks.html">Entity Relations</a></li>
+                        <li><a href="timeline.html">Case Timeline</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>Data extracted December 2025 • <a href="about.html">View Methodology</a></p>
+                <p>High-Fidelity Media Browser • Production v1.0.4 • <a href="about.html">Legal Disclosure</a></p>
             </div>
         </div>
     </footer>
 
     <script src="js/nav.js"></script>
-    <script src="js/gallery.js"></script>
     <script src="js/search.js"></script>
+    <script src="js/gallery.js"></script>
 </body>
 
 </html>

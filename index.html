@@ -4,21 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Epstein Investigation Files - Document Analysis</title>
+    <title>Executive Briefing - Epstein Files</title>
     <meta name="description"
-        content="Analysis of 18,550 documents from the Epstein investigation. All data sourced from official DOJ releases.">
+        content="Mission-critical analysis of 18,550 investigation files from the USVI and DOJ productions.">
     <link rel="stylesheet" href="css/main.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
-    <!-- Navigation -->
     <nav class="nav">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">EPSTEIN FILES</a>
 
             <div class="header-search">
-                <input type="text" placeholder="Search archive (documents, names, events)..." id="headerSearch">
+                <input type="text" placeholder="Search 18,550 records (names, dates, entities)..." id="headerSearch">
             </div>
 
             <button class="nav-toggle" aria-label="Menu" id="navToggle">☰</button>
@@ -34,176 +36,74 @@
         </div>
     </nav>
 
-    </div>
-    <div class="stat-item">
-        <span class="number">91</span>
-        <span class="label">Key Persons</span>
-    </div>
-    </div>
-    </div>
-    </section>
+    <main>
+        <div class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <span class="badge"
+                        style="background: var(--accent-gold-glow); color: var(--accent-gold); border-color: var(--accent-gold);">ACTIVE
+                        INVESTIGATION DATA</span>
+                    <h1>Executive Briefing</h1>
+                    <p class="hero-subtitle">Unified repository for the 18,550-document USVI v. Epstein and Giuffre v.
+                        Maxwell productions.</p>
+                    <div class="hero-actions">
+                        <a href="archive.html" class="btn btn-primary">Start Investigation</a>
+                        <a href="timeline.html" class="btn btn-secondary">View Chronicle</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <!-- Main Content with Sidebar -->
-    <main class="page-content">
-        <div class="container">
+        <div class="container mt-xl">
             <div class="layout-with-sidebar">
-
-                <!-- Sidebar -->
+                <!-- Sidebar Orientation -->
                 <aside class="sidebar">
                     <div class="sidebar-section">
-                        <h4>Official DOJ Sources</h4>
+                        <h4>Orientation</h4>
                         <ul class="sidebar-links">
-                            <li><a href="https://www.justice.gov/epstein" target="_blank">DOJ Epstein Portal</a></li>
-                            <li><a href="https://www.justice.gov/epstein/court-records" target="_blank">Court
-                                    Records</a></li>
-                            <li><a href="https://www.justice.gov/epstein/doj-disclosures" target="_blank">DOJ
-                                    Disclosures</a></li>
-                            <li><a href="https://www.justice.gov/epstein/foia" target="_blank">FOIA Records</a></li>
+                            <li><a href="#scale">Investigation Scale</a></li>
+                            <li><a href="#findings">Critical Evidence</a></li>
+                            <li><a href="#entities">Entity Mapping</a></li>
+                            <li><a href="#sources">Official Gateways</a></li>
                         </ul>
                     </div>
+
                     <div class="sidebar-section">
-                        <h4>Other Sources</h4>
+                        <h4>Quick Access</h4>
                         <ul class="sidebar-links">
-                            <li><a href="https://oversight.house.gov/release/oversight-committee-releases-epstein-records-provided-by-the-department-of-justice/"
-                                    target="_blank">House Oversight</a></li>
-                            <li><a href="https://www.courtlistener.com/docket/17318376/united-states-v-maxwell/"
-                                    target="_blank">Maxwell Trial Docket</a></li>
-                        </ul>
-                    </div>
-                    <div class="sidebar-section">
-                        <h4>On This Page</h4>
-                        <ul class="sidebar-links">
-                            <li><a href="#findings">Key Findings</a></li>
-                            <li><a href="#persons">Key Persons</a></li>
-                            <li><a href="#charts">Visualizations</a></li>
-                            <li><a href="#sources">Data Sources</a></li>
-                        </ul>
-                    </div>
-                    <div class="sidebar-section">
-                        <h4>Key Documents</h4>
-                        <ul class="sidebar-links">
-                            <li><a href="docs/A. Evidence List_0_0_0_0.pdf" target="_blank">Evidence List</a></li>
+                            <li><a href="docs/A. Evidence List_0_0_0_0.pdf" target="_blank">Evidence Index A</a></li>
                             <li><a href="docs/B. Flight Log_Released in U.S. v. Maxwell_0_0_0_0.pdf"
-                                    target="_blank">Flight Log</a></li>
-                            <li><a href="docs/C. Contact Book_Redacted_0.pdf" target="_blank">Contact Book</a></li>
-                            <li><a href="docs/D. Masseuse List_Redacted_0.pdf" target="_blank">Masseuse List</a></li>
+                                    target="_blank">Maxwell Flight Logs</a></li>
+                            <li><a href="docs/C. Contact Book_Redacted_0.pdf" target="_blank">Black Book Entries</a>
+                            </li>
                         </ul>
                     </div>
                 </aside>
 
-                <!-- Main Content -->
+                <!-- Intelligence Briefing -->
                 <div class="main-content">
-
-                    <!-- Key Findings -->
-                    <section class="section" id="findings">
+                    <section id="scale" class="mb-2xl">
                         <div class="section-header">
-                            <h2>Critical Findings</h2>
-                            <a href="documents.html" class="view-all">View All →</a>
+                            <h2>Investigation Scale</h2>
+                            <p class="text-muted">Total documented inventory extracted from federal releases.</p>
                         </div>
 
-                        <div class="findings-grid">
-                            <article class="finding-card critical">
-                                <span class="finding-tag">Evidence</span>
-                                <h3>Masseuse List</h3>
-                                <p>254 individuals documented. Names redacted to protect potential victims.</p>
-                                <a href="docs/D. Masseuse List_Redacted_0.pdf" target="_blank"
-                                    class="finding-source">View Source PDF</a>
-                            </article>
-
-                            <article class="finding-card critical">
-                                <span class="finding-tag">Evidence</span>
-                                <h3>Explicit Content CD</h3>
-                                <p>CD labeled "girl pics nude book 4" found in evidence seized during search.</p>
-                                <a href="docs/A. Evidence List_0_0_0_0.pdf" target="_blank" class="finding-source">View
-                                    Source PDF</a>
-                            </article>
-
-                            <article class="finding-card">
-                                <span class="finding-tag">Records</span>
-                                <h3>Flight Records</h3>
-                                <p>117 pages of flight logs documenting aircraft movements and passengers.</p>
-                                <a href="docs/B. Flight Log_Released in U.S. v. Maxwell_0_0_0_0.pdf" target="_blank"
-                                    class="finding-source">View Source PDF</a>
-                            </article>
-
-                            <article class="finding-card">
-                                <span class="finding-tag">Network</span>
-                                <h3>Contact Network</h3>
-                                <p>Extensive contact book with 1,000+ entries. Personal info redacted.</p>
-                                <a href="docs/C. Contact Book_Redacted_0.pdf" target="_blank"
-                                    class="finding-source">View Source PDF</a>
-                            </article>
-
-                            <article class="finding-card">
-                                <span class="finding-tag">Equipment</span>
-                                <h3>Surveillance System</h3>
-                                <p>UniFi NVR, server, and cameras seized from multiple properties.</p>
-                                <a href="docs/A. Evidence List_0_0_0_0.pdf" target="_blank" class="finding-source">View
-                                    Source PDF</a>
-                            </article>
-
-                            <article class="finding-card">
-                                <span class="finding-tag">Tampering</span>
-                                <h3>Shredded Documents</h3>
-                                <p>Multiple bags of shredded documents recovered and reconstructed.</p>
-                                <a href="docs/A. Evidence List_0_0_0_0.pdf" target="_blank" class="finding-source">View
-                                    Source PDF</a>
-                            </article>
-                        </div>
-                    </section>
-
-                    <!-- Key Persons Preview -->
-                    <section class="section" id="persons">
-                        <div class="section-header">
-                            <h2>Key Persons</h2>
-                            <a href="persons.html" class="view-all">View All 91 →</a>
-                        </div>
-                        <div class="person-grid" id="personsPreview"></div>
-                    </section>
-
-                    <!-- Discovered Emails -->
-                    <section class="section">
-                        <div class="section-header">
-                            <h2>Discovered Emails</h2>
-                        </div>
-                        <p class="text-muted mb-lg">Email addresses extracted during document analysis:</p>
-                        <div class="table-container">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Email Address</th>
-                                        <th>Associated With</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><code>gmax1@mindspring.com</code></td>
-                                        <td>Ghislaine Maxwell</td>
-                                    </tr>
-                                    <tr>
-                                        <td><code>AAcosta@usa.doj.gov</code></td>
-                                        <td>Alexander Acosta (DOJ)</td>
-                                    </tr>
-                                    <tr>
-                                        <td><code>ClaimantServices@EpsteinVCP.com</code></td>
-                                        <td>Victims Compensation Program</td>
-                                    </tr>
-                                    <tr>
-                                        <td><code>USANYS.EpsteinVictims@usa.doj.gov</code></td>
-                                        <td>DOJ Victim Services</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </section>
-
-                    <!-- Charts Section -->
-                    <section class="section" id="charts">
-                        <div class="section-header">
-                            <h2>Data Visualizations</h2>
+                        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                            <div class="stat-card" style="border-top: 4px solid var(--accent-gold);">
+                                <span class="stat-number">18,550</span>
+                                <span class="stat-label">Indexed Records</span>
+                            </div>
+                            <div class="stat-card" style="border-top: 4px solid var(--accent-blue);">
+                                <span class="stat-number">400+</span>
+                                <span class="stat-label">Mentioned Entities</span>
+                            </div>
+                            <div class="stat-card" style="border-top: 4px solid var(--accent-red);">
+                                <span class="stat-number">20.8 GB</span>
+                                <span class="stat-label">Media Discovery</span>
+                            </div>
                         </div>
 
-                        <div class="charts-grid">
+                        <div class="charts-grid mt-lg">
                             <div class="chart-wrapper">
                                 <canvas id="mentionsChart"></canvas>
                             </div>
@@ -213,92 +113,86 @@
                         </div>
                     </section>
 
-                    <!-- Official Data Sources -->
-                    <section class="section" id="sources">
+                    <section id="findings" class="mb-2xl">
                         <div class="section-header">
-                            <h2>Official Data Sources</h2>
+                            <h2>Critical Evidence Summary</h2>
+                            <a href="archive.html" class="view-all">Browse Archive →</a>
                         </div>
 
-                        <div class="source-cards">
-                            <a href="https://www.justice.gov/epstein" target="_blank" class="source-card official">
-                                <span class="source-badge">Primary</span>
-                                <h4>DOJ Epstein Portal</h4>
-                                <p>Central hub for all official Epstein-related documents from the Department of
-                                    Justice.</p>
-                                <span class="source-url">justice.gov/epstein</span>
-                            </a>
+                        <div class="findings-grid">
+                            <article class="finding-card critical">
+                                <span class="finding-tag"
+                                    style="background: var(--accent-gold-glow); color: var(--accent-gold);">TOP
+                                    PRIORITY</span>
+                                <h3>Masseuse Contact List</h3>
+                                <p>Comprehensive record of 254 individuals. Direct link to primary discovery batch
+                                    12.03.25.</p>
+                                <a href="docs/D. Masseuse List_Redacted_0.pdf" target="_blank"
+                                    class="finding-source">OPEN SECURE PDF</a>
+                            </article>
 
-                            <a href="https://www.justice.gov/epstein/court-records" target="_blank" class="source-card">
-                                <h4>Court Records</h4>
-                                <p>Federal court documents. Many contain pre-existing redactions with additional DOJ
-                                    redactions marked.</p>
-                                <span class="source-url">justice.gov/epstein/court-records</span>
-                            </a>
+                            <article class="finding-card">
+                                <span class="finding-tag">DIGITAL EVIDENCE</span>
+                                <h3>Surveillance Infrastructure</h3>
+                                <p>UniFi NVR systems, digital servers, and camera arrays seized from Manhattan and Palm
+                                    Beach properties.</p>
+                                <a href="archive.html?q=surveillance" class="finding-source">VIEW INVENTORY</a>
+                            </article>
 
-                            <a href="https://www.justice.gov/epstein/doj-disclosures" target="_blank"
-                                class="source-card">
-                                <h4>DOJ Disclosures</h4>
-                                <p>Releasable documents including disclosures under the Epstein Files Transparency Act
-                                    (H.R. 4405).</p>
-                                <span class="source-url">justice.gov/epstein/doj-disclosures</span>
-                            </a>
-
-                            <a href="https://www.justice.gov/epstein/foia" target="_blank" class="source-card">
-                                <h4>FOIA Records</h4>
-                                <p>Records released under Freedom of Information Act including Florida public records.
-                                </p>
-                                <span class="source-url">justice.gov/epstein/foia</span>
-                            </a>
-
-                            <a href="https://oversight.house.gov/release/oversight-committee-releases-epstein-records-provided-by-the-department-of-justice/"
-                                target="_blank" class="source-card">
-                                <h4>House Oversight Committee</h4>
-                                <p>Epstein records released by the House Committee on Oversight and Government Reform.
-                                </p>
-                                <span class="source-url">oversight.house.gov</span>
-                            </a>
-
-                            <a href="https://www.courtlistener.com/docket/17318376/united-states-v-maxwell/"
-                                target="_blank" class="source-card">
-                                <h4>Maxwell Trial Docket</h4>
-                                <p>Complete docket for United States v. Maxwell with public court filings.</p>
-                                <span class="source-url">courtlistener.com</span>
-                            </a>
+                            <article class="finding-card">
+                                <span class="finding-tag">FLIGHT RECODS</span>
+                                <h3>The "Lolita Express" Logs</h3>
+                                <p>117 pages of detailed flight movements between 1995 and 2013, released during the
+                                    Maxwell trial.</p>
+                                <a href="docs/B. Flight Log_Released in U.S. v. Maxwell_0_0_0_0.pdf" target="_blank"
+                                    class="finding-source">ANALYZE LOGS</a>
+                            </article>
                         </div>
                     </section>
 
+                    <section id="entities" class="mb-2xl">
+                        <div class="section-header">
+                            <h2>High-Impact Entities</h2>
+                            <a href="persons.html" class="view-all">Executive Person Database →</a>
+                        </div>
+                        <div class="person-grid" id="personsPreview">
+                            <!-- Populated by home.js with high-fidelity cards -->
+                        </div>
+                    </section>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div>
-                    <h4>About This Project</h4>
-                    <p>Analysis of publicly released documents from the Epstein investigation. All data sourced from
-                        official government releases. Not affiliated with DOJ.</p>
+                    <h4>Project Methodology</h4>
+                    <p>All data is processed through an automated high-fidelity indexing system. We prioritize source
+                        integrity and verifiable government citations.</p>
                 </div>
                 <div>
-                    <h4>Navigation</h4>
+                    <h4>Intelligence Paths</h4>
                     <ul class="footer-links">
-                        <li><a href="persons.html">People Database</a></li>
-                        <li><a href="archive.html">Master Archive</a></li>
-                        <li><a href="gallery.html">Media Gallery</a></li>
-                        <li><a href="about.html">Methodology</a></li>
+                        <li><a href="persons.html">Network Analysis</a></li>
+                        <li><a href="archive.html">Evidence Master</a></li>
+                        <li><a href="timeline.html">The Chronicle</a></li>
+                        <li><a href="about.html">Technical Spec</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>Data extracted December 2025 • <a href="about.html">View Methodology</a></p>
+                <p>Mission-Critical Dataset v1.0.4 • 18,550 Records Indexed • <a href="about.html">Research Policy</a>
+                </p>
             </div>
         </div>
     </footer>
 
     <script src="js/nav.js"></script>
     <script src="js/search.js"></script>
+    <script src="js/home.js"></script>
+    <script src="js/charts.js"></script>
 </body>
 
 </html>
