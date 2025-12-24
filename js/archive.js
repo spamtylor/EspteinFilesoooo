@@ -84,19 +84,31 @@ function applyFilters() {
     const sourceFilter = document.querySelector('.filter-tab.active')?.dataset.source || 'all';
     const searchQuery = document.getElementById('archiveSearch')?.value.toLowerCase() || '';
 
-    filteredRecords = archiveData.records.filter(record => {
+    // Initialize Fuse if not ready (and we have data)
+    if (!window.fuse && archiveData.records.length > 0) {
+        const options = {
+            keys: ['name', 'tags', 'description', 'collection'],
+            threshold: 0.3, // Fuzzy match sensitivity
+            ignoreLocation: true
+        };
+        window.fuse = new Fuse(archiveData.records, options);
+    }
+
+    // filtering logic
+    let results = archiveData.records;
+
+    // Apply Search First (if any)
+    if (searchQuery && window.fuse) {
+        // Fuse returns { item: ... } structure
+        results = window.fuse.search(searchQuery).map(result => result.item);
+    }
+
+    filteredRecords = results.filter(record => {
         const matchesType = typeFilter === 'all' || record.type === typeFilter;
         const matchesSource = sourceFilter === 'all' || record.source === sourceFilter;
-        const matchesCollection = collectionFilter === 'all' || record.tags.includes(collectionFilter);
+        const matchesCollection = collectionFilter === 'all' || record.collection === collectionFilter;
 
-        if (!matchesType || !matchesSource || !matchesCollection) return false;
-
-        if (searchQuery) {
-            const searchText = `${record.name} ${record.tags.join(' ')}`.toLowerCase();
-            return searchText.includes(searchQuery);
-        }
-
-        return true;
+        return matchesType && matchesSource && matchesCollection;
     });
 
     currentPage = 1;

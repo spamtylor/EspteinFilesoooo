@@ -13,24 +13,39 @@ document.addEventListener('DOMContentLoaded', async () => {
     // 1. Initial Data Load
     async function loadMedia() {
         try {
-            const response = await fetch('data/master_archive.json');
+            // Updated to fetch the new Production Manifest
+            const response = await fetch('manifest.json');
             const data = await response.json();
 
-            // Access via records key
-            const records = data.records || [];
+            // Access via files key (new schema)
+            const records = data.files || [];
 
             // Filter only media types
             allMedia = records.filter(item =>
-                item.type === 'image' ||
-                item.type === 'video' ||
-                item.path.endsWith('.jpg') ||
-                item.path.endsWith('.mp4')
+                item.file_type === 'image' ||
+                item.file_type === 'video' ||
+                item.filename.endsWith('.jpg') ||
+                item.filename.endsWith('.mp4')
             );
 
             renderFolders();
         } catch (error) {
             console.error('Gallery Engine Error:', error);
-            mediaGrid.innerHTML = '<div class="error">Failed to load media manifest.</div>';
+            // Fallback to old archive if manifest fails
+            console.warn('Manifest failed, trying master_archive.json fallback...');
+            try {
+                const response = await fetch('data/master_archive.json');
+                const data = await response.json();
+                allMedia = (data.records || []).map(r => ({
+                    filename: r.name,
+                    relative_path: r.path,
+                    collection_name: r.collection,
+                    file_type: r.type
+                }));
+                renderFolders();
+            } catch (e) {
+                mediaGrid.innerHTML = '<div class="error">Failed to load media manifest.</div>';
+            }
         }
     }
 
@@ -40,14 +55,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         folderGrid.style.display = 'grid';
         breadcrumb.textContent = 'Root / Collections';
 
-        // Unique collections from tags or path
-        const collections = [...new Set(allMedia.map(item => item.collection || 'Uncategorized'))];
+        // Unique collections
+        const collections = [...new Set(allMedia.map(item => item.collection_name || 'Uncategorized'))].sort();
 
         folderGrid.innerHTML = collections.map(col => `
             <div class="folder-card" onclick="openFolder('${col}')" style="background: var(--bg-glass); border: 1px solid var(--border-subtle); padding: 20px; border-radius: 8px; cursor: pointer; text-align: center; transition: all 0.2s;">
                 <div style="font-size: 2.5rem; color: var(--accent-gold); margin-bottom: 12px;">📁</div>
                 <div style="font-weight: 700; font-size: 0.85rem; text-transform: uppercase; color: var(--text-primary);">${col}</div>
-                <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 4px;">${allMedia.filter(m => m.collection === col).length} FILES</div>
+                <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 4px;">${allMedia.filter(m => m.collection_name === col).length} FILES</div>
             </div>
         `).join('');
     }
@@ -59,50 +74,114 @@ document.addEventListener('DOMContentLoaded', async () => {
         mediaGrid.style.display = 'grid';
         breadcrumb.innerHTML = `<span onclick="location.reload()" style="cursor:pointer; text-decoration: underline;">Root</span> / ${collection}`;
 
-        const folderItems = allMedia.filter(item => item.collection === collection);
-
-        mediaGrid.innerHTML = folderItems.map(item => {
-            const isVideo = item.path.endsWith('.mp4') || item.type === 'video';
-            const thumb = isVideo ? 'https://placehold.co/400x225/12121a/fff?text=VIDEO+READY' : item.path;
-
-            return `
-                <div class="media-item" onclick="openModal('${item.path}', '${isVideo ? 'video' : 'image'}')" style="background: var(--bg-glass); border-radius: 8px; overflow: hidden; border: 1px solid var(--border-subtle); cursor: pointer; transition: transform 0.2s;">
-                    <div style="aspect-ratio: 16/9; background: #000; position: relative; overflow: hidden;">
-                        <img src="${thumb}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;">
-                        ${isVideo ? '<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #fff; background: rgba(0,0,0,0.3);">▶</div>' : ''}
-                    </div>
-                    <div style="padding: 12px;">
-                        <div style="font-size: 0.7rem; font-family: 'JetBrains Mono'; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${item.name}</div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
-                            <span style="font-size: 0.6rem; background: var(--accent-blue); padding: 1px 4px; border-radius: 2px;">${item.type.toUpperCase()}</span>
-                            <span style="font-size: 0.6rem; color: var(--text-muted);">${item.id}</span>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }).join('');
+        const folderItems = allMedia.filter(item => item.collection_name === collection);
+        renderMediaList(folderItems);
     };
 
     // 4. Modal Logic
     window.openModal = function (path, type) {
         mediaModal.style.display = 'flex';
+        // Ensure path is properly encoded
+        const safePath = encodeURI(path);
+
         if (type === 'video') {
             modalContent.innerHTML = `
-                <video controls autoplay style="max-width: 100%; border: 4px solid var(--accent-gold); border-radius: 8px;">
-                    <source src="${path}" type="video/mp4">
+                <video id="modalVideoPlayer" controls autoplay style="max-width: 100%; border: 4px solid var(--accent-gold); border-radius: 8px; box-shadow: 0 0 30px rgba(226,183,64,0.2);">
+                    <source src="${safePath}" type="video/mp4">
+                    Your browser does not support the video tag.
                 </video>
-                <div style="padding: 20px; color: #fff;">PRODUCTION FILE: ${path}</div>
+                <div style="padding: 20px; color: #fff; font-family: 'JetBrains Mono';">PRODUCTION FILE: ${path}</div>
             `;
         } else {
             modalContent.innerHTML = `
-                <img src="${path}" style="max-width: 100%; max-height: 80vh; border: 4px solid var(--accent-blue); border-radius: 8px;">
-                <div style="padding: 20px; color: #fff;">EVIDENCE SNAPSHOT: ${path}</div>
+                <img src="${safePath}" style="max-width: 100%; max-height: 80vh; border: 4px solid var(--accent-blue); border-radius: 8px; box-shadow: 0 0 30px rgba(59,130,246,0.2);">
+                <div style="padding: 20px; color: #fff; font-family: 'JetBrains Mono';">EVIDENCE SNAPSHOT: ${path}</div>
             `;
         }
     };
 
-    modalClose.onclick = () => mediaModal.style.display = 'none';
-    mediaModal.onclick = (e) => { if (e.target === mediaModal) mediaModal.style.display = 'none'; };
+    function closeModal() {
+        mediaModal.style.display = 'none';
+        modalContent.innerHTML = ''; // Clear content to stop video
+    }
+
+    modalClose.onclick = closeModal;
+    mediaModal.onclick = (e) => { if (e.target === mediaModal) closeModal(); };
+
+    // 5. Sidebar Filter Logic
+    document.querySelector('.sidebar')?.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (!link) return;
+
+        e.preventDefault();
+
+        // Update active state
+        document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
+        link.classList.add('active');
+
+        const folder = link.dataset.folder;
+        const type = link.dataset.type;
+
+        if (folder) {
+            if (folder === 'root') {
+                renderFolders();
+            } else {
+                // If the user clicks a specific sidebar item, we assume it matches a collection name.
+                // Or if we hardcoded names in HTML like "batch_1", map them here OR update HTML to match real names.
+                // For robustness, try to match exact name or fallback.
+
+                if (folder === 'batch_1') openFolder('DataSet 1');
+                else if (folder === 'batch_2') openFolder('DataSet 2');
+                else if (folder === 'surveillance') openFolder('IMAGES005');
+                else openFolder(folder); // Try direct match
+            }
+        }
+
+        if (type) {
+            // Filter global media by type
+            folderGrid.style.display = 'none';
+            mediaGrid.style.display = 'grid';
+            breadcrumb.textContent = `Root / Filter: ${type.toUpperCase()}`;
+
+            const typeItems = allMedia.filter(item => item.filename.endsWith(type) || item.file_type === type);
+            renderMediaList(typeItems);
+        }
+    });
+
+    function renderMediaList(items) {
+        if (items.length === 0) {
+            mediaGrid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 40px;">No media found for this filter.</div>';
+            return;
+        }
+
+        // Pagination or limiting for performance (render first 100)
+        const displayItems = items.slice(0, 100);
+
+        mediaGrid.innerHTML = displayItems.map(item => {
+            const isVideo = item.filename.endsWith('.mp4') || item.file_type === 'video';
+            // Use relative_path for src. 
+            const thumb = isVideo ? 'https://placehold.co/400x225/12121a/fff?text=VIDEO+READY' : item.relative_path;
+
+            return `
+                <div class="media-item" onclick="openModal('${item.relative_path}', '${isVideo ? 'video' : 'image'}')" style="background: var(--bg-glass); border-radius: 8px; overflow: hidden; border: 1px solid var(--border-subtle); cursor: pointer; transition: transform 0.2s;">
+                    <div style="aspect-ratio: 16/9; background: #000; position: relative; overflow: hidden;">
+                        <img src="${thumb}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;">
+                        ${isVideo ? '<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #fff; background: rgba(0,0,0,0.3);">▶</div>' : ''}
+                    </div>
+                    <div style="padding: 12px;">
+                        <div style="font-size: 0.7rem; font-family: 'JetBrains Mono'; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${item.filename}</div>
+                         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
+                            <span style="font-size: 0.6rem; background: var(--accent-blue); padding: 1px 4px; border-radius: 2px;">${(item.file_type || 'MEDIA').toUpperCase()}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        if (items.length > 100) {
+            mediaGrid.innerHTML += `<div style="grid-column: 1/-1; text-align: center; padding: 20px; color: var(--text-muted);">+${items.length - 100} more items (Filter to see specific files)</div>`;
+        }
+    }
 
     // Initial Start
     loadMedia();

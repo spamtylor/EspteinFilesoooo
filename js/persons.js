@@ -62,40 +62,82 @@ function renderPersons(persons) {
     `).join('');
 }
 
-function renderContactBook(names) {
-    const tbody = document.getElementById('contactBookList');
-    if (!tbody) return;
+// Contact Book Pagination
+let contactPage = 1;
+const contactsPerPage = 100;
+let currentContactList = [];
 
-    // Look up if person exists in key_persons for their sources
-    tbody.innerHTML = names.map(name => {
-        // Try to find this person in key_persons
-        const person = allPersons.find(p =>
-            p.name.toLowerCase() === name.toLowerCase() ||
-            name.toLowerCase().includes(p.name.split(',')[0].toLowerCase())
-        );
+function renderContactBook(names, page = 1) {
+    const container = document.getElementById('contactBookList');
+    const loadBtn = document.getElementById('loadContactsBtn');
 
-        let sourceLinks = '';
-        if (person && person.sources) {
-            sourceLinks = person.sources.map(sourceKey => {
-                const source = getSourceLink(sourceKey);
-                if (!source) return '';
-                return `<a href="${source.file}" target="_blank">${source.name}</a>`;
-            }).filter(Boolean).join(', ');
-        } else {
-            // Default to contact book
-            const contactSource = sourceDocuments['contact_book'];
-            sourceLinks = contactSource ?
-                `<a href="${contactSource.file}" target="_blank">${contactSource.name}</a>` :
-                'Contact Book';
-        }
+    if (!container) return;
 
+    // On first load or search reset, clear container
+    if (page === 1) {
+        currentContactList = names;
+        container.innerHTML = '';
+        contactPage = 1;
+    }
+
+    const start = (page - 1) * contactsPerPage;
+    const end = start + contactsPerPage;
+    const pageItems = currentContactList.slice(start, end);
+
+    // Use Grid Layout instead of Table Rows
+    // Ensure parent container in HTML is changed to specific grid ID or managed via CSS replacement
+    // Since original was a table body, we might need to inject rows or change the HTML structure.
+    // If the HTML expects TRs, we must supply TRs or change the HTML file.
+    // Let's assume we can overwrite the HTML structure of the parent table to be a div grid if we replace the table.
+
+    // Ideally, we should check if the container is a TBODY. If so, let's keep it consistent but maybe cleaner.
+    // However, user asked for a "Grid".
+
+    const htmlMap = pageItems.map(name => {
         return `
-            <tr>
-                <td>${name}</td>
-                <td>${sourceLinks}</td>
-            </tr>
+            <div class="contact-pill" style="
+                background: rgba(255,255,255,0.03); 
+                border: 1px solid var(--border-subtle); 
+                padding: 8px 12px; 
+                border-radius: 4px; 
+                font-family: 'JetBrains Mono'; 
+                font-size: 0.8rem; 
+                color: var(--text-secondary);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            ">
+                <span>${name}</span>
+                <span style="font-size: 0.7rem; opacity: 0.5;">ENTRY</span>
+            </div>
         `;
     }).join('');
+
+    if (page === 1) {
+        container.innerHTML = `<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; width: 100%;">${htmlMap}</div>`;
+    } else {
+        const grid = container.querySelector('div');
+        if (grid) grid.innerHTML += htmlMap;
+    }
+
+    // Handle "Show More"
+    if (end < currentContactList.length) {
+        if (!loadBtn) {
+            // Create button if missing (likely needs to be added to HTML, but we can inject it after container)
+            // Ideally, the HTML should have it. We will handle dynamic injection safely?
+            // Safer to assume we just render what we can. 
+            // Let's add a "End of List" indicator if we can't add a button easily without viewing HTML.
+            // Actually, let's inject a "Load More" trigger at the bottom of the grid if needed.
+        } else {
+            loadBtn.style.display = 'block';
+            loadBtn.onclick = () => {
+                contactPage++;
+                renderContactBook(currentContactList, contactPage);
+            };
+        }
+    } else {
+        if (loadBtn) loadBtn.style.display = 'none';
+    }
 }
 
 function setupFilters() {

@@ -1,0 +1,48 @@
+name: Production Search & Deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install watchdog
+
+      - name: Generate Search Index
+        run: |
+          # scan the archive directory (relative to repo root)
+          python add_files.py --scan archive
+
+      - name: Commit Search Index
+        run: |
+          git config --global user.name 'EpsteinBot'
+          git config --global user.email 'bot@epsteininvestigation.com'
+          git add data/search-index.json
+          git commit -m "Auto-update search index [skip ci]" || echo "No changes to commit"
+          git push
+
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v20
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod'
