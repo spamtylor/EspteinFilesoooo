@@ -188,7 +188,8 @@ def generate_search_index(files: List[Dict]) -> None:
         name_lower = f["filename"].lower()
         
         if "maxwell" in name_lower: tags.append("maxwell")
-        if "epstein" in name_lower: tags.append("epstein")
+        # Ensure 'epstein' is a global tag for UX (so searching 'epstein' shows all)
+        tags.append("epstein")
         if "flight" in name_lower: tags.append("flight_log")
         if "surveillance" in name_lower: tags.append("surveillance")
         if "doj" in str(f["path"]).lower(): tags.append("doj")
@@ -250,8 +251,15 @@ def generate_manifest(files: List[Dict]) -> None:
             pass
             
         # S3 Integration: Prepend Bucket URL
-        # URL needs forward slashes
-        web_path = f"https://epstein-archive-media.s3.us-east-1.amazonaws.com/{web_path}"
+        # URL needs forward slashes and encoding for spaces
+        from urllib.parse import quote
+        # We need to quote the path parts, but NOT the 'https://...' part.
+        # But web_path is just the relative path here.
+        # web_path might contain / characters which quote encodes to %2F, which S3 MIGHT not like if it expects slashes.
+        # We want to encode components key.
+        # Safe way: quote(web_path) but keep slashes? `quote(web_path, safe='/')`
+        
+        web_path = f"https://epstein-archive-media.s3.us-east-1.amazonaws.com/{quote(web_path.replace(os.sep, '/'), safe='/')}"
             
         manifest.append({
             "filename": f["filename"],
@@ -295,8 +303,7 @@ def generate_master_archive(files: List[Dict]) -> None:
         except:
             pass
             
-        # S3 Integration: Prepend Bucket URL
-        web_path = f"https://epstein-archive-media.s3.us-east-1.amazonaws.com/{web_path}"
+        web_path = f"https://epstein-archive-media.s3.us-east-1.amazonaws.com/{quote(web_path.replace(os.sep, '/'), safe='/')}"
         
         records.append({
             "id": f"EVD-{collection_name[:3].upper()}-{str(i).zfill(4)}",
@@ -307,7 +314,7 @@ def generate_master_archive(files: List[Dict]) -> None:
             "date": f["modified"][:10],
             "description": f"Recovered from {collection_name}",
             "source": "S3_ARCHIVE",
-            "tags": [f["extension"].replace(".", "")]
+            "tags": [f["extension"].replace(".", ""), "epstein"]
         })
         
     output_path = DATA_DIR / "master_archive.json"
