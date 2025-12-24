@@ -14,14 +14,18 @@
     <nav class="nav">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">EPSTEIN FILES</a>
+
+            <div class="header-search">
+                <input type="text" placeholder="Search archive (documents, names, events)..." id="headerSearch">
+            </div>
+
             <button class="nav-toggle" aria-label="Menu" id="navToggle">☰</button>
             <ul class="nav-links" id="navLinks">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="persons.html">Persons</a></li>
+                <li><a href="index.html">Briefing</a></li>
+                <li><a href="persons.html">People</a></li>
                 <li><a href="networks.html">Networks</a></li>
-                <li><a href="documents.html">Documents</a></li>
+                <li><a href="archive.html">Archive</a></li>
                 <li><a href="gallery.html" class="active">Gallery</a></li>
-                <li><a href="evidence.html">Evidence</a></li>
                 <li><a href="timeline.html">Timeline</a></li>
                 <li><a href="about.html">About</a></li>
             </ul>
@@ -224,14 +228,31 @@
 
     <footer class="footer">
         <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h4>About This Project</h4>
+                    <p>Analysis of publicly released documents from the Epstein investigation. All data sourced from
+                        official government releases. Not affiliated with DOJ.</p>
+                </div>
+                <div>
+                    <h4>Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="persons.html">People Database</a></li>
+                        <li><a href="archive.html">Master Archive</a></li>
+                        <li><a href="gallery.html">Media Gallery</a></li>
+                        <li><a href="about.html">Methodology</a></li>
+                    </ul>
+                </div>
+            </div>
             <div class="footer-bottom">
-                <p>Media from official releases • <a href="https://www.justice.gov/epstein" target="_blank">Official DOJ
-                        Source</a></p>
+                <p>Data extracted December 2025 • <a href="about.html">View Methodology</a></p>
             </div>
         </div>
     </footer>
 
     <script src="js/nav.js"></script>
+    <script src="js/gallery.js"></script>
+    <script src="js/search.js"></script>
 </body>
 
 </html>
