@@ -1,182 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Epstein Investigation Analysis Dashboard</title>
-    <meta name="description" content="Comprehensive analysis of 18,550 files from the Epstein investigation">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Epstein Files - Investigation Analysis</title>
+    <meta name="description"
+        content="Comprehensive analysis of 18,550 documents from the Epstein investigation. Browse persons, evidence, and source documents.">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <div class="dashboard">
-        <!-- Header -->
-        <header class="header">
-            <div class="header-content">
-                <h1>Epstein Investigation</h1>
-                <p class="subtitle">Data Analysis Dashboard</p>
-            </div>
-            <div class="header-stats">
-                <div class="stat-badge">
-                    <span class="stat-value" id="totalFiles">18,550</span>
-                    <span class="stat-label">Files</span>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">EPSTEIN FILES</a>
+            <button class="nav-toggle" aria-label="Menu">☰</button>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="persons.html">Persons</a></li>
+                <li><a href="documents.html">Documents</a></li>
+                <li><a href="evidence.html">Evidence</a></li>
+                <li><a href="timeline.html">Timeline</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <h1>Epstein Investigation Files</h1>
+            <p class="subtitle">Comprehensive analysis of 18,550 documents from federal releases. Every finding links to
+                source documents for verification.</p>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <section class="stats-bar">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="number">18,550</span>
+                    <span class="label">Total Files</span>
                 </div>
-                <div class="stat-badge">
-                    <span class="stat-value" id="totalSize">19.43 GB</span>
-                    <span class="stat-label">Data</span>
+                <div class="stat-item">
+                    <span class="number">14,700</span>
+                    <span class="label">PDFs</span>
+                </div>
+                <div class="stat-item">
+                    <span class="number">887</span>
+                    <span class="label">Videos</span>
+                </div>
+                <div class="stat-item">
+                    <span class="number">6,775</span>
+                    <span class="label">Images</span>
+                </div>
+                <div class="stat-item">
+                    <span class="number">19.43 GB</span>
+                    <span class="label">Total Data</span>
                 </div>
             </div>
-        </header>
+        </div>
+    </section>
 
-        <!-- Main Grid -->
-        <main class="main-grid">
-            <!-- Left Column -->
-            <div class="column-left">
-                <!-- Key Persons Card -->
-                <section class="card card-dark">
-                    <div class="card-header">
-                        <h2>🔍 Key Persons</h2>
-                        <span class="badge">23 Individuals</span>
-                    </div>
-                    <div class="card-content">
-                        <div class="person-categories">
-                            <button class="filter-btn active" data-filter="all">All</button>
-                            <button class="filter-btn" data-filter="subject">Subjects</button>
-                            <button class="filter-btn" data-filter="legal">Legal</button>
-                            <button class="filter-btn" data-filter="associate">Associates</button>
-                        </div>
-                        <div class="persons-list" id="personsList">
-                            <!-- Populated by JS -->
-                        </div>
-                    </div>
-                </section>
+    <!-- Main Content -->
+    <main class="page-content" style="padding-top: var(--space-xl);">
+        <div class="container">
 
-                <!-- Contact Book Card -->
-                <section class="card">
-                    <div class="card-header">
-                        <h2>📒 Contact Book Names</h2>
-                        <span class="badge">20+ Notable</span>
-                    </div>
-                    <div class="card-content">
-                        <div class="tag-cloud" id="contactNames">
-                            <!-- Populated by JS -->
+            <!-- Key Findings Section -->
+            <section class="section">
+                <div class="section-header">
+                    <h2>Critical Findings</h2>
+                    <a href="documents.html" class="view-all">View All Documents →</a>
+                </div>
+
+                <div class="doc-grid">
+                    <article class="card card-critical">
+                        <h3>Masseuse List</h3>
+                        <p>254 individuals documented on list. Names redacted to protect potential victims.</p>
+                        <div class="source">
+                            Source: <a href="docs/D_Masseuse_List.pdf">D. Masseuse List (PDF)</a>
                         </div>
+                    </article>
+
+                    <article class="card card-critical">
+                        <h3>Explicit Content CD</h3>
+                        <p>CD labeled "girl pics nude book 4" found in evidence seized during search.</p>
+                        <div class="source">
+                            Source: <a href="docs/A_Evidence_List.pdf">A. Evidence List (PDF)</a>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <h3>Flight Records</h3>
+                        <p>117 pages of flight logs documenting aircraft movements and passenger lists.</p>
+                        <div class="source">
+                            Source: <a href="docs/B_Flight_Log.pdf">B. Flight Log (PDF)</a>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <h3>Contact Network</h3>
+                        <p>Extensive contact book with international connections. Personal info redacted.</p>
+                        <div class="source">
+                            Source: <a href="docs/C_Contact_Book.pdf">C. Contact Book (PDF)</a>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <h3>Surveillance System</h3>
+                        <p>UniFi surveillance infrastructure seized from properties including NVR and cameras.</p>
+                        <div class="source">
+                            Source: <a href="docs/A_Evidence_List.pdf">A. Evidence List (PDF)</a>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <h3>Shredded Documents</h3>
+                        <p>Reconstructed shredded documents recovered from Matchmaker service.</p>
+                        <div class="source">
+                            Source: <a href="docs/A_Evidence_List.pdf">A. Evidence List (PDF)</a>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Key Persons Section -->
+            <section class="section">
+                <div class="section-header">
+                    <h2>Key Persons</h2>
+                    <a href="persons.html" class="view-all">View All Persons →</a>
+                </div>
+
+                <div class="person-grid" id="personsPreview">
+                    <!-- Populated by JS -->
+                </div>
+            </section>
+
+            <!-- Hidden Emails Section -->
+            <section class="section">
+                <div class="section-header">
+                    <h2>Discovered Emails</h2>
+                </div>
+                <p class="text-muted mb-lg">Email addresses found during redaction analysis of 14,700 PDFs:</p>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Email Address</th>
+                                <th>Associated With</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>gmax1@mindspring.com</code></td>
+                                <td>Ghislaine Maxwell</td>
+                            </tr>
+                            <tr>
+                                <td><code>AAcosta@usa.doj.gov</code></td>
+                                <td>Alexander Acosta (DOJ)</td>
+                            </tr>
+                            <tr>
+                                <td><code>ClaimantServices@EpsteinVCP.com</code></td>
+                                <td>Victims Compensation Program</td>
+                            </tr>
+                            <tr>
+                                <td><code>doug.band@gsa.gov</code></td>
+                                <td>Doug Band</td>
+                            </tr>
+                            <tr>
+                                <td><code>USANYS.EpsteinVictims@usa.doj.gov</code></td>
+                                <td>DOJ Victim Services</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Data Sources -->
+            <section class="section">
+                <div class="section-header">
+                    <h2>Data Sources</h2>
+                </div>
+
+                <div class="doc-grid">
+                    <div class="doc-card">
+                        <h4>DOJ First Production</h4>
+                        <p class="meta">Federal documents released by Department of Justice</p>
+                        <a href="documents.html#doj" class="download-btn">Browse Files</a>
                     </div>
-                </section>
+
+                    <div class="doc-card">
+                        <h4>USVI Production</h4>
+                        <p class="meta">Documents from U.S. Virgin Islands investigation</p>
+                        <a href="documents.html#usvi" class="download-btn">Browse Files</a>
+                    </div>
+
+                    <div class="doc-card">
+                        <h4>Estate Production</h4>
+                        <p class="meta">Documents from estate proceedings</p>
+                        <a href="documents.html#estate" class="download-btn">Browse Files</a>
+                    </div>
+
+                    <div class="doc-card">
+                        <h4>Maxwell Trial Exhibits</h4>
+                        <p class="meta">Evidence released during U.S. v. Maxwell</p>
+                        <a href="documents.html#maxwell" class="download-btn">Browse Files</a>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h4>About This Project</h4>
+                    <p>This site provides analysis of publicly released documents from the Epstein investigation. All
+                        data is sourced from official government releases. Every finding links to source documents for
+                        independent verification.</p>
+                </div>
+                <div>
+                    <h4>Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="persons.html">Person Database</a></li>
+                        <li><a href="documents.html">Source Documents</a></li>
+                        <li><a href="evidence.html">Evidence Inventory</a></li>
+                        <li><a href="about.html">Methodology</a></li>
+                    </ul>
+                </div>
             </div>
-
-            <!-- Center Column -->
-            <div class="column-center">
-                <!-- Stats Overview -->
-                <section class="card stats-card">
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <div class="stat-icon">📄</div>
-                            <div class="stat-info">
-                                <span class="stat-number">14,700</span>
-                                <span class="stat-desc">PDF Documents</span>
-                            </div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-icon">🎬</div>
-                            <div class="stat-info">
-                                <span class="stat-number">887</span>
-                                <span class="stat-desc">Videos</span>
-                            </div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-icon">📷</div>
-                            <div class="stat-info">
-                                <span class="stat-number">6,775</span>
-                                <span class="stat-desc">Images</span>
-                            </div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-icon">📊</div>
-                            <div class="stat-info">
-                                <span class="stat-number">29,408</span>
-                                <span class="stat-desc">DAT Records</span>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Key Findings -->
-                <section class="card">
-                    <div class="card-header">
-                        <h2>⚠️ Critical Findings</h2>
-                    </div>
-                    <div class="card-content">
-                        <div class="findings-list" id="findingsList">
-                            <!-- Populated by JS -->
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Evidence Categories -->
-                <section class="card">
-                    <div class="card-header">
-                        <h2>📦 Evidence Categories</h2>
-                    </div>
-                    <div class="card-content">
-                        <div class="evidence-grid" id="evidenceGrid">
-                            <!-- Populated by JS -->
-                        </div>
-                    </div>
-                </section>
+            <div class="footer-bottom">
+                <p>Data extracted December 2025 • Analysis performed using PyMuPDF + Tesseract OCR</p>
             </div>
+        </div>
+    </footer>
 
-            <!-- Right Column -->
-            <div class="column-right">
-                <!-- Hidden Emails Discovered -->
-                <section class="card card-warning">
-                    <div class="card-header">
-                        <h2>📧 Hidden Emails Found</h2>
-                        <span class="badge badge-warning">Discovered in Scan</span>
-                    </div>
-                    <div class="card-content">
-                        <div class="emails-list" id="emailsList">
-                            <!-- Populated by JS -->
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Locations -->
-                <section class="card">
-                    <div class="card-header">
-                        <h2>📍 Key Locations</h2>
-                    </div>
-                    <div class="card-content">
-                        <div class="locations-list" id="locationsList">
-                            <!-- Populated by JS -->
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Analysis Info -->
-                <section class="card card-info">
-                    <div class="card-header">
-                        <h2>ℹ️ Analysis Details</h2>
-                    </div>
-                    <div class="card-content">
-                        <ul class="info-list">
-                            <li><strong>Extraction Date:</strong> December 24, 2025</li>
-                            <li><strong>Source Archives:</strong> 12 ZIP files</li>
-                            <li><strong>Data Sources:</strong> DOJ, USVI, Estate Productions</li>
-                            <li><strong>Redaction Status:</strong> Masseuse List ✅ Secure</li>
-                            <li><strong>Tools Used:</strong> PyMuPDF, Tesseract OCR</li>
-                        </ul>
-                    </div>
-                </section>
-            </div>
-        </main>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <p>Data extracted from publicly released documents • Analysis performed December 2025</p>
-        </footer>
-    </div>
-
-    <script src="app.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/home.js"></script>
 </body>
+
 </html>

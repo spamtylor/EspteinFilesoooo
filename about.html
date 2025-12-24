@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About &amp; Methodology - Epstein Files</title>
+    <meta name="description"
+        content="Methodology, data sources, and disclaimer for the Epstein investigation analysis.">
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">EPSTEIN FILES</a>
+            <button class="nav-toggle" aria-label="Menu">☰</button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="persons.html">Persons</a></li>
+                <li><a href="documents.html">Documents</a></li>
+                <li><a href="evidence.html">Evidence</a></li>
+                <li><a href="timeline.html">Timeline</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="page-content">
+        <div class="container">
+            <h1>About This Project</h1>
+
+            <section class="section">
+                <h2>Purpose</h2>
+                <p>This site provides analysis of publicly released documents from the Jeffrey Epstein investigation.
+                    The goal is to make these documents accessible and searchable, with every finding linked to source
+                    documents for independent verification.</p>
+            </section>
+
+            <section class="section">
+                <h2>Data Sources</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Source</th>
+                                <th>Description</th>
+                                <th>Files</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>DOJ First Production</td>
+                                <td>Department of Justice document release</td>
+                                <td>77 files</td>
+                            </tr>
+                            <tr>
+                                <td>DataSet 1-8</td>
+                                <td>eDiscovery production volumes</td>
+                                <td>11,033+ files</td>
+                            </tr>
+                            <tr>
+                                <td>12.03.25 USVI Production</td>
+                                <td>U.S. Virgin Islands investigation</td>
+                                <td>Variable</td>
+                            </tr>
+                            <tr>
+                                <td>12.11.25 Estate Production</td>
+                                <td>Estate proceedings</td>
+                                <td>Variable</td>
+                            </tr>
+                            <tr>
+                                <td>IMAGES005</td>
+                                <td>Image archive</td>
+                                <td>~1.5 GB</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Methodology</h2>
+
+                <h3>1. Data Extraction</h3>
+                <p>All ZIP archives were extracted using standard decompression tools. Total dataset: 18,550 files,
+                    19.43 GB.</p>
+
+                <h3>2. Text Extraction</h3>
+                <p>PDF text was extracted using <strong>PyMuPDF</strong> (fitz library). For scanned documents,
+                    <strong>Tesseract OCR</strong> was used.</p>
+
+                <h3>3. Name Extraction</h3>
+                <p>Names were extracted using pattern matching. Initial extraction found 65,488 unique strings, which
+                    were filtered to 23 key individuals after removing locations, dates, and metadata artifacts.</p>
+
+                <h3>4. Redaction Analysis</h3>
+                <p>All PDFs were scanned for potential redaction bypasses. The Masseuse List was confirmed to have
+                    proper redactions (names fully removed). The Contact Book intentionally shows names with only
+                    personal contact information redacted.</p>
+
+                <h3>5. Verification</h3>
+                <p>Every finding links to the source document. Users are encouraged to verify claims independently.</p>
+            </section>
+
+            <section class="section">
+                <h2>Tools Used</h2>
+                <ul>
+                    <li><strong>Python 3.13</strong> - Primary scripting language</li>
+                    <li><strong>PyMuPDF</strong> - PDF text extraction</li>
+                    <li><strong>Tesseract OCR</strong> - Optical character recognition for scanned documents</li>
+                    <li><strong>PowerShell / WSL</strong> - Archive extraction</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2>Limitations</h2>
+                <ul>
+                    <li>Automated name extraction may miss some individuals or include false positives</li>
+                    <li>OCR accuracy varies by document quality</li>
+                    <li>Some documents are scanned at low resolution</li>
+                    <li>Redacted content cannot be recovered if properly applied</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2>Adding New Files</h2>
+                <p>This site is designed to accommodate future document releases. To add new files:</p>
+                <ol>
+                    <li>Extract new archives to the <code>extracted/</code> directory</li>
+                    <li>Run the extraction scripts to process new PDFs</li>
+                    <li>Update the JSON data files in <code>data/</code></li>
+                    <li>Commit and push to GitHub for automatic deployment</li>
+                </ol>
+            </section>
+
+            <section class="section">
+                <h2>Disclaimer</h2>
+                <p><strong>This site presents analysis of publicly available documents.</strong> Inclusion on this site
+                    does not imply guilt or wrongdoing. Many individuals appear in these documents as witnesses,
+                    attorneys, or incidental contacts. Users should draw their own conclusions based on source
+                    documents.</p>
+                <p>This project is not affiliated with any government agency, news organization, or legal entity.</p>
+            </section>
+
+            <section class="section">
+                <h2>Contact</h2>
+                <p>For corrections or questions, please open an issue on the <a
+                        href="https://github.com/spamtylor/EspteinFilesoooo">GitHub repository</a>.</p>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>Analysis performed December 2025</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/nav.js"></script>
+</body>
+
+</html>

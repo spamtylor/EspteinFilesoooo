@@ -1,0 +1,18 @@
+# Debug logs
+debug.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+
+# Node modules (if ever added)
+node_modules/
+
+# Temporary files
+*.tmp
+*.temp

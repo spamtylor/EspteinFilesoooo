@@ -1,0 +1,164 @@
+{
+    "persons": [
+        {
+            "name": "Jeffrey Epstein",
+            "mentions": 1276,
+            "role": "Primary Subject",
+            "category": "subject"
+        },
+        {
+            "name": "Ghislaine Maxwell",
+            "mentions": 1057,
+            "role": "Co-Conspirator",
+            "category": "subject"
+        },
+        {
+            "name": "Prince Andrew",
+            "mentions": 77,
+            "role": "Associate",
+            "category": "associate"
+        },
+        {
+            "name": "Laura Menninger",
+            "mentions": 220,
+            "role": "Defense Attorney",
+            "category": "legal"
+        },
+        {
+            "name": "Christian Everdell",
+            "mentions": 215,
+            "role": "Prosecutor",
+            "category": "legal"
+        },
+        {
+            "name": "Jeff Pagliuca",
+            "mentions": 136,
+            "role": "Defense Attorney",
+            "category": "legal"
+        },
+        {
+            "name": "Audrey Strauss",
+            "mentions": 88,
+            "role": "Acting US Attorney",
+            "category": "legal"
+        },
+        {
+            "name": "Judge Nathan",
+            "mentions": 170,
+            "role": "Presiding Judge",
+            "category": "legal"
+        },
+        {
+            "name": "Brad Edwards",
+            "mentions": 55,
+            "role": "Victims Attorney",
+            "category": "legal"
+        },
+        {
+            "name": "Gloria Allred",
+            "mentions": 51,
+            "role": "Victims Attorney",
+            "category": "legal"
+        },
+        {
+            "name": "Donald Trump",
+            "mentions": 51,
+            "role": "Associate (Mentioned)",
+            "category": "associate"
+        },
+        {
+            "name": "Bobbi Sternheim",
+            "mentions": 54,
+            "role": "Defense Attorney",
+            "category": "legal"
+        },
+        {
+            "name": "Martin Weinberg",
+            "mentions": 55,
+            "role": "Defense Attorney",
+            "category": "legal"
+        },
+        {
+            "name": "David Boies",
+            "mentions": 28,
+            "role": "Attorney",
+            "category": "legal"
+        },
+        {
+            "name": "Roberta Kaplan",
+            "mentions": 26,
+            "role": "Attorney",
+            "category": "legal"
+        },
+        {
+            "name": "Mark Epstein",
+            "mentions": 30,
+            "role": "Brother",
+            "category": "family"
+        },
+        {
+            "name": "Dermot Shea",
+            "mentions": 83,
+            "role": "NYPD Commissioner",
+            "category": "law_enforcement"
+        },
+        {
+            "name": "Geoffrey Berman",
+            "mentions": 63,
+            "role": "Former US Attorney",
+            "category": "legal"
+        },
+        {
+            "name": "Alexander Acosta",
+            "mentions": 54,
+            "role": "Former Labor Secretary",
+            "category": "government"
+        },
+        {
+            "name": "Roy Black",
+            "mentions": 30,
+            "role": "Defense Attorney",
+            "category": "legal"
+        },
+        {
+            "name": "Jay Lefkowitz",
+            "mentions": 41,
+            "role": "Attorney",
+            "category": "legal"
+        },
+        {
+            "name": "Jack Scarola",
+            "mentions": 33,
+            "role": "Plaintiff Attorney",
+            "category": "legal"
+        },
+        {
+            "name": "Reid Weingarten",
+            "mentions": 62,
+            "role": "Defense Attorney",
+            "category": "legal"
+        }
+    ],
+    "contact_book_names": [
+        "Althorp, Charlie",
+        "David Frost",
+        "George Hamilton",
+        "Bob Weinstein",
+        "Dr. Ruth Westheimer",
+        "Dr. Eli Wiesel",
+        "Charlie Rose",
+        "Hannah Rothchild",
+        "Duke and Duchess of Rutland",
+        "Sam Waksal",
+        "Jacques Villeneuve",
+        "Eddie Irvine",
+        "Von Habsburg",
+        "Governor Turnbull",
+        "Lord Weidenfeld",
+        "Casey Wasserman",
+        "Tamara Beckwith",
+        "Victoria Harvey",
+        "Jerry Lefcourt",
+        "Christopher Lawford"
+    ]
+}
