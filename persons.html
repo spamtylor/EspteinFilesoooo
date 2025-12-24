@@ -8,6 +8,93 @@
     <meta name="description" content="Searchable database of individuals mentioned in Epstein investigation documents.">
     <link rel="stylesheet" href="css/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Additional category colors */
+        .person-card[data-category="coconspirator"] {
+            border-left: 4px solid #dc2626;
+        }
+
+        .person-card[data-category="victim"] {
+            border-left: 4px solid #7c3aed;
+        }
+
+        .person-card[data-category="associate"] {
+            border-left: 4px solid #f59e0b;
+        }
+
+        .person-card[data-category="legal_prosecution"] {
+            border-left: 4px solid #059669;
+        }
+
+        .person-card[data-category="legal_defense"] {
+            border-left: 4px solid #0284c7;
+        }
+
+        .person-card[data-category="legal_victim"] {
+            border-left: 4px solid #6366f1;
+        }
+
+        .person-card[data-category="judge"] {
+            border-left: 4px solid #1d4ed8;
+        }
+
+        .person-card[data-category="law_enforcement"] {
+            border-left: 4px solid #0891b2;
+        }
+
+        .person-card[data-category="government"] {
+            border-left: 4px solid #4f46e5;
+        }
+
+        .person-card[data-category="family"] {
+            border-left: 4px solid #10b981;
+        }
+
+        .person-card[data-category="witness"] {
+            border-left: 4px solid #8b5cf6;
+        }
+
+        .person-card[data-category="media"] {
+            border-left: 4px solid #ec4899;
+        }
+
+        .person-card .notes {
+            display: block;
+            font-size: 0.75rem;
+            color: #6b7280;
+            font-style: italic;
+            margin-top: 4px;
+        }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            padding: 16px;
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            margin-bottom: 24px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.875rem;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 2px;
+        }
+
+        .results-count {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-bottom: 16px;
+        }
+    </style>
 </head>
 
 <body>
@@ -29,22 +116,49 @@
     <main class="page-content">
         <div class="container">
             <h1>Person Database</h1>
-            <p class="text-muted mb-lg">23 key individuals identified in the investigation documents. All mention counts
-                are from automated text extraction across 14,700 PDFs.</p>
+            <p class="text-muted mb-lg">85+ key individuals identified across the investigation documents. All mention
+                counts from automated text extraction across 14,700 PDFs.</p>
+
+            <!-- Color Legend -->
+            <div class="legend">
+                <div class="legend-item"><span class="legend-color" style="background:#dc2626"></span> Co-Conspirator
+                </div>
+                <div class="legend-item"><span class="legend-color" style="background:#7c3aed"></span> Alleged Victim
+                </div>
+                <div class="legend-item"><span class="legend-color" style="background:#f59e0b"></span> Associate</div>
+                <div class="legend-item"><span class="legend-color" style="background:#059669"></span> Prosecution</div>
+                <div class="legend-item"><span class="legend-color" style="background:#0284c7"></span> Defense</div>
+                <div class="legend-item"><span class="legend-color" style="background:#6366f1"></span> Victim Attorney
+                </div>
+                <div class="legend-item"><span class="legend-color" style="background:#1d4ed8"></span> Judge</div>
+                <div class="legend-item"><span class="legend-color" style="background:#0891b2"></span> Law Enforcement
+                </div>
+                <div class="legend-item"><span class="legend-color" style="background:#4f46e5"></span> Government</div>
+                <div class="legend-item"><span class="legend-color" style="background:#10b981"></span> Family</div>
+                <div class="legend-item"><span class="legend-color" style="background:#8b5cf6"></span> Witness</div>
+                <div class="legend-item"><span class="legend-color" style="background:#ec4899"></span> Media</div>
+            </div>
 
             <!-- Search & Filters -->
             <div class="search-bar">
-                <input type="text" class="search-input" id="searchInput" placeholder="Search by name...">
+                <input type="text" class="search-input" id="searchInput"
+                    placeholder="Search by name, role, or notes...">
             </div>
 
             <div class="filter-buttons">
-                <button class="filter-btn active" data-filter="all">All (23)</button>
-                <button class="filter-btn" data-filter="subject">Subjects</button>
-                <button class="filter-btn" data-filter="legal">Legal</button>
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="coconspirator">Co-Conspirators</button>
+                <button class="filter-btn" data-filter="victim">Victims</button>
                 <button class="filter-btn" data-filter="associate">Associates</button>
+                <button class="filter-btn" data-filter="legal">Legal (All)</button>
+                <button class="filter-btn" data-filter="judge">Judges</button>
+                <button class="filter-btn" data-filter="law_enforcement">Law Enforcement</button>
                 <button class="filter-btn" data-filter="government">Government</button>
-                <button class="filter-btn" data-filter="family">Family</button>
+                <button class="filter-btn" data-filter="witness">Witnesses</button>
             </div>
+
+            <!-- Results count -->
+            <p class="results-count" id="resultsCount"></p>
 
             <!-- Persons Grid -->
             <div class="person-grid" id="personsList"></div>
@@ -52,7 +166,7 @@
             <!-- Contact Book Section -->
             <section class="section mt-lg">
                 <div class="section-header">
-                    <h2>Contact Book Names</h2>
+                    <h2>Contact Book Names (120+)</h2>
                 </div>
                 <p class="text-muted mb-lg">Names visible in the Contact Book document. Personal contact information was
                     redacted; names were intentionally left visible per document design.</p>
@@ -62,7 +176,7 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Source</th>
+                                <th>Source Document</th>
                             </tr>
                         </thead>
                         <tbody id="contactBookList"></tbody>

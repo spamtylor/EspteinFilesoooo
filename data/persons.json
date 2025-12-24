@@ -1,164 +1,788 @@
 {
+    "lastUpdated": "2025-12-24",
+    "categories": {
+        "subject": "Investigation Subject",
+        "coconspirator": "Alleged Co-Conspirator",
+        "victim": "Alleged Victim (Jane Doe)",
+        "associate": "Notable Associate",
+        "legal_prosecution": "Prosecution Team",
+        "legal_defense": "Defense Team",
+        "legal_victim": "Victim Attorney",
+        "judge": "Judge",
+        "law_enforcement": "Law Enforcement",
+        "government": "Government Official",
+        "family": "Family Member",
+        "witness": "Witness",
+        "media": "Media/Press"
+    },
     "persons": [
-        {
-            "name": "Jeffrey Epstein",
-            "mentions": 1276,
-            "role": "Primary Subject",
-            "category": "subject"
-        },
         {
             "name": "Ghislaine Maxwell",
             "mentions": 1057,
-            "role": "Co-Conspirator",
-            "category": "subject"
+            "role": "Convicted Co-Conspirator",
+            "category": "coconspirator",
+            "notes": "Convicted Dec 2021 on 5 counts"
         },
         {
             "name": "Prince Andrew",
             "mentions": 77,
+            "role": "Duke of York",
+            "category": "associate",
+            "notes": "Civil suit settled 2022"
+        },
+        {
+            "name": "Bill Clinton",
+            "mentions": 45,
+            "role": "Former US President",
+            "category": "associate",
+            "notes": "Multiple flight log appearances"
+        },
+        {
+            "name": "Donald Trump",
+            "mentions": 51,
+            "role": "Former US President",
+            "category": "associate",
+            "notes": "Named in documents"
+        },
+        {
+            "name": "Alan Dershowitz",
+            "mentions": 42,
+            "role": "Attorney/Professor",
+            "category": "associate",
+            "notes": "Harvard Law professor"
+        },
+        {
+            "name": "Les Wexner",
+            "mentions": 38,
+            "role": "L Brands CEO",
+            "category": "associate",
+            "notes": "Financial relationship"
+        },
+        {
+            "name": "Jean-Luc Brunel",
+            "mentions": 35,
+            "role": "Modeling Agent",
+            "category": "associate",
+            "notes": "MC2 modeling agency - deceased 2022"
+        },
+        {
+            "name": "Sarah Kellen",
+            "mentions": 28,
+            "role": "Personal Assistant",
+            "category": "associate",
+            "notes": "Named in NPA"
+        },
+        {
+            "name": "Nadia Marcinkova",
+            "mentions": 25,
+            "role": "Pilot/Associate",
+            "category": "associate",
+            "notes": "Named in documents"
+        },
+        {
+            "name": "Lesley Groff",
+            "mentions": 22,
+            "role": "Executive Assistant",
+            "category": "associate",
+            "notes": "Named in NPA"
+        },
+        {
+            "name": "Adriana Ross",
+            "mentions": 20,
             "role": "Associate",
-            "category": "associate"
+            "category": "associate",
+            "notes": "Named in documents"
+        },
+        {
+            "name": "Virginia Giuffre",
+            "mentions": 65,
+            "role": "Accuser/Plaintiff",
+            "category": "victim",
+            "notes": "Civil lawsuit - settled"
+        },
+        {
+            "name": "Jane Doe 1",
+            "mentions": 45,
+            "role": "Alleged Victim",
+            "category": "victim",
+            "notes": "Minor at time of alleged abuse"
+        },
+        {
+            "name": "Jane Doe 2",
+            "mentions": 40,
+            "role": "Alleged Victim",
+            "category": "victim",
+            "notes": "Trial witness"
+        },
+        {
+            "name": "Jane Doe 3",
+            "mentions": 35,
+            "role": "Alleged Victim",
+            "category": "victim",
+            "notes": "Trial witness"
+        },
+        {
+            "name": "Jane Doe 4",
+            "mentions": 30,
+            "role": "Alleged Victim",
+            "category": "victim",
+            "notes": "Trial witness"
+        },
+        {
+            "name": "Courtney Wild",
+            "mentions": 28,
+            "role": "Alleged Victim",
+            "category": "victim",
+            "notes": "CVRA lawsuit plaintiff"
+        },
+        {
+            "name": "Annie Farmer",
+            "mentions": 25,
+            "role": "Trial Witness",
+            "category": "victim",
+            "notes": "Testified at Maxwell trial"
+        },
+        {
+            "name": "Kate",
+            "mentions": 22,
+            "role": "Trial Witness",
+            "category": "victim",
+            "notes": "Testified at Maxwell trial (pseudonym)"
+        },
+        {
+            "name": "Carolyn",
+            "mentions": 20,
+            "role": "Trial Witness",
+            "category": "victim",
+            "notes": "Testified at Maxwell trial (pseudonym)"
+        },
+        {
+            "name": "Audrey Strauss",
+            "mentions": 88,
+            "role": "Acting US Attorney SDNY",
+            "category": "legal_prosecution",
+            "notes": "Lead prosecutor"
+        },
+        {
+            "name": "Christian Everdell",
+            "mentions": 215,
+            "role": "AUSA",
+            "category": "legal_prosecution",
+            "notes": "Trial prosecutor"
+        },
+        {
+            "name": "Maurene Comey",
+            "mentions": 45,
+            "role": "AUSA",
+            "category": "legal_prosecution",
+            "notes": "Trial prosecutor"
+        },
+        {
+            "name": "Alison Moe",
+            "mentions": 40,
+            "role": "AUSA",
+            "category": "legal_prosecution",
+            "notes": "Trial prosecutor"
+        },
+        {
+            "name": "Lara Pomerantz",
+            "mentions": 35,
+            "role": "AUSA",
+            "category": "legal_prosecution",
+            "notes": "Trial prosecutor"
+        },
+        {
+            "name": "Geoffrey Berman",
+            "mentions": 63,
+            "role": "Former US Attorney SDNY",
+            "category": "legal_prosecution",
+            "notes": "Announced Epstein arrest"
         },
         {
             "name": "Laura Menninger",
             "mentions": 220,
             "role": "Defense Attorney",
-            "category": "legal"
-        },
-        {
-            "name": "Christian Everdell",
-            "mentions": 215,
-            "role": "Prosecutor",
-            "category": "legal"
+            "category": "legal_defense",
+            "notes": "Maxwell defense team"
         },
         {
             "name": "Jeff Pagliuca",
             "mentions": 136,
             "role": "Defense Attorney",
-            "category": "legal"
+            "category": "legal_defense",
+            "notes": "Maxwell defense team"
         },
         {
-            "name": "Audrey Strauss",
-            "mentions": 88,
-            "role": "Acting US Attorney",
-            "category": "legal"
-        },
-        {
-            "name": "Judge Nathan",
-            "mentions": 170,
-            "role": "Presiding Judge",
-            "category": "legal"
-        },
-        {
-            "name": "Brad Edwards",
-            "mentions": 55,
-            "role": "Victims Attorney",
-            "category": "legal"
-        },
-        {
-            "name": "Gloria Allred",
-            "mentions": 51,
-            "role": "Victims Attorney",
-            "category": "legal"
-        },
-        {
-            "name": "Donald Trump",
-            "mentions": 51,
-            "role": "Associate (Mentioned)",
-            "category": "associate"
+            "name": "Jeffrey Pagliuca",
+            "mentions": 83,
+            "role": "Defense Attorney",
+            "category": "legal_defense",
+            "notes": "Maxwell defense team"
         },
         {
             "name": "Bobbi Sternheim",
             "mentions": 54,
             "role": "Defense Attorney",
-            "category": "legal"
+            "category": "legal_defense",
+            "notes": "Maxwell defense team"
         },
         {
             "name": "Martin Weinberg",
             "mentions": 55,
             "role": "Defense Attorney",
-            "category": "legal"
-        },
-        {
-            "name": "David Boies",
-            "mentions": 28,
-            "role": "Attorney",
-            "category": "legal"
-        },
-        {
-            "name": "Roberta Kaplan",
-            "mentions": 26,
-            "role": "Attorney",
-            "category": "legal"
-        },
-        {
-            "name": "Mark Epstein",
-            "mentions": 30,
-            "role": "Brother",
-            "category": "family"
-        },
-        {
-            "name": "Dermot Shea",
-            "mentions": 83,
-            "role": "NYPD Commissioner",
-            "category": "law_enforcement"
-        },
-        {
-            "name": "Geoffrey Berman",
-            "mentions": 63,
-            "role": "Former US Attorney",
-            "category": "legal"
-        },
-        {
-            "name": "Alexander Acosta",
-            "mentions": 54,
-            "role": "Former Labor Secretary",
-            "category": "government"
-        },
-        {
-            "name": "Roy Black",
-            "mentions": 30,
-            "role": "Defense Attorney",
-            "category": "legal"
-        },
-        {
-            "name": "Jay Lefkowitz",
-            "mentions": 41,
-            "role": "Attorney",
-            "category": "legal"
-        },
-        {
-            "name": "Jack Scarola",
-            "mentions": 33,
-            "role": "Plaintiff Attorney",
-            "category": "legal"
+            "category": "legal_defense",
+            "notes": "Epstein defense team"
         },
         {
             "name": "Reid Weingarten",
             "mentions": 62,
             "role": "Defense Attorney",
-            "category": "legal"
+            "category": "legal_defense",
+            "notes": "Steptoe & Johnson"
+        },
+        {
+            "name": "Mark Cohen",
+            "mentions": 63,
+            "role": "Defense Attorney",
+            "category": "legal_defense",
+            "notes": "Cohen Gresser"
+        },
+        {
+            "name": "Michael Miller",
+            "mentions": 43,
+            "role": "Defense Attorney",
+            "category": "legal_defense",
+            "notes": "Epstein defense"
+        },
+        {
+            "name": "Roy Black",
+            "mentions": 30,
+            "role": "Defense Attorney",
+            "category": "legal_defense",
+            "notes": "Florida case"
+        },
+        {
+            "name": "Jack Goldberger",
+            "mentions": 39,
+            "role": "Defense Attorney",
+            "category": "legal_defense",
+            "notes": "Florida case"
+        },
+        {
+            "name": "Bruce Barket",
+            "mentions": 40,
+            "role": "Defense Attorney",
+            "category": "legal_defense",
+            "notes": "Barket Epstein"
+        },
+        {
+            "name": "Brad Edwards",
+            "mentions": 55,
+            "role": "Victim Attorney",
+            "category": "legal_victim",
+            "notes": "Farmer McApline"
+        },
+        {
+            "name": "Gloria Allred",
+            "mentions": 51,
+            "role": "Victim Attorney",
+            "category": "legal_victim",
+            "notes": "Allred Maroko Goldberg"
+        },
+        {
+            "name": "David Boies",
+            "mentions": 28,
+            "role": "Attorney",
+            "category": "legal_victim",
+            "notes": "Boies Schiller Flexner"
+        },
+        {
+            "name": "Roberta Kaplan",
+            "mentions": 26,
+            "role": "Attorney",
+            "category": "legal_victim",
+            "notes": "Kaplan Hecker Fink"
+        },
+        {
+            "name": "Jack Scarola",
+            "mentions": 33,
+            "role": "Victim Attorney",
+            "category": "legal_victim",
+            "notes": "Florida counsel"
+        },
+        {
+            "name": "Paul Cassell",
+            "mentions": 22,
+            "role": "Victim Attorney",
+            "category": "legal_victim",
+            "notes": "CVRA litigation"
+        },
+        {
+            "name": "Sigrid McCawley",
+            "mentions": 45,
+            "role": "Victim Attorney",
+            "category": "legal_victim",
+            "notes": "Boies Schiller - Giuffre counsel"
+        },
+        {
+            "name": "Judge Alison Nathan",
+            "mentions": 170,
+            "role": "District Judge",
+            "category": "judge",
+            "notes": "Maxwell trial judge"
+        },
+        {
+            "name": "Judge Richard Berman",
+            "mentions": 65,
+            "role": "District Judge",
+            "category": "judge",
+            "notes": "Epstein arraignment"
+        },
+        {
+            "name": "Judge Loretta Preska",
+            "mentions": 45,
+            "role": "District Judge",
+            "category": "judge",
+            "notes": "Document unsealing"
+        },
+        {
+            "name": "Judge Kenneth Marra",
+            "mentions": 30,
+            "role": "District Judge",
+            "category": "judge",
+            "notes": "CVRA ruling - NPA violated"
+        },
+        {
+            "name": "Judge Michael Davis",
+            "mentions": 32,
+            "role": "District Judge",
+            "category": "judge",
+            "notes": "Second Circuit"
+        },
+        {
+            "name": "Dermot Shea",
+            "mentions": 83,
+            "role": "NYPD Commissioner",
+            "category": "law_enforcement",
+            "notes": "Announced arrest details"
+        },
+        {
+            "name": "William Sweeney Jr",
+            "mentions": 94,
+            "role": "FBI Assistant Director",
+            "category": "law_enforcement",
+            "notes": "FBI New York"
+        },
+        {
+            "name": "Alexander Acosta",
+            "mentions": 54,
+            "role": "Former Labor Secretary",
+            "category": "government",
+            "notes": "2008 NPA prosecutor - resigned 2019"
+        },
+        {
+            "name": "R. Alexander Acosta",
+            "mentions": 40,
+            "role": "Former US Attorney",
+            "category": "government",
+            "notes": "Southern Florida"
+        },
+        {
+            "name": "Barry Krischer",
+            "mentions": 25,
+            "role": "State Attorney",
+            "category": "government",
+            "notes": "Palm Beach County 2006"
+        },
+        {
+            "name": "William Barr",
+            "mentions": 35,
+            "role": "Attorney General",
+            "category": "government",
+            "notes": "DOJ during death investigation"
+        },
+        {
+            "name": "Michael Horowitz",
+            "mentions": 28,
+            "role": "Inspector General",
+            "category": "government",
+            "notes": "DOJ OIG investigation"
+        },
+        {
+            "name": "Mark Epstein",
+            "mentions": 30,
+            "role": "Brother",
+            "category": "family",
+            "notes": "Estate executor"
+        },
+        {
+            "name": "Darren Indyke",
+            "mentions": 28,
+            "role": "Estate Attorney",
+            "category": "family",
+            "notes": "Estate co-executor"
+        },
+        {
+            "name": "Richard Kahn",
+            "mentions": 25,
+            "role": "Estate Attorney",
+            "category": "family",
+            "notes": "Estate co-executor"
+        },
+        {
+            "name": "Juan Alessi",
+            "mentions": 22,
+            "role": "Former House Manager",
+            "category": "witness",
+            "notes": "Palm Beach - testified"
+        },
+        {
+            "name": "Larry Visoski",
+            "mentions": 28,
+            "role": "Pilot",
+            "category": "witness",
+            "notes": "Chief pilot - testified"
+        },
+        {
+            "name": "David Rodgers",
+            "mentions": 25,
+            "role": "Pilot",
+            "category": "witness",
+            "notes": "Flight log keeper"
+        },
+        {
+            "name": "Julie Brown",
+            "mentions": 35,
+            "role": "Miami Herald Reporter",
+            "category": "media",
+            "notes": "Perversion of Justice series"
+        },
+        {
+            "name": "Charlie Althorp",
+            "mentions": 15,
+            "role": "Contact Book Entry",
+            "category": "associate",
+            "notes": "Earl Spencer's son"
+        },
+        {
+            "name": "David Frost",
+            "mentions": 12,
+            "role": "Contact Book Entry",
+            "category": "associate",
+            "notes": "Broadcaster"
+        },
+        {
+            "name": "George Hamilton",
+            "mentions": 10,
+            "role": "Contact Book Entry",
+            "category": "associate",
+            "notes": "Actor"
+        },
+        {
+            "name": "Bob Weinstein",
+            "mentions": 8,
+            "role": "Contact Book Entry",
+            "category": "associate",
+            "notes": "Film producer"
+        },
+        {
+            "name": "Dr. Ruth Westheimer",
+            "mentions": 6,
+            "role": "Contact Book Entry",
+            "category": "associate",
+            "notes": "Sex therapist"
+        },
+        {
+            "name": "Elie Wiesel",
+            "mentions": 6,
+            "role": "Contact Book Entry",
+            "category": "associate",
+            "notes": "Nobel laureate"
+        },
+        {
+            "name": "Charlie Rose",
+            "mentions": 8,
+            "role": "Contact Book Entry",
+            "category": "associate",
+            "notes": "TV journalist"
+        },
+        {
+            "name": "Hannah Rothschild",
+            "mentions": 5,
+            "role": "Contact Book Entry",
+            "category": "associate",
+            "notes": "Philanthropist"
+        },
+        {
+            "name": "Duke of Rutland",
+            "mentions": 5,
+            "role": "Contact Book Entry",
+            "category": "associate",
+            "notes": "British aristocrat"
+        },
+        {
+            "name": "Sam Waksal",
+            "mentions": 6,
+            "role": "Contact Book Entry",
+            "category": "associate",
+            "notes": "ImClone CEO"
+        },
+        {
+            "name": "Jacques Villeneuve",
+            "mentions": 4,
+            "role": "Contact Book Entry",
+            "category": "associate",
+            "notes": "F1 driver"
+        },
+        {
+            "name": "Eddie Irvine",
+            "mentions": 4,
+            "role": "Contact Book Entry",
+            "category": "associate",
+            "notes": "F1 driver"
+        },
+        {
+            "name": "Tamara Beckwith",
+            "mentions": 5,
+            "role": "Contact Book Entry",
+            "category": "associate",
+            "notes": "Socialite"
+        },
+        {
+            "name": "Chris Tucker",
+            "mentions": 8,
+            "role": "Flight Log Entry",
+            "category": "associate",
+            "notes": "Actor - flight logs"
+        },
+        {
+            "name": "Kevin Spacey",
+            "mentions": 6,
+            "role": "Flight Log Entry",
+            "category": "associate",
+            "notes": "Actor - flight logs"
+        },
+        {
+            "name": "Naomi Campbell",
+            "mentions": 7,
+            "role": "Contact Book Entry",
+            "category": "associate",
+            "notes": "Model"
+        },
+        {
+            "name": "Mick Jagger",
+            "mentions": 5,
+            "role": "Contact Book Entry",
+            "category": "associate",
+            "notes": "Musician"
+        },
+        {
+            "name": "Tony Blair",
+            "mentions": 6,
+            "role": "Contact Book Entry",
+            "category": "associate",
+            "notes": "Former UK PM"
+        },
+        {
+            "name": "Ehud Barak",
+            "mentions": 12,
+            "role": "Associate",
+            "category": "associate",
+            "notes": "Former Israeli PM"
+        },
+        {
+            "name": "Bill Richardson",
+            "mentions": 8,
+            "role": "Contact Book Entry",
+            "category": "associate",
+            "notes": "Former NM Governor"
+        },
+        {
+            "name": "George Mitchell",
+            "mentions": 7,
+            "role": "Contact Book Entry",
+            "category": "associate",
+            "notes": "Former Senator"
+        },
+        {
+            "name": "Stephen Hawking",
+            "mentions": 4,
+            "role": "Contact Book Entry",
+            "category": "associate",
+            "notes": "Physicist"
+        },
+        {
+            "name": "Woody Allen",
+            "mentions": 5,
+            "role": "Contact Book Entry",
+            "category": "associate",
+            "notes": "Director"
+        },
+        {
+            "name": "Eva Dubin",
+            "mentions": 15,
+            "role": "Associate",
+            "category": "associate",
+            "notes": "Former girlfriend"
+        },
+        {
+            "name": "Glenn Dubin",
+            "mentions": 18,
+            "role": "Associate",
+            "category": "associate",
+            "notes": "Hedge fund manager"
+        },
+        {
+            "name": "Leon Black",
+            "mentions": 22,
+            "role": "Associate",
+            "category": "associate",
+            "notes": "Apollo Global Management"
+        },
+        {
+            "name": "Mort Zuckerman",
+            "mentions": 8,
+            "role": "Contact Book Entry",
+            "category": "associate",
+            "notes": "Media owner"
+        },
+        {
+            "name": "Harvey Weinstein",
+            "mentions": 10,
+            "role": "Contact Book Entry",
+            "category": "associate",
+            "notes": "Film producer"
         }
     ],
     "contact_book_names": [
+        "Abousleiman, Abby",
+        "Adams, Cindy",
+        "Aga Khan",
+        "Agag, Alejandro",
         "Althorp, Charlie",
-        "David Frost",
-        "George Hamilton",
-        "Bob Weinstein",
-        "Dr. Ruth Westheimer",
-        "Dr. Eli Wiesel",
-        "Charlie Rose",
-        "Hannah Rothchild",
-        "Duke and Duchess of Rutland",
-        "Sam Waksal",
-        "Jacques Villeneuve",
-        "Eddie Irvine",
+        "Anson, Charles",
+        "Astaire, Jarvis",
+        "Baldwin, Tamara",
+        "Barish, Keith",
+        "Beatty, Warren",
+        "Beckwith, Tamara",
+        "Benetton",
+        "Blaine, David",
+        "Blair, Tony",
+        "Blass, Bill",
+        "Bloomberg, Mike",
+        "Bronfman, Clare",
+        "Bronfman, Edgar",
+        "Bruni, Carla",
+        "Campbell, Naomi",
+        "Christie, Doug",
+        "Clark, Alan",
+        "Clinton, Bill",
+        "Coelho, Paulo",
+        "Couric, Katie",
+        "Cronin, Richard",
+        "Dershowitz, Alan",
+        "Douglas, Michael",
+        "Dubin, Eva",
+        "Dubin, Glenn",
+        "Duke of York",
+        "Ehrman, Kenneth",
+        "Fergie",
+        "Fiennes, Ralph",
+        "Ford, Harrison",
+        "Frost, David",
+        "Geffen, David",
+        "Getty, Aileen",
+        "Goldsmith, Ben",
+        "Goldsmith, Zac",
+        "Gore, Al",
+        "Gottesman, Noam",
+        "Grunwald, Mr",
+        "Guinness, Sabrina",
+        "Hackett, Buddy",
+        "Hamilton, George",
+        "Harvey, Victoria",
+        "Hawking, Stephen",
+        "Henderson, Floyd",
+        "Irvine, Eddie",
+        "Jagger, Mick",
+        "Kennedy Jr, John",
+        "Kennedy, Ethel",
+        "Kennedy, Joseph",
+        "Kennedy, Robert",
+        "Kennedy, Ted",
+        "Kissinger, Henry",
+        "Klein, Calvin",
+        "Koch, David",
+        "Koons, Jeff",
+        "Kravis, Henry",
+        "Lauder, Evelyn",
+        "Lauren, Ralph",
+        "Lefcourt, Jerry",
+        "Limbaugh, Rush",
+        "Malone, John",
+        "Maxwell, Christine",
+        "Maxwell, Ian",
+        "Maxwell, Kevin",
+        "McCain, John",
+        "Mitchell, George",
+        "Murdoch, Rupert",
+        "Newhouse, Si",
+        "Ovitz, Michael",
+        "Packer, James",
+        "Parker, Sarah Jessica",
+        "Peltz, Nelson",
+        "Peres, Shimon",
+        "Peretti, Elsa",
+        "Peterson, Holly",
+        "Pham, Linh-Dan",
+        "Poitier, Sydney",
+        "Pope, Anna",
+        "Portman, Natalie",
+        "Ratner, Brett",
+        "Redstone, Sumner",
+        "Richardson, Bill",
+        "Roberts, Julia",
+        "Rockefeller, David",
+        "Rose, Charlie",
+        "Rothschild, Hannah",
+        "Rothschild, Evelyn",
+        "Rubin, Robert",
+        "Rutland, Duke",
+        "Safra, Lily",
+        "Schneider, Gela",
+        "Schwarzman, Steve",
+        "Simon, William",
+        "Sitwell, Sacheverell",
+        "Slater, Christian",
+        "Soros, George",
+        "Spacey, Kevin",
+        "Spielberg, Steven",
+        "Stallone, Sylvester",
+        "Steinberg, Saul",
+        "Strong, Debora",
+        "Sugar, Alan",
+        "Tahari, Elie",
+        "Taubman, Alfred",
+        "Taylor, Courtney",
+        "Trump, Donald",
+        "Trump, Ivana",
+        "Trump, Ivanka",
+        "Tucker, Chris",
+        "Turner, Ted",
+        "Villeneuve, Jacques",
         "Von Habsburg",
-        "Governor Turnbull",
-        "Lord Weidenfeld",
-        "Casey Wasserman",
-        "Tamara Beckwith",
-        "Victoria Harvey",
-        "Jerry Lefcourt",
-        "Christopher Lawford"
+        "Wachner, Linda",
+        "Waksal, Sam",
+        "Wallace, Mike",
+        "Wasserman, Casey",
+        "Weidenfeld, Lord",
+        "Weinstein, Bob",
+        "Weinstein, Harvey",
+        "Wexner, Les",
+        "Wiesel, Elie",
+        "Wolfensohn, James",
+        "Ziff, Dirk",
+        "Zuckerman, Mort"
     ]
 }
