@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Unique collections
         const collections = [...new Set(allMedia.map(item => item.collection_name || 'Uncategorized'))].sort();
 
+        // Render Grid
         folderGrid.innerHTML = collections.map(col => `
             <div class="folder-card" onclick="openFolder('${col}')" style="background: var(--bg-glass); border: 1px solid var(--border-subtle); padding: 20px; border-radius: 8px; cursor: pointer; text-align: center; transition: all 0.2s;">
                 <div style="font-size: 2.5rem; color: var(--accent-gold); margin-bottom: 12px;">📁</div>
@@ -65,6 +66,23 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 4px;">${allMedia.filter(m => m.collection_name === col).length} FILES</div>
             </div>
         `).join('');
+
+        // Render Sidebar Filters (Dynamic)
+        renderSidebar(collections);
+    }
+
+    function renderSidebar(collections) {
+        const sidebarList = document.getElementById('productionFilters');
+        if (sidebarList) {
+            // Keep the 'All Collections' link (first child)
+            const allLink = sidebarList.firstElementChild.outerHTML;
+
+            const dynamicLinks = collections.map(col => `
+                <li><a href="#" data-folder="${col}">${col}</a></li>
+             `).join('');
+
+            sidebarList.innerHTML = allLink + dynamicLinks;
+        }
     }
 
     // 3. Open Folder & Render Media
@@ -126,14 +144,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (folder === 'root') {
                 renderFolders();
             } else {
-                // If the user clicks a specific sidebar item, we assume it matches a collection name.
-                // Or if we hardcoded names in HTML like "batch_1", map them here OR update HTML to match real names.
-                // For robustness, try to match exact name or fallback.
-
-                if (folder === 'batch_1') openFolder('DataSet 1');
-                else if (folder === 'batch_2') openFolder('DataSet 2');
-                else if (folder === 'surveillance') openFolder('IMAGES005');
-                else openFolder(folder); // Try direct match
+                // Direct match for dynamic folders
+                openFolder(folder);
             }
         }
 
