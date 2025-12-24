@@ -594,3 +594,157 @@ tr:hover {
 .mb-lg {
     margin-bottom: var(--space-lg);
 }
+
+/* ===== Charts Grid ===== */
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: var(--space-xl);
+}
+
+.chart-wrapper {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-light);
+    padding: var(--space-lg);
+    min-height: 350px;
+}
+
+@media (max-width: 768px) {
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== Sidebar Navigation (UX Improvement 1) ===== */
+.page-with-sidebar {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: var(--space-xl);
+}
+
+.sidebar {
+    position: sticky;
+    top: calc(var(--nav-height) + var(--space-lg));
+    height: fit-content;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-light);
+    padding: var(--space-lg);
+}
+
+.sidebar h4 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin-bottom: var(--space-md);
+}
+
+.sidebar-links {
+    list-style: none;
+}
+
+.sidebar-links li {
+    margin-bottom: var(--space-sm);
+}
+
+.sidebar-links a {
+    display: block;
+    padding: var(--space-sm) var(--space-md);
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    border-left: 2px solid transparent;
+    transition: all 0.2s;
+}
+
+.sidebar-links a:hover,
+.sidebar-links a.active {
+    background: var(--bg-primary);
+    border-left-color: var(--accent-red);
+    text-decoration: none;
+}
+
+@media (max-width: 992px) {
+    .page-with-sidebar {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: static;
+    }
+}
+
+/* ===== Breadcrumb Navigation (UX Improvement 3) ===== */
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.breadcrumb a {
+    color: var(--accent-blue);
+}
+
+.breadcrumb span {
+    color: var(--text-muted);
+}
+
+.breadcrumb-separator {
+    color: var(--text-muted);
+}
+
+/* ===== Tags System (UX Improvement 2) ===== */
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+}
+
+.tag {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-xs) var(--space-md);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-light);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.tag:hover,
+.tag.active {
+    background: var(--bg-dark);
+    color: #fff;
+    border-color: var(--bg-dark);
+}
+
+.tag .count {
+    margin-left: var(--space-xs);
+    color: var(--text-muted);
+}
+
+.tag.active .count {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* ===== Jump Links for Long Pages ===== */
+.jump-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-light);
+    margin-bottom: var(--space-xl);
+}
+
+.jump-links a {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
