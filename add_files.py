@@ -269,6 +269,53 @@ def generate_manifest(files: List[Dict]) -> None:
         
     print(f"Generated Production Manifest: {output_path}")
 
+def generate_master_archive(files: List[Dict]) -> None:
+    """Generate master_archive.json for Archive.js (Evidence Tracker)."""
+    records = []
+    
+    for i, f in enumerate(files):
+        # Determine Web Path (relative)
+        web_path = f["path"]
+        location_parts = Path(f["path"]).parts
+        
+        # Try to find 'archive' in path to determine relative root
+        collection_name = "Uncategorized"
+        try:
+            if "archive" in location_parts:
+                idx = location_parts.index("archive")
+                # relative path from archive, inclusive
+                rel_parts = location_parts[idx:]
+                web_path = "/".join(rel_parts)
+                
+                # Collection is the folder directly inside archive
+                if len(rel_parts) > 2:
+                    collection_name = rel_parts[1]
+            elif "dashboard" in f["path"]:
+                 web_path = f["path"].split("dashboard")[1].lstrip(os.sep).replace("\\", "/")
+        except:
+            pass
+            
+        # S3 Integration: Prepend Bucket URL
+        web_path = f"https://epstein-archive-media.s3.us-east-1.amazonaws.com/{web_path}"
+        
+        records.append({
+            "id": f"EVD-{collection_name[:3].upper()}-{str(i).zfill(4)}",
+            "name": f["filename"],
+            "path": web_path,
+            "collection": collection_name,
+            "type": f["category"],
+            "date": f["modified"][:10],
+            "description": f"Recovered from {collection_name}",
+            "source": "S3_ARCHIVE",
+            "tags": [f["extension"].replace(".", "")]
+        })
+        
+    output_path = DATA_DIR / "master_archive.json"
+    with open(output_path, 'w') as f:
+        json.dump({"records": records}, f)
+        
+    print(f"Generated Master Archive: {output_path}")
+
 
 
 class NewFileHandler(FileSystemEventHandler):
@@ -346,7 +393,9 @@ def main():
         update_documents_data(files)
         update_timeline_data(files)
         generate_search_index(files)
+        generate_search_index(files)
         generate_manifest(files)
+        generate_master_archive(files)
         print("Done!")
     else:
         parser.print_help()
