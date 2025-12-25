@@ -193,7 +193,16 @@ def get_path_info(abs_path: str) -> tuple:
     collection = "Uncategorized"
     
     # Analyze path structure
-    if "archive" in parts:
+    # Analyze path structure
+    if "extracted" in parts:
+        try:
+            idx = parts.index("extracted")
+            rel_parts = parts[idx+1:] # Collection/File...
+            if len(rel_parts) > 0:
+                collection = rel_parts[0]
+            rel_path = "/".join(rel_parts)
+        except: pass
+    elif "archive" in parts:
         try:
             idx = parts.index("archive")
             rel_parts = parts[idx:] # archive/Collection/...
