@@ -115,6 +115,17 @@
         </div>
     </main>
 
+    <!-- Modal for Media Preview -->
+    <div id="mediaModal" class="modal"
+        style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 2000; align-items: center; justify-content: center; padding: 40px;">
+        <span class="modal-close" onclick="closeModal()"
+            style="position: absolute; top: 20px; right: 30px; font-size: 2.5rem; cursor: pointer; color: #fff; z-index: 2001;">&times;</span>
+        <div id="modalContent"
+            style="max-width: 90vw; max-height: 90vh; display: flex; flex-direction: column; align-items: center;">
+            <!-- Dynamic content injected by archive.js -->
+        </div>
+    </div>
+
     <footer class="footer">
         <div class="container">
             <div class="footer-content">

@@ -187,10 +187,10 @@ function renderArchive() {
     }
 
     container.innerHTML += pageItems.map(record => `
-        <div class="archive-item">
+        <div class="archive-item" onclick="openModal('${record.path}', '${record.type}', '${record.name.replace(/'/g, "\\'")}')">
             ${(record.type === 'image' || record.tags.includes('jpg') || record.tags.includes('png')) ?
             `<div class="archive-item-preview">
-                    <img src="${record.path}" alt="${record.name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'archive-item-icon image\'></div>'">
+                    <img src="${record.path}" alt="${record.name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'archive-item-icon image\\'></div>'">
                  </div>` :
             `<div class="archive-item-icon ${record.type}"></div>`
         }
@@ -199,14 +199,14 @@ function renderArchive() {
                     <span class="record-id">${record.id}</span>
                     <span class="record-date">${record.date}</span>
                 </div>
-                <h3><a href="${record.path}" target="_blank">${record.name}</a></h3>
+                <h3>${record.name}</h3>
                 <p>${record.description}</p>
                 <div class="archive-item-footer">
                     <span class="source-tag">${record.source.toUpperCase()}</span>
-                    ${record.tags.map(tag => `<span class="tag">#${tag}</span>`).join('')}
+                    ${record.tags.slice(0, 3).map(tag => `<span class="tag">#${tag}</span>`).join('')}
                 </div>
             </div>
-            <div class="archive-item-actions">
+            <div class="archive-item-actions" onclick="event.stopPropagation();">
                 <a href="${record.path}" download class="btn-icon" title="Download Record">📥</a>
                 <a href="${record.path}" target="_blank" class="btn-icon" title="Open in New Tab">↗</a>
             </div>
@@ -220,3 +220,51 @@ function renderArchive() {
         loadMore.style.display = 'block';
     }
 }
+
+// Modal Viewer Functions
+function openModal(url, type, name) {
+    const modal = document.getElementById('mediaModal');
+    const content = document.getElementById('modalContent');
+
+    let html = '';
+    if (type === 'image' || url.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
+        html = `<img src="${url}" alt="${name}" style="max-width: 100%; max-height: 85vh; object-fit: contain;">
+                <p style="color: #888; margin-top: 16px; font-size: 0.9rem;">${name}</p>`;
+    } else if (type === 'video' || url.match(/\.(mp4|mov|webm|avi)$/i)) {
+        html = `<video src="${url}" controls autoplay style="max-width: 100%; max-height: 85vh;">Your browser does not support video.</video>
+                <p style="color: #888; margin-top: 16px; font-size: 0.9rem;">${name}</p>`;
+    } else if (type === 'document' || url.match(/\.pdf$/i)) {
+        html = `<iframe src="${url}" style="width: 80vw; height: 85vh; border: none; background: #fff;"></iframe>
+                <p style="color: #888; margin-top: 16px; font-size: 0.9rem;">${name}</p>`;
+    } else {
+        // Fallback: open in new tab
+        window.open(url, '_blank');
+        return;
+    }
+
+    content.innerHTML = html;
+    modal.style.display = 'flex';
+}
+
+function closeModal() {
+    const modal = document.getElementById('mediaModal');
+    const content = document.getElementById('modalContent');
+    content.innerHTML = '';
+    modal.style.display = 'none';
+}
+
+// Close modal on background click
+document.addEventListener('click', (e) => {
+    const modal = document.getElementById('mediaModal');
+    if (e.target === modal) {
+        closeModal();
+    }
+});
+
+// Close modal on Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeModal();
+    }
+});
+

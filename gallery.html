@@ -3,130 +3,18 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Media Gallery - Epstein Files</title>
-    <meta name="description"
-        content="Secure media gallery for 20.8GB of investigation discovery including surveillance and property stills.">
+    <meta http-equiv="refresh" content="0;url=archive.html">
+    <title>Redirecting to Master Library</title>
     <link rel="stylesheet" href="css/main.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap"
-        rel="stylesheet">
 </head>
 
-<body>
-    <nav class="nav">
-        <div class="nav-container">
-            <a href="index.html" class="nav-logo">EPSTEIN FILES</a>
-
-            <div class="header-search">
-                <input type="text" placeholder="Search archive (documents, names, events)..." id="headerSearch">
-            </div>
-
-            <button class="nav-toggle" aria-label="Menu" id="navToggle">☰</button>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="index.html">Briefing</a></li>
-                <li><a href="persons.html">People</a></li>
-                <li><a href="networks.html">Networks</a></li>
-                <li><a href="archive.html">Archive</a></li>
-                <li><a href="gallery.html" class="active">Gallery</a></li>
-                <li><a href="timeline.html">Timeline</a></li>
-                <li><a href="about.html">About</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <main class="page-content">
-        <div class="container">
-            <div class="section-header mb-lg">
-                <div>
-                    <span class="badge" style="background: var(--accent-blue); color: #fff;">MEDIA DISCOVERY</span>
-                    <h1 class="mt-sm">Evidence Gallery</h1>
-                    <p class="text-muted">Interactive browser for 887 videos and 6,775 image assets.</p>
-                </div>
-            </div>
-
-            <div class="layout-with-sidebar">
-                <!-- Media Sidebar -->
-                <aside class="sidebar">
-                    <div class="sidebar-section">
-                        <h4>Production Sets</h4>
-                        <ul class="sidebar-links" id="productionFilters">
-                            <li><a href="#" data-folder="root" class="active">All Collections</a></li>
-                            <!-- Dynamic Population -->
-                        </ul>
-                    </div>
-                    <div class="sidebar-section">
-                        <h4>File Types</h4>
-                        <ul class="sidebar-links">
-                            <li><a href="#" data-type="mp4">Video (887)</a></li>
-                            <li><a href="#" data-type="jpg">Image Stills (6k+)</a></li>
-                            <li><a href="#" data-type="pdf">Key PDFs</a></li>
-                        </ul>
-                    </div>
-                </aside>
-
-                <!-- Media Browser -->
-                <div class="main-content">
-                    <!-- Breadcrumbs -->
-                    <div class="gallery-nav mb-lg"
-                        style="display: flex; align-items: center; gap: 12px; font-family: 'JetBrains Mono'; font-size: 0.8rem; color: var(--text-muted); padding: 8px 16px; background: var(--bg-glass); border-radius: 4px;">
-                        <span id="breadcrumb">Root / All Collections</span>
-                    </div>
-
-                    <!-- Folder Grid (Hidden when in specific folder) -->
-                    <div id="folderGrid" class="grid mb-2xl"
-                        style="grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: var(--space-md);">
-                        <!-- Categorized folders populated by gallery.js -->
-                    </div>
-
-                    <!-- Media Grid (Lazy Loaded) -->
-                    <div id="mediaGrid" class="grid"
-                        style="grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--space-lg);">
-                        <!-- Media items populated by gallery.js -->
-                        <div class="loading-placeholder">Initializing Media Engine...</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Modal for Large Media -->
-    <div id="mediaModal" class="modal"
-        style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 2000; align-items: center; justify-content: center; padding: 40px;">
-        <span class="modal-close"
-            style="position: absolute; top: 20px; right: 20px; font-size: 2rem; cursor: pointer; color: #fff;">&times;</span>
-        <div id="modalContent"
-            style="max-width: 100%; max-height: 100%; display: flex; flex-direction: column; align-items: center;">
-            <!-- Dynamic content -->
-        </div>
+<body style="display: flex; align-items: center; justify-content: center; height: 100vh; text-align: center;">
+    <div class="container">
+        <h1>Master Library</h1>
+        <p>The Gallery has been consolidated into the unified Master Library.</p>
+        <p>Redirecting you now...</p>
+        <a href="archive.html" class="btn btn-primary">Go to Library</a>
     </div>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div>
-                    <h4>Media Methodology</h4>
-                    <p>All assets are linked to the 18,550-file master index. Digital evidence is cross-referenced with
-                        production Batch IDs.</p>
-                </div>
-                <div>
-                    <h4>Investigation Path</h4>
-                    <ul class="footer-links">
-                        <li><a href="archive.html">Evidence Tracker</a></li>
-                        <li><a href="networks.html">Entity Relations</a></li>
-                        <li><a href="timeline.html">Case Timeline</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>High-Fidelity Media Browser • Production v1.0.4 • <a href="about.html">Legal Disclosure</a></p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="js/nav.js"></script>
-    <script src="js/search.js"></script>
-    <script src="js/gallery.js"></script>
 </body>
 
 </html>
