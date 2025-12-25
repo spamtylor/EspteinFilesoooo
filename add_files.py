@@ -256,11 +256,16 @@ KEYWORD_MAP = {
 
 def get_semantic_tags(filename, collection):
     """
-    Generates semantic tags based on filename, collection, and a massive keyword list.
+    Generates semantic tags based on filename, collection, and keyword matching.
+    Tags are added only when there's evidence in the filename/path.
     """
     tags = set()
     lower_name = filename.lower().replace("_", " ").replace("-", " ").replace(".", " ")
     lower_col = collection.lower().replace("_", " ")
+    
+    # 0. BASE TAGS - All files are from Epstein investigation
+    tags.add("epstein")
+    tags.add("investigation")
     
     # 1. File Extension Tags
     ext = os.path.splitext(filename)[1].lower()
@@ -272,7 +277,7 @@ def get_semantic_tags(filename, collection):
         tags.add('document')
         tags.add('pdf')
     
-    # 2. Collection Context Tags
+    # 2. Collection Context Tags (location/source based)
     if "usvi" in lower_col:
         tags.add("island")
         tags.add("usvi")
@@ -283,26 +288,24 @@ def get_semantic_tags(filename, collection):
     if "court" in lower_col or "dataset" in lower_col:
         tags.add("legal")
         tags.add("court")
-        tags.add("evidence") # Broad tag for discovery
-        tags.add("maxwell")  # Assume discovery is related to Maxwell/Epstein
-        tags.add("investigation")
+        tags.add("evidence")
     
-    # 3. Mega Keyword Matching
-    # Scan both filename and collection name for keywords
+    # 3. Keyword Matching - ONLY add person tags when found in filename/path
     search_text = f"{lower_name} {lower_col}"
     
     for category, keywords in KEYWORD_MAP.items():
         for keyword in keywords:
             if keyword in search_text:
-                tags.add(category) # Add the primary category (e.g., 'trump')
-                tags.add(keyword)  # Add the specific match
-                break # Only add category once per category type
+                tags.add(category)
+                break  # Only add category once
     
-    # 4. Inferred Tags
+    # 4. Inferred Tags from filename patterns
     if "dc" in lower_name or "district" in lower_name:
         tags.add("legal")
     if "def" in lower_name or "plaintiff" in lower_name:
         tags.add("court")
+    if "deposition" in lower_name or "transcript" in lower_name:
+        tags.add("testimony")
 
     return list(tags)
 

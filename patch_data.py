@@ -34,9 +34,17 @@ KEYWORD_MAP = {
 }
 
 def get_semantic_tags(filename, collection):
+    """
+    Generates semantic tags based on filename, collection, and keyword matching.
+    Tags are added only when there's evidence in the filename/path.
+    """
     tags = set()
     lower_name = filename.lower().replace("_", " ").replace("-", " ").replace(".", " ")
     lower_col = collection.lower().replace("_", " ")
+    
+    # 0. BASE TAGS - All files are from Epstein investigation
+    tags.add("epstein")
+    tags.add("investigation")
     
     # 1. File Extension Tags
     ext = os.path.splitext(filename)[1].lower()
@@ -44,26 +52,26 @@ def get_semantic_tags(filename, collection):
     elif ext in ['.mp4', '.mov', '.avi', '.mkv', '.webm']: tags.add('video')
     elif ext in ['.pdf']: tags.add('document'); tags.add('pdf')
     
-    # 2. Collection Context Tags
+    # 2. Collection Context Tags (location/source based)
     if "usvi" in lower_col:
         tags.update(["island", "usvi", "little st james"])
     if "estate" in lower_col:
         tags.update(["estate", "financial"])
     if "court" in lower_col or "dataset" in lower_col:
-        tags.update(["legal", "court", "evidence", "maxwell", "investigation"])
+        tags.update(["legal", "court", "evidence"])
 
-    # 3. Mega Keyword Matching
+    # 3. Keyword Matching - ONLY add person tags when found in filename/path
     search_text = f"{lower_name} {lower_col}"
     for category, keywords in KEYWORD_MAP.items():
         for keyword in keywords:
             if keyword in search_text:
                 tags.add(category)
-                tags.add(keyword)
-                break
+                break  # Only add category once
     
-    # 4. Inferred Tags
+    # 4. Inferred Tags from filename patterns
     if "dc" in lower_name or "district" in lower_name: tags.add("legal")
     if "def" in lower_name or "plaintiff" in lower_name: tags.add("court")
+    if "deposition" in lower_name or "transcript" in lower_name: tags.add("testimony")
 
     return list(tags)
 
