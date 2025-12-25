@@ -35,6 +35,43 @@ document.addEventListener('DOMContentLoaded', () => {
     setupSort();
 });
 
+function setupFilters() {
+    // Type Filters (Sidebar)
+    document.getElementById('typeFilters')?.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (!link) return;
+        e.preventDefault();
+        document.querySelectorAll('#typeFilters a').forEach(a => a.classList.remove('active'));
+        link.classList.add('active');
+        applyFilters();
+    });
+
+    // Collection Filters (Sidebar)
+    document.getElementById('collectionFilters')?.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (!link) return;
+        e.preventDefault();
+        document.querySelectorAll('#collectionFilters a').forEach(a => a.classList.remove('active'));
+        link.classList.add('active');
+        applyFilters();
+    });
+
+    // Source Tabs (Main Content)
+    document.querySelector('.filter-tabs')?.addEventListener('click', (e) => {
+        const tab = e.target.closest('.filter-tab');
+        if (!tab) return;
+        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        applyFilters();
+    });
+
+    // Load More
+    document.getElementById('loadMore')?.addEventListener('click', () => {
+        currentPage++;
+        renderArchive();
+    });
+}
+
 function setupSort() {
     document.getElementById('sortOptions')?.addEventListener('click', (e) => {
         const link = e.target.closest('a');
