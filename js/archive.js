@@ -67,6 +67,16 @@ function setupFilters() {
         applyFilters();
     });
 
+    // Person Filters (Sidebar - NEW)
+    document.getElementById('personFilters')?.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (!link) return;
+        e.preventDefault();
+        document.querySelectorAll('#personFilters a').forEach(a => a.classList.remove('active'));
+        link.classList.add('active');
+        applyFilters();
+    });
+
     // Load More
     document.getElementById('loadMore')?.addEventListener('click', () => {
         currentPage++;
@@ -103,6 +113,7 @@ function applyFilters() {
     const typeFilter = document.querySelector('#typeFilters a.active')?.dataset.filter || 'all';
     const collectionFilter = document.querySelector('#collectionFilters a.active')?.dataset.collection || 'all';
     const sourceFilter = document.querySelector('#sourceFilters a.active')?.dataset.source || 'all';
+    const personFilter = document.querySelector('#personFilters a.active')?.dataset.person || 'all';
     const sortParams = document.querySelector('#sortOptions a.active')?.dataset.sort || 'date-desc';
     const searchQuery = document.getElementById('archiveSearch')?.value.toLowerCase() || '';
 
@@ -128,10 +139,11 @@ function applyFilters() {
     // Apply Filters
     filteredRecords = results.filter(record => {
         const matchesType = typeFilter === 'all' || record.type === typeFilter;
-        const matchesSource = sourceFilter === 'all' || record.source === sourceFilter;
-        const matchesCollection = collectionFilter === 'all' || record.collection === collectionFilter;
+        const matchesCollection = collectionFilter === 'all' || record.collection.toLowerCase().replace(/ /g, '_').includes(collectionFilter);
+        const matchesSource = sourceFilter === 'all' || (record.source && record.source === sourceFilter);
+        const matchesPerson = personFilter === 'all' || (record.tags && record.tags.includes(personFilter));
 
-        return matchesType && matchesSource && matchesCollection;
+        return matchesType && matchesCollection && matchesSource && matchesPerson;
     });
 
     // Apply Sort
