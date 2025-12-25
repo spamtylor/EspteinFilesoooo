@@ -25,6 +25,7 @@ import argparse
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional
+from urllib.parse import quote
 
 try:
     from watchdog.observers import Observer
@@ -177,48 +178,123 @@ def update_timeline_data(files: List[Dict]) -> None:
     print(f"Updated {output_path}")
 
 
+
+# -----------------------------------------------------------------------------
+# Metadata Helpers (Refactored for extensive tagging & simple maintenance)
+# -----------------------------------------------------------------------------
+
+def get_path_info(abs_path: str) -> tuple:
+    """Derive relative path, collection name, and S3 URL from absolute path."""
+    from urllib.parse import quote
+    
+    path_obj = Path(abs_path)
+    parts = path_obj.parts
+    rel_path = str(path_obj)
+    collection = "Uncategorized"
+    
+    # Analyze path structure
+    if "archive" in parts:
+        try:
+            idx = parts.index("archive")
+            rel_parts = parts[idx:] # archive/Collection/...
+            rel_path = "/".join(rel_parts)
+            if len(rel_parts) > 1:
+                collection = rel_parts[1] 
+        except: pass
+    elif "dashboard" in abs_path:
+        try:
+            rel_path = abs_path.split("dashboard")[1].lstrip(os.sep).replace("\\", "/")
+        except: pass
+        
+    s3_url = f"https://epstein-archive-media.s3.us-east-1.amazonaws.com/{quote(rel_path.replace(os.sep, '/'), safe='/')}"
+    return rel_path, collection, s3_url
+
+def get_semantic_tags(filename: str, path: str) -> List[str]:
+    """Generate extensive tags based on filename and known keywords."""
+    tags = ["epstein"] # Global tag for broad search
+    
+    # Text Analysis
+    text = (filename + " " + path).lower()
+    
+    # 1. File Type
+    ext = Path(filename).suffix.replace(".", "").lower()
+    if ext: tags.append(ext)
+    
+    # 2. Key People
+    people = {
+        "maxwell": ["maxwell", "ghislaine", "gmax"],
+        "andrew": ["andrew", "york", "prince", "hrh"],
+        "clinton": ["clinton", "bill", "president"],
+        "trump": ["trump", "donald"],
+        "dershowitz": ["dershowitz", "alan"],
+        "acosta": ["acosta", "alex"],
+        "giuffre": ["giuffre", "virginia", "roberts"],
+        "sjoberg": ["sjoberg", "johanna"],
+        "wexner": ["wexner", "les"]
+    }
+    for tag, keywords in people.items():
+        if any(k in text for k in keywords):
+            tags.append(tag)
+            tags.append("person_interest")
+
+    # 3. Locations
+    locations = {
+        "island": ["island", "lsj", "little st", "james", "usvi"],
+        "palm_beach": ["palm beach", "florida", "pb"],
+        "zorro": ["zorro", "ranch", "mexico"],
+        "nyc": ["manhattan", "nyc", "york", "mansion"],
+        "paris": ["paris", "france"]
+    }
+    for tag, keywords in locations.items():
+        if any(k in text for k in keywords):
+            tags.append(tag)
+            tags.append("location")
+
+    # 4. Context & Evidence Type
+    context = {
+        "flight_log": ["flight", "log", "manifest", "pilot", "plane", "aircraft", "g550", "727"],
+        "legal": ["deposition", "testimony", "affidavit", "motion", "order", "sealed", "redacted", "court", "exhibit"],
+        "financial": ["check", "bank", "wire", "payment", "ledger", "finance"],
+        "correspondence": ["email", "letter", "fax", "message", "contact"],
+        "media": ["photo", "image", "video", "camera", "dvr", "surveillance"],
+        "victim": ["victim", "minor", "underage", "recruit", "massage", "girl"]
+    }
+    for tag, keywords in context.items():
+        if any(k in text for k in keywords):
+            tags.append(tag)
+            
+    return list(set(tags))
+
+def get_source_category(collection: str, filename: str) -> str:
+    """Determine high-level source category for filtering."""
+    s = (collection + " " + filename).lower()
+    if "doj" in s or "oversight" in s: return "doj"
+    if "court" in s or "deposition" in s: return "court"
+    if "maxwell" in s and "trial" in s: return "maxwell"
+    if "estate" in s: return "estate"
+    if "usvi" in s: return "usvi"
+    return "S3_ARCHIVE"
+
+
 def generate_search_index(files: List[Dict]) -> None:
     """Generate search-index.json for Fuse.js fuzzy search."""
     DATA_DIR.mkdir(exist_ok=True)
     
     search_index = []
     for f in files:
-        # Generate tags based on extension and simple keywords in filename
-        tags = [f["extension"].replace(".", "")]
-        name_lower = f["filename"].lower()
-        
-        if "maxwell" in name_lower: tags.append("maxwell")
-        # Ensure 'epstein' is a global tag for UX (so searching 'epstein' shows all)
-        tags.append("epstein")
-        if "flight" in name_lower: tags.append("flight_log")
-        if "surveillance" in name_lower: tags.append("surveillance")
-        if "doj" in str(f["path"]).lower(): tags.append("doj")
-        
-        # Ensure path is relative to dashboard root if possible
-        # We assume f['path'] is absolute or relative to where script ran.
-        # For the frontend, we want relative to the web root.
-        # If f['path'] is absolute 'd:\...\dashboard\archive\file', we want 'archive/file'.
-        
-        web_path = f["path"]
-        if "dashboard" in web_path:
-            try:
-                # Naive splitting to get relative web path
-                web_path = web_path.split("dashboard")[1].lstrip(os.sep).lstrip("/")
-                # Replace backslashes for web
-                web_path = web_path.replace("\\", "/")
-            except:
-                pass
+        rel_path, collection, s3_url = get_path_info(f["path"])
+        tags = get_semantic_tags(f["filename"], f["path"])
         
         search_index.append({
             "name": f["filename"],
             "type": f["category"],
-            "tags": list(set(tags)), # Deduplicate
-            "path": web_path
+            "tags": tags,
+            "path": s3_url
         })
     
     output_path = DATA_DIR / "search-index.json"
     with open(output_path, 'w') as f:
-        json.dump(search_index, f) # Minified for performance
+        json.dump(search_index, f)
     
     print(f"Generated {output_path} with {len(search_index)} entries")
 
@@ -228,96 +304,47 @@ def generate_manifest(files: List[Dict]) -> None:
     manifest = []
     
     for f in files:
-        # Determine Web Path (relative)
-        web_path = f["path"]
-        location_parts = Path(f["path"]).parts
+        rel_path, collection, s3_url = get_path_info(f["path"])
         
-        # Try to find 'archive' in path to determine relative root
-        collection_name = "Uncategorized"
-        try:
-            if "archive" in location_parts:
-                idx = location_parts.index("archive")
-                # relative path from archive, inclusive
-                rel_parts = location_parts[idx:]
-                web_path = "/".join(rel_parts)
-                
-                # Collection is the folder directly inside archive
-                if len(rel_parts) > 2:
-                    collection_name = rel_parts[1]
-            elif "dashboard" in f["path"]:
-                 # Fallback if archive keyword is mapped differently
-                 web_path = f["path"].split("dashboard")[1].lstrip(os.sep).replace("\\", "/")
-        except:
-            pass
-            
-        # S3 Integration: Prepend Bucket URL
-        # URL needs forward slashes and encoding for spaces
-        from urllib.parse import quote
-        # We need to quote the path parts, but NOT the 'https://...' part.
-        # But web_path is just the relative path here.
-        # web_path might contain / characters which quote encodes to %2F, which S3 MIGHT not like if it expects slashes.
-        # We want to encode components key.
-        # Safe way: quote(web_path) but keep slashes? `quote(web_path, safe='/')`
-        
-        web_path = f"https://epstein-archive-media.s3.us-east-1.amazonaws.com/{quote(web_path.replace(os.sep, '/'), safe='/')}"
-            
         manifest.append({
             "filename": f["filename"],
-            "relative_path": web_path,
-            "collection_name": collection_name,
+            "relative_path": s3_url,
+            "collection_name": collection,
             "file_type": f["category"],
             "last_modified": f["modified"]
         })
         
     output_path = DASHBOARD_DIR / "manifest.json"
     with open(output_path, 'w') as f:
-        json.dump({"files": manifest}, f) # User asked for recursive scan, wrapping in object is standard or list? 
-        # User said "generate a manifest.json... Schema Requirement: Each entry must include..."
-        # Usually a list of entries or {"files": []}. I'll use {"files": ...} for safety/metadata room.
+        json.dump({"files": manifest}, f)
         
     print(f"Generated Production Manifest: {output_path}")
+
 
 def generate_master_archive(files: List[Dict]) -> None:
     """Generate master_archive.json for Archive.js (Evidence Tracker)."""
     records = []
     
     for i, f in enumerate(files):
-        # Determine Web Path (relative)
-        web_path = f["path"]
-        location_parts = Path(f["path"]).parts
-        
-        # Try to find 'archive' in path to determine relative root
-        collection_name = "Uncategorized"
-        try:
-            if "archive" in location_parts:
-                idx = location_parts.index("archive")
-                # relative path from archive, inclusive
-                rel_parts = location_parts[idx:]
-                web_path = "/".join(rel_parts)
-                
-                # Collection is the folder directly inside archive
-                if len(rel_parts) > 2:
-                    collection_name = rel_parts[1]
-            elif "dashboard" in f["path"]:
-                 web_path = f["path"].split("dashboard")[1].lstrip(os.sep).replace("\\", "/")
-        except:
-            pass
-            
-        web_path = f"https://epstein-archive-media.s3.us-east-1.amazonaws.com/{quote(web_path.replace(os.sep, '/'), safe='/')}"
+        rel_path, collection, s3_url = get_path_info(f["path"])
+        tags = get_semantic_tags(f["filename"], f["path"])
+        source = get_source_category(collection, f["filename"])
         
         records.append({
-            "id": f"EVD-{collection_name[:3].upper()}-{str(i).zfill(4)}",
+            "id": f"EVD-{collection[:3].upper()}-{str(i).zfill(4)}",
             "name": f["filename"],
-            "path": web_path,
-            "collection": collection_name,
+            "path": s3_url,
+            "collection": collection,
             "type": f["category"],
             "date": f["modified"][:10],
-            "description": f"Recovered from {collection_name}",
-            "source": "S3_ARCHIVE",
-            "tags": [f["extension"].replace(".", ""), "epstein"]
+            "description": f"Recovered from {collection}",
+            "source": source,
+            "tags": tags
         })
         
     output_path = DATA_DIR / "master_archive.json"
+    with open(output_path, 'w') as f:
+        json.dump({"records": records}, f)
     with open(output_path, 'w') as f:
         json.dump({"records": records}, f)
         
@@ -399,7 +426,6 @@ def main():
         print(f"Found {len(files)} files")
         update_documents_data(files)
         update_timeline_data(files)
-        generate_search_index(files)
         generate_search_index(files)
         generate_manifest(files)
         generate_master_archive(files)

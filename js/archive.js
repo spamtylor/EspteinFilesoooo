@@ -133,7 +133,12 @@ function renderArchive() {
 
     container.innerHTML += pageItems.map(record => `
         <div class="archive-item">
-            <div class="archive-item-icon ${record.type}"></div>
+            ${(record.type === 'image' || record.tags.includes('jpg') || record.tags.includes('png')) ?
+            `<div class="archive-item-preview">
+                    <img src="${record.path}" alt="${record.name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'archive-item-icon image\'></div>'">
+                 </div>` :
+            `<div class="archive-item-icon ${record.type}"></div>`
+        }
             <div class="archive-item-content">
                 <div class="archive-item-header">
                     <span class="record-id">${record.id}</span>
