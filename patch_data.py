@@ -95,14 +95,14 @@ def get_semantic_tags(filename, collection):
     return list(tags)
 
 def get_source_category(collection: str, filename: str) -> str:
+    """Determine the source category - matched to sidebar filter values."""
     s = (collection + " " + filename).lower()
     if "doj" in s or "oversight" in s or "release" in s or "gdrive" in s: return "doj"
     if "usvi" in s or "estate" in s: return "usvi"
-    if "minors" in s: return "court"
-    if "dataset" in s: return "court"
+    # DataSets 1-8 are Maxwell trial discovery - return 'maxwell' for source filter
+    if "dataset" in s: return "maxwell"
     if "court" in s or "deposition" in s or "legal" in s or "exhibit" in s: return "court"
-    if "maxwell" in s: return "maxwell"
-    return "S3_ARCHIVE"
+    return "court"
 
 # -----------------------------------------------------------------------------
 # Patching Logic
