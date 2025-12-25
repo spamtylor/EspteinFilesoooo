@@ -2,6 +2,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const toggle = document.querySelector('.nav-toggle');
     const links = document.querySelector('.nav-links');
+    const nav = document.querySelector('.nav');
 
     if (toggle && links) {
         toggle.addEventListener('click', () => {
@@ -20,4 +21,20 @@ document.addEventListener('DOMContentLoaded', () => {
             link.classList.remove('active');
         }
     });
+
+    // Scroll-based nav enhancement
+    if (nav) {
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > 50) {
+                nav.classList.add('nav-scrolled');
+            } else {
+                nav.classList.remove('nav-scrolled');
+            }
+
+            lastScroll = currentScroll;
+        }, { passive: true });
+    }
 });

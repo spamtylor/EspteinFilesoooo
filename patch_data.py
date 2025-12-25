@@ -33,10 +33,29 @@ KEYWORD_MAP = {
     "vi": ["virgin", "islands", "lsj", "little", "james", "sj", "st"],
 }
 
+# Collection-to-tags mapping based on known dataset contents
+COLLECTION_TAGS = {
+    "dataset 1": ["maxwell", "legal", "discovery", "court", "deposition"],
+    "dataset 2": ["maxwell", "legal", "discovery", "court"],
+    "dataset 3": ["maxwell", "legal", "discovery", "court"],
+    "dataset 4": ["maxwell", "legal", "discovery", "court"],
+    "dataset 5": ["maxwell", "legal", "discovery", "court"],
+    "dataset 6": ["maxwell", "legal", "discovery", "court"],
+    "dataset 7": ["maxwell", "legal", "discovery", "court"],
+    "dataset 8": ["maxwell", "trial", "media", "property", "evidence"],
+    "usvi": ["island", "little st james", "property", "drone", "aerial"],
+    "estate": ["financial", "assets", "property", "records"],
+    "gdrive": ["doj", "government", "official"],
+    "images005": ["property", "photographs", "evidence"],
+    "12.03.25": ["usvi", "production", "island", "property"],
+    "12.11.25": ["estate", "financial", "assets"],
+    "12.18.25": ["release", "official", "doj"],
+}
+
 def get_semantic_tags(filename, collection):
     """
     Generates semantic tags based on filename, collection, and keyword matching.
-    Tags are added only when there's evidence in the filename/path.
+    Uses collection-based mappings for known dataset contents.
     """
     tags = set()
     lower_name = filename.lower().replace("_", " ").replace("-", " ").replace(".", " ")
@@ -52,15 +71,12 @@ def get_semantic_tags(filename, collection):
     elif ext in ['.mp4', '.mov', '.avi', '.mkv', '.webm']: tags.add('video')
     elif ext in ['.pdf']: tags.add('document'); tags.add('pdf')
     
-    # 2. Collection Context Tags (location/source based)
-    if "usvi" in lower_col:
-        tags.update(["island", "usvi", "little st james"])
-    if "estate" in lower_col:
-        tags.update(["estate", "financial"])
-    if "court" in lower_col or "dataset" in lower_col:
-        tags.update(["legal", "court", "evidence"])
-
-    # 3. Keyword Matching - ONLY add person tags when found in filename/path
+    # 2. Collection-based tags from known dataset contents
+    for key, col_tags in COLLECTION_TAGS.items():
+        if key in lower_col:
+            tags.update(col_tags)
+    
+    # 3. Keyword Matching - add tags when found in filename/path
     search_text = f"{lower_name} {lower_col}"
     for category, keywords in KEYWORD_MAP.items():
         for keyword in keywords:
@@ -72,6 +88,9 @@ def get_semantic_tags(filename, collection):
     if "dc" in lower_name or "district" in lower_name: tags.add("legal")
     if "def" in lower_name or "plaintiff" in lower_name: tags.add("court")
     if "deposition" in lower_name or "transcript" in lower_name: tags.add("testimony")
+    if "house" in lower_name or "oversight" in lower_name: tags.add("government")
+    if "dji" in lower_name or "drone" in lower_name: tags.add("aerial")
+    if "img" in lower_name: tags.add("photograph")
 
     return list(tags)
 

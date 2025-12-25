@@ -158,6 +158,15 @@ code {
     border-bottom: 1px solid var(--border-subtle);
     display: flex;
     align-items: center;
+    transition: all 0.3s ease;
+}
+
+/* Scrolled state - compact with gold accent */
+.nav.nav-scrolled {
+    height: 60px;
+    background: rgba(10, 10, 18, 0.95);
+    border-bottom-color: var(--accent-gold);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4), 0 1px 0 var(--border-gold);
 }
 
 .nav-container {
