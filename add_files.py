@@ -215,64 +215,81 @@ def get_path_info(abs_path: str) -> tuple:
             rel_path = abs_path.split("dashboard")[1].lstrip(os.sep).replace("\\", "/")
         except: pass
         
-    s3_url = f"https://epstein-archive-media.s3.us-east-1.amazonaws.com/{quote(rel_path.replace(os.sep, '/'), safe='/')}"
+    s3_url = f"https://epstein-archive-media.s3.us-east-1.amazonaws.com/archive/{quote(rel_path.replace(os.sep, '/'), safe='/')}"
     return rel_path, collection, s3_url
 
-def get_semantic_tags(filename: str, path: str) -> List[str]:
-    """Generate extensive tags based on filename and known keywords."""
-    tags = ["epstein"] # Global tag for broad search
-    
-    # Text Analysis
-    text = (filename + " " + path).lower()
-    
-    # 1. File Type
-    ext = Path(filename).suffix.replace(".", "").lower()
-    if ext: tags.append(ext)
-    
-    # 2. Key People
-    people = {
-        "maxwell": ["maxwell", "ghislaine", "gmax"],
-        "andrew": ["andrew", "york", "prince", "hrh"],
-        "clinton": ["clinton", "bill", "president"],
-        "trump": ["trump", "donald"],
-        "dershowitz": ["dershowitz", "alan"],
-        "acosta": ["acosta", "alex"],
-        "giuffre": ["giuffre", "virginia", "roberts"],
-        "sjoberg": ["sjoberg", "johanna"],
-        "wexner": ["wexner", "les"]
-    }
-    for tag, keywords in people.items():
-        if any(k in text for k in keywords):
-            tags.append(tag)
-            tags.append("person_interest")
+# Enhanced Keyword Map for Forced Tagging
+KEYWORD_MAP = {
+    "epstein": ["epstein", "jeffrey", "island", "pedophile"],
+    "maxwell": ["ghislaine", "maxwell", "terra", "mar", "terramar"],
+    "trump": ["trump", "donald", "president"],
+    "clinton": ["clinton", "bill", "president"],
+    "prince": ["prince", "andrew", "duke", "royal"],
+    "dershowitz": ["dershowitz", "alan"],
+    "brunel": ["brunel", "jean", "luc"],
+    "les": ["wexner", "leslie"],
+    "giuffre": ["virginia", "roberts", "giuffre"],
+    "sjberg": ["johanna", "sjoberg", "sjberg"],
+    "flight": ["flight", "log", "pilot", "manifest", "plane", "lolita", "express"],
+    "court": ["deposition", "transcript", "testimony", "affidavit", "motion", "exhibit", "v."],
+    "redacted": ["redacted", "blacked", "out"],
+    "financial": ["bank", "check", "deposit", "transfer", "jp", "morgan", "deutsche"],
+    "palm": ["palm", "beach", "florida", "mansion"],
+    "mexico": ["zorro", "ranch", "mexico", "nm"],
+    "paris": ["paris", "france", "apartment"],
+    "ny": ["york", "manhattan", "house", "71st"],
+    "vi": ["virgin", "islands", "lsj", "little", "james", "sj", "st"],
+}
 
-    # 3. Locations
-    locations = {
-        "island": ["island", "lsj", "little st", "james", "usvi"],
-        "palm_beach": ["palm beach", "florida", "pb"],
-        "zorro": ["zorro", "ranch", "mexico"],
-        "nyc": ["manhattan", "nyc", "york", "mansion"],
-        "paris": ["paris", "france"]
-    }
-    for tag, keywords in locations.items():
-        if any(k in text for k in keywords):
-            tags.append(tag)
-            tags.append("location")
+def get_semantic_tags(filename, collection):
+    """
+    Generates semantic tags based on filename, collection, and a massive keyword list.
+    """
+    tags = set()
+    lower_name = filename.lower().replace("_", " ").replace("-", " ").replace(".", " ")
+    lower_col = collection.lower().replace("_", " ")
+    
+    # 1. File Extension Tags
+    ext = os.path.splitext(filename)[1].lower()
+    if ext in ['.jpg', '.jpeg', '.png', '.gif']:
+        tags.add('image')
+    elif ext in ['.mp4', '.mov', '.avi', '.mkv', '.webm']:
+        tags.add('video')
+    elif ext in ['.pdf']:
+        tags.add('document')
+        tags.add('pdf')
+    
+    # 2. Collection Context Tags
+    if "usvi" in lower_col:
+        tags.add("island")
+        tags.add("usvi")
+        tags.add("little st james")
+    if "estate" in lower_col:
+        tags.add("estate")
+        tags.add("financial")
+    if "court" in lower_col:
+        tags.add("legal")
+        tags.add("court")
+    
+    # 3. Mega Keyword Matching
+    # Scan both filename and collection name for keywords
+    search_text = f"{lower_name} {lower_col}"
+    
+    for category, keywords in KEYWORD_MAP.items():
+        for keyword in keywords:
+            if keyword in search_text:
+                tags.add(category) # Add the primary category (e.g., 'trump')
+                tags.add(keyword)  # Add the specific match
+                break # Only add category once per category type
+    
+    # 4. Inferred Tags
+    if "dc" in lower_name or "district" in lower_name:
+        tags.add("legal")
+    if "def" in lower_name or "plaintiff" in lower_name:
+        tags.add("court")
 
-    # 4. Context & Evidence Type
-    context = {
-        "flight_log": ["flight", "log", "manifest", "pilot", "plane", "aircraft", "g550", "727"],
-        "legal": ["deposition", "testimony", "affidavit", "motion", "order", "sealed", "redacted", "court", "exhibit"],
-        "financial": ["check", "bank", "wire", "payment", "ledger", "finance"],
-        "correspondence": ["email", "letter", "fax", "message", "contact"],
-        "media": ["photo", "image", "video", "camera", "dvr", "surveillance"],
-        "victim": ["victim", "minor", "underage", "recruit", "massage", "girl"]
-    }
-    for tag, keywords in context.items():
-        if any(k in text for k in keywords):
-            tags.append(tag)
-            
-    return list(set(tags))
+    return list(tags)
+
 
 def get_source_category(collection: str, filename: str) -> str:
     """Determine high-level source category for filtering."""
