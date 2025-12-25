@@ -266,14 +266,24 @@ function renderArchive() {
         return;
     }
 
-    container.innerHTML += pageItems.map(record => `
-        <div class="archive-item" onclick="openModal('${record.path}', '${record.type}', '${record.name.replace(/'/g, "\\'")}')">
-            ${(record.type === 'image' || record.tags.includes('jpg') || record.tags.includes('png')) ?
-            `<div class="archive-item-preview">
-                    <img src="${record.path}" alt="${record.name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'archive-item-icon image\\'></div>'">
-                 </div>` :
-            `<div class="archive-item-icon ${record.type}"></div>`
+    container.innerHTML += pageItems.map(record => {
+        // Determine the thumbnail/icon to show
+        let thumbnailHtml = '';
+        if (record.type === 'image') {
+            thumbnailHtml = `<div class="archive-item-preview">
+                <img src="${record.path}" alt="${record.name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'archive-item-icon\\'>🖼</div>'">
+            </div>`;
+        } else if (record.type === 'video') {
+            thumbnailHtml = `<div class="archive-item-icon video">🎬</div>`;
+        } else if (record.type === 'document') {
+            thumbnailHtml = `<div class="archive-item-icon document">📄</div>`;
+        } else {
+            thumbnailHtml = `<div class="archive-item-icon other">📁</div>`;
         }
+
+        return `
+        <div class="archive-item" onclick="openModal('${record.path}', '${record.type}', '${record.name.replace(/'/g, "\\'")}')">
+            ${thumbnailHtml}
             <div class="archive-item-content">
                 <div class="archive-item-header">
                     <span class="record-id">${record.id}</span>
@@ -291,7 +301,8 @@ function renderArchive() {
                 <a href="${record.path}" target="_blank" class="btn-icon" title="Open in New Tab">↗</a>
             </div>
         </div>
-    `).join('');
+    `;
+    }).join('');
 
     const loadMore = document.getElementById('loadMore');
     if (end >= filteredRecords.length) {
