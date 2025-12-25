@@ -112,6 +112,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                 </video>
                 <div style="padding: 20px; color: #fff; font-family: 'JetBrains Mono';">PRODUCTION FILE: ${path}</div>
             `;
+        } else if (type === 'document' || type === 'pdf') {
+            modalContent.innerHTML = `
+                <iframe src="${safePath}" style="width: 100%; height: 80vh; border: 4px solid var(--accent-gold); border-radius: 8px; background: white;"></iframe>
+                <div style="padding: 20px; color: #fff; font-family: 'JetBrains Mono';">EVIDENCE RECORD: ${path}</div>
+            `;
         } else {
             modalContent.innerHTML = `
                 <img src="${safePath}" style="max-width: 100%; max-height: 80vh; border: 4px solid var(--accent-blue); border-radius: 8px; box-shadow: 0 0 30px rgba(59,130,246,0.2);">
@@ -173,19 +178,32 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         mediaGrid.innerHTML = displayItems.map(item => {
             const isVideo = item.filename.endsWith('.mp4') || item.file_type === 'video';
-            // Use relative_path for src. 
-            const thumb = isVideo ? 'https://placehold.co/400x225/12121a/fff?text=VIDEO+READY' : item.relative_path;
+            const isPdf = item.filename.endsWith('.pdf') || item.file_type === 'document';
+
+            // Determine Thumbnail
+            let thumb = item.relative_path;
+            let typeLabel = 'IMAGE';
+            let typeIcon = '';
+
+            if (isVideo) {
+                thumb = 'https://placehold.co/400x225/12121a/fff?text=VIDEO+PLAYER';
+                typeLabel = 'VIDEO';
+                typeIcon = '<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #fff; background: rgba(0,0,0,0.3);">▶</div>';
+            } else if (isPdf) {
+                thumb = 'https://placehold.co/400x225/2a1212/fff?text=PDF+DOCUMENT';
+                typeLabel = 'PDF';
+            }
 
             return `
-                <div class="media-item" onclick="openModal('${item.relative_path}', '${isVideo ? 'video' : 'image'}')" style="background: var(--bg-glass); border-radius: 8px; overflow: hidden; border: 1px solid var(--border-subtle); cursor: pointer; transition: transform 0.2s;">
+                <div class="media-item" onclick="openModal('${item.relative_path}', '${isVideo ? 'video' : (isPdf ? 'pdf' : 'image')}')" style="background: var(--bg-glass); border-radius: 8px; overflow: hidden; border: 1px solid var(--border-subtle); cursor: pointer; transition: transform 0.2s;">
                     <div style="aspect-ratio: 16/9; background: #000; position: relative; overflow: hidden;">
                         <img src="${thumb}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;">
-                        ${isVideo ? '<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #fff; background: rgba(0,0,0,0.3);">▶</div>' : ''}
+                        ${typeIcon}
                     </div>
                     <div style="padding: 12px;">
                         <div style="font-size: 0.7rem; font-family: 'JetBrains Mono'; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${item.filename}</div>
                          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
-                            <span style="font-size: 0.6rem; background: var(--accent-blue); padding: 1px 4px; border-radius: 2px;">${(item.file_type || 'MEDIA').toUpperCase()}</span>
+                            <span style="font-size: 0.6rem; background: var(--accent-blue); padding: 1px 4px; border-radius: 2px;">${typeLabel}</span>
                         </div>
                     </div>
                 </div>

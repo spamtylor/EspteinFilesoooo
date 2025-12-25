@@ -268,11 +268,14 @@ def get_semantic_tags(filename: str, path: str) -> List[str]:
 def get_source_category(collection: str, filename: str) -> str:
     """Determine high-level source category for filtering."""
     s = (collection + " " + filename).lower()
-    if "doj" in s or "oversight" in s: return "doj"
-    if "court" in s or "deposition" in s: return "court"
-    if "maxwell" in s and "trial" in s: return "maxwell"
+    
+    # Relaxed Logic for better matching
+    if "doj" in s or "oversight" in s or "release" in s: return "doj"
+    if "court" in s or "deposition" in s or "legal" in s or "exhibit" in s: return "court"
+    if "maxwell" in s: return "maxwell"
     if "estate" in s: return "estate"
     if "usvi" in s: return "usvi"
+    
     return "S3_ARCHIVE"
 
 

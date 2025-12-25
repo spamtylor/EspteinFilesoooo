@@ -32,38 +32,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setupFilters();
     setupSearch();
+    setupSort();
 });
 
-function setupFilters() {
-    document.getElementById('typeFilters')?.addEventListener('click', (e) => {
+function setupSort() {
+    document.getElementById('sortOptions')?.addEventListener('click', (e) => {
         const link = e.target.closest('a');
         if (!link) return;
         e.preventDefault();
-        document.querySelectorAll('#typeFilters a').forEach(a => a.classList.remove('active'));
+
+        // Update Active State
+        document.querySelectorAll('#sortOptions a').forEach(a => a.classList.remove('active'));
         link.classList.add('active');
-        applyFilters();
-    });
 
-    document.getElementById('collectionFilters')?.addEventListener('click', (e) => {
-        const link = e.target.closest('a');
-        if (!link) return;
-        e.preventDefault();
-        document.querySelectorAll('#collectionFilters a').forEach(a => a.classList.remove('active'));
-        link.classList.add('active');
         applyFilters();
-    });
-
-    document.querySelector('.filter-tabs')?.addEventListener('click', (e) => {
-        const tab = e.target.closest('.filter-tab');
-        if (!tab) return;
-        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        applyFilters();
-    });
-
-    document.getElementById('loadMore')?.addEventListener('click', () => {
-        currentPage++;
-        renderArchive();
     });
 }
 
@@ -82,13 +64,14 @@ function applyFilters() {
     const typeFilter = document.querySelector('#typeFilters a.active')?.dataset.filter || 'all';
     const collectionFilter = document.querySelector('#collectionFilters a.active')?.dataset.collection || 'all';
     const sourceFilter = document.querySelector('.filter-tab.active')?.dataset.source || 'all';
+    const sortParams = document.querySelector('#sortOptions a.active')?.dataset.sort || 'date-desc';
     const searchQuery = document.getElementById('archiveSearch')?.value.toLowerCase() || '';
 
     // Initialize Fuse if not ready (and we have data)
     if (!window.fuse && archiveData.records.length > 0) {
         const options = {
             keys: ['name', 'tags', 'description', 'collection'],
-            threshold: 0.3, // Fuzzy match sensitivity
+            threshold: 0.4, // Increased sensitivity for "island", "plane"
             ignoreLocation: true
         };
         window.fuse = new Fuse(archiveData.records, options);
@@ -103,12 +86,33 @@ function applyFilters() {
         results = window.fuse.search(searchQuery).map(result => result.item);
     }
 
+    // Apply Filters
     filteredRecords = results.filter(record => {
         const matchesType = typeFilter === 'all' || record.type === typeFilter;
         const matchesSource = sourceFilter === 'all' || record.source === sourceFilter;
         const matchesCollection = collectionFilter === 'all' || record.collection === collectionFilter;
 
         return matchesType && matchesSource && matchesCollection;
+    });
+
+    // Apply Sort
+    filteredRecords.sort((a, b) => {
+        switch (sortParams) {
+            case 'date-desc':
+                return new Date(b.date) - new Date(a.date);
+            case 'date-asc':
+                return new Date(a.date) - new Date(b.date);
+            case 'name-asc':
+                return a.name.localeCompare(b.name);
+            case 'name-desc':
+                return b.name.localeCompare(a.name);
+            case 'relevance':
+                // Use default order (Fuse results are already by relevance)
+                // If not searching, relevance = date-desc usually
+                return searchQuery ? 0 : new Date(b.date) - new Date(a.date);
+            default:
+                return new Date(b.date) - new Date(a.date);
+        }
     });
 
     currentPage = 1;
