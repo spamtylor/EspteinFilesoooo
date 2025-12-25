@@ -56,12 +56,14 @@ function setupFilters() {
         applyFilters();
     });
 
-    // Source Tabs (Main Content)
-    document.querySelector('.filter-tabs')?.addEventListener('click', (e) => {
-        const tab = e.target.closest('.filter-tab');
-        if (!tab) return;
-        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
+
+    // Source Filters (Sidebar - NEW)
+    document.getElementById('sourceFilters')?.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (!link) return;
+        e.preventDefault();
+        document.querySelectorAll('#sourceFilters a').forEach(a => a.classList.remove('active'));
+        link.classList.add('active');
         applyFilters();
     });
 
@@ -100,7 +102,7 @@ function setupSearch() {
 function applyFilters() {
     const typeFilter = document.querySelector('#typeFilters a.active')?.dataset.filter || 'all';
     const collectionFilter = document.querySelector('#collectionFilters a.active')?.dataset.collection || 'all';
-    const sourceFilter = document.querySelector('.filter-tab.active')?.dataset.source || 'all';
+    const sourceFilter = document.querySelector('#sourceFilters a.active')?.dataset.source || 'all';
     const sortParams = document.querySelector('#sortOptions a.active')?.dataset.sort || 'date-desc';
     const searchQuery = document.getElementById('archiveSearch')?.value.toLowerCase() || '';
 

@@ -59,6 +59,16 @@
                         </ul>
                     </div>
                     <div class="sidebar-section">
+                        <h4>Filter by Source</h4>
+                        <ul class="sidebar-links" id="sourceFilters">
+                            <li><a href="#" class="active" data-source="all">All Sources</a></li>
+                            <li><a href="#" data-source="doj">DOJ Production</a></li>
+                            <li><a href="#" data-source="court">Court Records</a></li>
+                            <li><a href="#" data-source="maxwell">Maxwell Trial</a></li>
+                            <li><a href="#" data-source="usvi">USVI Production</a></li>
+                        </ul>
+                    </div>
+                    <div class="sidebar-section">
                         <h4>Sort By</h4>
                         <ul class="sidebar-links" id="sortOptions">
                             <li><a href="#" class="active" data-sort="date-desc">Newest First</a></li>
@@ -80,12 +90,7 @@
                     <div class="archive-controls">
                         <input type="text" id="archiveSearch"
                             placeholder="Filter records by name, tag, or collection..." class="search-input">
-                        <div class="filter-tabs">
-                            <button class="filter-tab active" data-source="all">All Sources</button>
-                            <button class="filter-tab" data-source="doj">DOJ Production</button>
-                            <button class="filter-tab" data-source="court">Court Records</button>
-                            <button class="filter-tab" data-source="maxwell">Maxwell Trial</button>
-                        </div>
+
                     </div>
 
                     <div class="archive-list" id="archiveContainer">
